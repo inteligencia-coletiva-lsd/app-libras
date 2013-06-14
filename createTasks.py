@@ -23,15 +23,11 @@ import re
 import random
 
 def get_videos_ids():
+    signs_video = {}
     with open( 'libras_signs_videos.json', 'rb' ) as fp:
         signs_video = json.load( fp )
     
-    ids = []
-    for videos_ids_list in signs_video.values():
-        for videos_id in videos_ids_list:
-            ids.append(videos_id)
-    print ids, len(ids)
-    return ids
+    return signs_video
 
 def contents(filename):
     return file(filename).read()
@@ -43,7 +39,7 @@ if __name__ == "__main__":
     # URL where PyBossa listens
     parser.add_option("-s", "--server", dest="api_url",
                       help="PyBossa URL http://domain.com/", metavar="URL",
-                      default="http://localhost:5000/")
+                      default="http://localhost/pybossa")
     # API-KEY
     parser.add_option("-k", "--api-key", dest="api_key",
                       help="PyBossa User API-KEY to interact with PyBossa",
@@ -109,7 +105,6 @@ if __name__ == "__main__":
         print('Using API-KEY: %s' % options.api_key)
 
     def find_app_by_short_name():
-        print len( pbclient.find_app(short_name=app_config['short_name']) ) 
         return pbclient.find_app(short_name=app_config['short_name'])[0]
 
     def setup_app():
@@ -122,10 +117,11 @@ if __name__ == "__main__":
         pbclient.update_app(app)
         return app
     
-    def create_video_task(app, video_id, question):
+    def create_video_task(app, signal_name, video_id, question):
         # Data for the tasks
         task_info = dict(question=question,
                          n_answers=options.n_answers,
+			 signal_name=signal_name,
                          video_id=video_id)
         pbclient.create_task(app.id, task_info)
 
@@ -171,9 +167,8 @@ if __name__ == "__main__":
 #            for question in questions:
 #                for video_id in videos_ids:
 #                    create_video_task( app, video_id, question)
-        print videos_ids, len(videos_ids)
-        for video_id in videos_ids:
-          create_video_task( app, video_id, question)
+        for k,v in videos_ids.iteritems():
+          create_video_task( app, k, v, question)
       
     else:
         if options.add_more_tasks:
@@ -181,7 +176,8 @@ if __name__ == "__main__":
             app = find_app_by_short_name()
             videos_ids = get_videos_ids()
             question = "Com quantas m&atilde;os se faz o sinal?"
-            [create_video_task( app, video_id, question) for video_id in videos_ids ]
+            for k,v in iteritems():
+              create_video_task(app, k, v, question)
 
     if options.update_template:
         print "Updating app template"
