@@ -1,5 +1,5 @@
 from flask import (Flask, jsonify, request)
-import simplejson as json
+import json
 import os
 import time
 import random
@@ -16,14 +16,15 @@ MOV_PONTUAL_SCRIPT = os.path.join(SCRIPTS_BLENDER_DIR, "movPontual.py")
 def render():
 
      parameters = json.loads(request.data)
-     signal_name = parameters['signal_name'] + str(random.getrandbits(64))
+     random_id = str(random.getrandbits(64))
+     signal_name = parameters['signal_name'] + random_id
      user_id = 'userId'
 
      right_hand = parameters['right']
      left_hand = parameters['left']
 
-     path_dir = VIDEOS_DIR + 'pontualDir'
-     path_esq = VIDEOS_DIR + 'pontualEsq'
+     path_dir = VIDEOS_DIR + 'pontualDir' + random_id
+     path_esq = VIDEOS_DIR + 'pontualEsq' + random_id
 
      # mao direita
      try:
@@ -58,6 +59,7 @@ def render():
      finally:
 	f.close()
 
+     #time.sleep(1000)
      cmd = "cd " + SCRIPTS_BLENDER_DIR + "; blender -b " + BLEND_FILE + " -o " + VIDEOS_DIR + " -P " + MOV_PONTUAL_SCRIPT + " " + path_dir + " " + path_esq
      exitcode = os.system(cmd)
 
