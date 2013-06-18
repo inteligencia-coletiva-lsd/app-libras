@@ -533,11 +533,20 @@ pybossa.presentTask(function(task, deferred) {
 	console.log(state);
      }
 
+     function stopAndPlaySignalVideo (toPlay) {
+	autoplay_Id = toPlay ? 1 : 0;
+        $('#signal_video').html(function(){
+            var video_id = task.info.video_id;
+            return '<iframe type="text/html" width="540" height="450" src="http://www.youtube.com/embed/' + 
+            video_id + '?autoplay=' + autoplay_Id + '&version=3&loop=1&playlist=' + video_id + '" />'});
+     }
+
      function showRenderedVideo(result) {
 	console.log(result);
 	$.unblockUI();
 	mostrarPergunta();
 
+	stopAndPlaySignalVideo(true);
         $('#avatar_video').html(function(){
 	      return '<video width="395" height="450" controls="true" autoplay="autoplay" loop="true"> <source src="/libras-videos/' + result.rendered_video + '.webm"> </video>'});
 	$('#avatar_video').show();
@@ -549,6 +558,7 @@ pybossa.presentTask(function(task, deferred) {
 	console.log(parametros.left);
 
 	$.blockUI({message: "Rendering..."});
+	stopAndPlaySignalVideo(false);
 
 	jQuery.ajax({
  	  type: 'POST',
@@ -568,10 +578,7 @@ pybossa.presentTask(function(task, deferred) {
 
     if ( !$.isEmptyObject(task) ) {
       
-        $('#signal_video').html(function(){
-            var video_id = task.info.video_id;
-            return '<iframe type="text/html" width="540" height="450" src="http://www.youtube.com/embed/' + 
-            video_id + '?autoplay=1&version=3&loop=1&playlist=' + video_id + '" />'}); 
+        stopAndPlaySignalVideo(true);
         
         $('#task-id').html(task.id);
 	parametros['signal_name'] = task.info.signal_name;
