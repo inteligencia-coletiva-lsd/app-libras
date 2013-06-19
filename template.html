@@ -133,7 +133,7 @@
         </div>
     </div><!-- End of orientacao_palma_da_mao -->
     <section id="expressao_facial" style="display: none">
-      <div class="pagination" style="padding: 0; margin: 0 0 0 0">
+      <div class="pagination expressao_pagination" style="padding: 0; margin: 0 0 0 0">
         <ul style="padding: 0; margin: 0 0 0 20px">
           <li data-exp_group="prev"><a href="#">Prev</a></li>
           <li data-exp_group="group_1"><a href="#">1</a></li>
@@ -142,7 +142,6 @@
           <li data-exp_group="next"><a href="#">Next</a></li>
         </ul>
       </div>
-      <div class="clear"></div>
       <ul style="padding: 0; margin: 0 0 0 0">
         <li class="exp" title=""  data-exp_facial="" ></li>
         <li class="exp" title=""  data-exp_facial="" ></li>
@@ -191,22 +190,46 @@
         <img id="avatar_distancia_img" src="http://bit.ly/10Y64tS" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
     </div><!-- End of ponto de articulacao -->
     <!-- Formas de mao -->
-    <section id="tipos_de_mao" style="display: none">
+    <section id="tipos_de_mao">
+      <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 0 0 0">
+        <ul style="padding: 0; margin: 0 0 0 20px">
+          <li data-handshape_group="prev"><a href="#">Prev</a></li>
+          <li data-handshape_group="group_1"><a href="#">1</a></li>
+          <li data-handshape_group="group_2"><a href="#">2</a></li>
+          <li data-handshape_group="next"><a href="#">Next</a></li>
+        </ul>
+      </div>
       <ul>
-        <li data-handshape='tipo_1'></li>
-        <li data-handshape='tipo_2'></li>
-        <li data-handshape="tipo_3"></li>
-        <li data-handshape="tipo_4"></li>
-        <li data-handshape="tipo_5"></li>
-        <li data-handshape="tipo_6"></li>
-        <li data-handshape="tipo_7"></li>
-        <li data-handshape="tipo_8"></li>
-        <li data-handshape="tipo_9"></li>
-        <li data-handshape="tipo_10"></li>
-        <li data-handshape="tipo_11"></li>
-        <li data-handshape="tipo_12"></li>
-        <li data-handshape=""></li>
-        <li data-handshape="tipos"><img src="http://imageshack.us/a/img832/4817/backqb.png" /></li>
+        <li class="handshape" data-handshape='tipo_1'></li>
+        <li class="handshape" data-handshape='tipo_2'></li>
+        <li class="handshape" data-handshape="tipo_3"></li>
+        <li class="handshape" data-handshape="tipo_4"></li>
+        <li class="handshape" data-handshape="tipo_5"></li>
+        <li class="handshape" data-handshape="tipo_6"></li>
+        <li class="handshape" data-handshape="tipo_7"></li>
+        <li class="handshape" data-handshape="tipo_8"></li>
+        <li class="handshape" data-handshape="tipo_9"></li>
+        <li class="handshape" data-handshape="tipo_10"></li>
+        <li class="handshape" data-handshape="tipo_11"></li>
+        <li class="handshape" data-handshape="tipo_12"></li>
+        <li class="handshape" data-handshape='tipo_13'></li>
+        <li class="handshape" data-handshape='tipo_14'></li>
+        <li class="handshape" data-handshape="tipo_15"></li>
+        <li class="handshape" data-handshape="tipo_16"></li>
+        <li class="handshape" data-handshape="tipo_17"></li>
+        <li class="handshape" data-handshape="tipo_18"></li>
+        <li class="handshape" data-handshape="tipo_19"></li>
+        <li class="handshape" data-handshape="tipo_20"></li>
+        <li class="handshape" data-handshape="tipo_21"></li>
+        <li class="handshape" data-handshape="tipo_22"></li>
+        <li class="handshape" data-handshape="tipo_23"></li>
+        <li class="handshape" data-handshape="tipo_24"></li>
+        <li class="handshape" data-handshape="tipo_25"></li>
+        <li class="handshape" data-handshape="tipo_26"></li>
+        <li class="handshape" data-handshape="tipo_27"></li>
+        <li class="handshape" data-handshape="tipo_28"></li>
+        <li class="handshape" data-handshape="tipo_29"></li>
+        <li class="handshape" data-handshape="tipo_30"></li>
       </ul>
     </section> <!-- Fim de formas de mao -->
 </div><!-- End of Skeleton -->
@@ -300,6 +323,7 @@ pybossa.presentTask(function(task, deferred) {
                      };
     
     var current_exp_group;
+    var current_handshape_group;
     var parametros = {right : {}, left : {}};
     var state = "TIPOS_MAO";
     var isRightHand = true;
@@ -318,7 +342,20 @@ pybossa.presentTask(function(task, deferred) {
     grupo['tipo_11'] = new Array("mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32", "mao_38");
     grupo['tipo_12'] = new Array("mao_1", "mao_2", "mao_7", "mao_10", "mao_11");
     grupo['tipos'] = new Array("mao_14", "mao_48", "mao_36", "mao_54", "mao_60", "mao_26", "mao_28", "mao_50", "mao_42", "mao_44", "mao_38", "mao_2");
-    
+    grupo['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
+                                 "mao_48", "mao_33", "mao_34", "mao_47",
+                                 "mao_36", "mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_37", "mao_49",
+                                 "mao_54", "mao_8", "mao_52",
+                                 "mao_60", "mao_25", "mao_53", "mao_55", "mao_56", "mao_57", "mao_59",
+                                 "mao_26", "mao_27", "mao_29", "mao_30" );
+
+    grupo['group_2'] = new Array("mao_28", "mao_22", "mao_58",
+                                 "mao_50", "mao_3", "mao_4", "mao_5", "mao_6", "mao_39", "mao_40", "mao_51",
+                                 "mao_42", "mao_41",
+                                 "mao_44", "mao_43", "mao_45", "mao_46",
+                                 "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
+                                 "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");
+
     /* Modifica o background dos li DOM da section expressao_facial */
     function set_button_bg( group ) {
       var nth_li;
@@ -360,21 +397,21 @@ pybossa.presentTask(function(task, deferred) {
     function set_pagination() {
     
       if( current_exp_group == "group_1" ){
-          $('.pagination').find("li").first().addClass("disabled");
+          $('.expressao_pagination').find("li").first().addClass("disabled");
       }else{
-          $('.pagination').find("li").first().removeClass("disabled");
+          $('.expressao_pagination').find("li").first().removeClass("disabled");
       }
     
       if( current_exp_group == "group_3" ){
-          $('.pagination').find("li").last().addClass("disabled");
+          $('.expressao_pagination').find("li").last().addClass("disabled");
       }else{
-          $('.pagination').find("li").last().removeClass("disabled");
+          $('.expressao_pagination').find("li").last().removeClass("disabled");
       }
 
     } // Fim da funcao set_pagination
     
-    // A pagination button is clicked 
-    $('.pagination').on( 'click', 'li', function(event){
+    // An expressao_pagination button is clicked 
+    $('.expressao_pagination').on( 'click', 'li', function(event){
       event.preventDefault();
       if ( ( $(this).data("exp_group") == "prev" ) && ( current_exp_group != "group_1" ) ){
         set_button_bg( $(this).data("exp_group") );
@@ -387,10 +424,52 @@ pybossa.presentTask(function(task, deferred) {
       }
     
     });
+    
+    // A handshape_pagination button is clicked 
+    $('.handshape_pagination').on( 'click', 'li', function(event){
+      event.preventDefault();
+      if ( ( $(this).data("handshape_group") == "prev" ) && ( current_handshape_group != "group_1" ) ){
+        formasDeMaoLiBg( $(this).data("handshape_group") );
+      }else if ( ( $(this).data("handshape_group") == "next" ) && ( current_handshape_group != "group_2" ) ){
+        formasDeMaoLiBg( $(this).data("handshape_group") );
+      }
+    
+      if ( ( $(this).data("handshape_group") != "prev" )  && ( $(this).data("handshape_group") != "next" ) ){
+        formasDeMaoLiBg( $(this).data("handshape_group") );
+      }
+    });
+    
+    // Modifica a aparencia do pagination 
+    function set_handshape_pagination() {
+    
+      if( current_handshape_group == "group_1" ){
+          $('.handshape_pagination').find("li").first().addClass("disabled");
+      }else{
+          $('.handshape_pagination').find("li").first().removeClass("disabled");
+      }
+    
+      if( current_handshape_group == "group_2" ){
+          $('.handshape_pagination').find("li").last().addClass("disabled");
+      }else{
+          $('.handshape_pagination').find("li").last().removeClass("disabled");
+      }
+    }
 
     // Modifica o background dos li DOM da section formas_de_mao
     function formasDeMaoLiBg(hand_type) {
       $("#tipos_de_mao").find('li').hide();
+      
+     if( hand_type == "prev" ){
+          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) - 1 );
+          hand_type = current_handshape_group;
+      }else if( hand_type == "next" ){
+          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) + 1 );
+          hand_type = current_handshape_group;
+      }else{
+          current_handshape_group = hand_type;
+      }
+
+      set_handshape_pagination();
 
       for( var i = 0; i < grupo[hand_type].length; i++ ) {
           var nth_li = ":nth-child(" + (i+1) + ")";
@@ -457,7 +536,7 @@ pybossa.presentTask(function(task, deferred) {
 		pergunta = "Escolha a forma inicial da m&atilde;o esquerda.";
 	}
 
-	formasDeMaoLiBg('tipos', isRightHand)
+	formasDeMaoLiBg('group_1', isRightHand)
         $('#tipos_de_mao').show();
       }
       else if (state == "QTD_MAOS") {
@@ -505,7 +584,8 @@ pybossa.presentTask(function(task, deferred) {
 	var nextState = "";
 
 	if (state == "TIPOS_MAO") {
-	     nextState = "CONF_MAO";
+	     // nextState = "CONF_MAO";
+	     nextState = "ORIENT_PALMA";
 	} else if (state == "CONF_MAO") {
 	     nextState = "ORIENT_PALMA";
 	} else if (state == "ORIENT_PALMA") {
@@ -619,12 +699,15 @@ pybossa.presentTask(function(task, deferred) {
          });
 
 	// Eventos de cliques em tipos de mão
-         $("#tipos_de_mao").find("li").off("click").on( "click", function() {
+         $(".handshape").off("click").on( "click", function() {
 	   answer = $(this).data('handshape');
 
 	   if (state == "TIPOS_MAO") {
-	 	formasDeMaoLiBg(answer);
+	 	/*formasDeMaoLiBg(answer);
+	 	updateState(answer);*/
+		saveAnswer(answer); 
 	 	updateState(answer);
+	   	mostrarPergunta();
 	   } else if (state == "CONF_MAO") {
 		saveAnswer(answer); 
 	 	updateState(answer);
@@ -656,8 +739,8 @@ pybossa.run('librasdictionary');
 
 <style type="text/css">
 
-  #tipos_de_mao li{
-    margin: 5px 0 0 5px;
+  section#tipos_de_mao li.handshape{
+    margin: 1px 0 0 1px;
     float: left;
     width: 65px;
     height: 80px;
@@ -665,15 +748,13 @@ pybossa.run('librasdictionary');
     list-style: none;
     background: url("http://imageshack.us/a/img5/1439/spritehandsshape.png") no-repeat;
   }
-
-  #tipos_de_mao li:last-child {
-    background: #FFF;
-  }
- 
-  section#expressao_facial {
-    /*padding: 0;*/
-  }
   
+  section#tipos_de_mao li.handshape:hover{
+    -webkit-box-shadow: inset 0 0 10px #F70;
+    -moz-box-shadow: inset 0 0 10px #F70;
+    box-shadow: inset 0 0 10px #F70;
+  }
+
   section#expressao_facial li.exp {
     float: left;
     list-style: none;
@@ -688,10 +769,6 @@ pybossa.run('librasdictionary');
     -webkit-box-shadow: inset 0 0 10px #F70;
     -moz-box-shadow: inset 0 0 10px #F70;
     box-shadow: inset 0 0 10px #F70;
-  }
-
-  .clear{
-    float: both
   }
 
 </style>
