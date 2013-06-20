@@ -40,7 +40,10 @@
 
 <div class="skeleton"> <!-- Start Skeleton -->
     <div id="signal_video" style="float: left;">video here</div><!-- The video will be showed here -->
-    <div id="avatar_video" style="float: right; display: none;">video here</div>
+    <div id="report-pane" style="position: relative; display: none">
+      <div class="loading"><img src="http://imageshack.us/a/img843/1108/kf6.gif" width="256" height="256"/></div>
+      <div id="avatar_video"></div>
+    </div> <!-- End of repor-pane div -->
   
     <div id="quantidade_maos" style="display: none"> <!-- Start DIV for the submission buttons -->
         <!-- If the user clicks this button, the saved answer will be value="yes"-->
@@ -51,10 +54,6 @@
         <button class="btn btn-large btn-info btn-answer" style="margin: 5px 0px 0px 10px; width: 200px"  value='duas'>
             Duas m&atilde;os
         </button><br/>
-        <!-- If the user clicks this button, the saved answer will be value="NotKnown"
-        <button class="btn btn-large btn-info btn-answer" style="margin: 5px 0px 0px 10px; width: 200px" value='Nenhuma'>
-            Nenhuma m&atilde;o
-        </button> -->
     </div><!-- End of DIV for the submission buttons -->
 
 
@@ -132,6 +131,7 @@
             </button>
         </div>
     </div><!-- End of orientacao_palma_da_mao -->
+    <!-- Begin of expressao_facial -->
     <section id="expressao_facial" style="display: none">
       <div class="pagination expressao_pagination" style="padding: 0; margin: 0 0 0 0">
         <ul style="padding: 0; margin: 0 0 0 20px">
@@ -150,7 +150,8 @@
         <li class="exp" title=""  data-exp_facial="" ></li>
         <li class="exp" title=""  data-exp_facial="" ></li>
       </ul>
-    </section> <!-- Fim da expressao facial -->
+    </section> <!-- End of expressao_facial -->
+    <!--Begin of ponto_de_articulacao -->
     <div id="ponto_de_articulacao" style="display: none">
         <map name="avatar_completo" id="avatar_completo">   
           <!-- Cabeca -->
@@ -188,8 +189,8 @@
         
         <img id="avatar_completo_img"  src="http://bit.ly/10lA9nE" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
         <img id="avatar_distancia_img" src="http://bit.ly/10Y64tS" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
-    </div><!-- End of ponto de articulacao -->
-    <!-- Formas de mao -->
+    </div><!-- End of ponto_de_articulacao -->
+    <!-- Begin of tipos_de_mao -->
     <section id="tipos_de_mao">
       <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 0 0 0">
         <ul style="padding: 0; margin: 0 0 0 20px">
@@ -231,7 +232,7 @@
         <li class="handshape" data-handshape="tipo_29"></li>
         <li class="handshape" data-handshape="tipo_30"></li>
       </ul>
-    </section> <!-- Fim de formas de mao -->
+    </section> <!-- End of tipos_de_mao -->
 </div><!-- End of Skeleton -->
 
 <div class="row skeleton">
@@ -329,19 +330,6 @@ pybossa.presentTask(function(task, deferred) {
     var isRightHand = true;
 
     var grupo = new Object();
-    grupo['tipo_1'] = new Array("mao_12", "mao_13", "mao_14", "mao_16");
-    grupo['tipo_2'] = new Array("mao_33", "mao_34", "mao_47", "mao_48");
-    grupo['tipo_3'] = new Array("mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_36", "mao_37", "mao_49");
-    grupo['tipo_4'] = new Array("mao_8", "mao_52", "mao_54");
-    grupo['tipo_5'] = new Array("mao_25", "mao_53", "mao_55", "mao_56", "mao_57", "mao_59", "mao_60");
-    grupo['tipo_6'] = new Array("mao_26", "mao_27", "mao_29", "mao_30");
-    grupo['tipo_7'] = new Array("mao_22", "mao_28", "mao_58");
-    grupo['tipo_8'] = new Array("mao_3", "mao_4", "mao_5", "mao_6", "mao_39", "mao_40", "mao_50", "mao_51");
-    grupo['tipo_9'] = new Array("mao_41", "mao_42");
-    grupo['tipo_10'] = new Array("mao_43", "mao_44", "mao_45", "mao_46");
-    grupo['tipo_11'] = new Array("mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32", "mao_38");
-    grupo['tipo_12'] = new Array("mao_1", "mao_2", "mao_7", "mao_10", "mao_11");
-    grupo['tipos'] = new Array("mao_14", "mao_48", "mao_36", "mao_54", "mao_60", "mao_26", "mao_28", "mao_50", "mao_42", "mao_44", "mao_38", "mao_2");
     grupo['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
                                  "mao_48", "mao_33", "mao_34", "mao_47",
                                  "mao_36", "mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_37", "mao_49",
@@ -356,7 +344,7 @@ pybossa.presentTask(function(task, deferred) {
                                  "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
                                  "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");
 
-    /* Modifica o background dos li DOM da section expressao_facial */
+    // Modifica o background dos li DOM da section expressao_facial
     function set_button_bg( group ) {
       var nth_li;
       var exp_num;
@@ -637,8 +625,21 @@ pybossa.presentTask(function(task, deferred) {
 	console.log(parametros.right);
 	console.log(parametros.left);
 
-	$.blockUI({message: "Rendering..."});
-	stopAndPlaySignalVideo(false);
+//	$.blockUI({message: "Rendering..."});
+        
+        $("#expressao_facial").hide();
+        $("#report-pane").show();
+
+        $("#report-pane").ajaxStart(function(){
+          var width = $(this).width();
+          var height = $(this).height();
+          
+          $(".loading").fadeIn(200); 
+        }).ajaxStop(function(){
+          $(".loading", this).fadeOut(1000); 
+        });
+	
+        stopAndPlaySignalVideo(false);
 
 	jQuery.ajax({
  	  type: 'POST',
@@ -769,6 +770,30 @@ pybossa.run('librasdictionary');
     -webkit-box-shadow: inset 0 0 10px #F70;
     -moz-box-shadow: inset 0 0 10px #F70;
     box-shadow: inset 0 0 10px #F70;
+  }
+
+  .loading {
+    position: absolute;
+    border: 1px solid #5c9ccc;
+    padding: 2px;
+    background-color: #5c9ccc;
+    color: #FFFFFF;
+    opacity: 0.90;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 380px;
+    height: 448px;
+    text-align: center;
+    z-index: 100000;
+  }
+
+  .loading img {  margin-top: 92px; }
+
+  #report-pane{
+    width: 395px;
+    height: 450px;
+    margin: 0 0 0 548px;
   }
 
 </style>
