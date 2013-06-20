@@ -8,6 +8,9 @@ import commands
 import subprocess as sub
 import sys
 
+#import time
+#init = time.time()
+
 def substr(str,origem, tamanho):
 	return str[origem:tamanho+origem]
 
@@ -249,20 +252,35 @@ for u in range(0, 2, 1 ):
 
 
 cena = Blender.Scene.GetCurrent()
+
 cont = cena.getRenderingContext()
+cont.imageSizeX(400)
+cont.imageSizeY(400)
+#cont.imageSizeX(200)
+#cont.imageSizeY(200)
+cont.enableShadow(0)
+cont.enableRayTracing(0)
+cont.enableEnvironmentMap(0)
+cont.enablePanorama(0)
+cont.enableRadiosityRender(0)
+cont.enableMotionBlur(0)
+cont.enableOversampling(0)
+
+# threads e particionamento da imagem
+cont.threads = 4
+cont.xParts = 2
+cont.yParts = 2
 
 renderPath = cont.renderPath
 cont.renderPath += "//" + nomeSinal + "_"
 cont.sFrame = 1
-cont.eFrame = endFrame + 30
+cont.eFrame = endFrame + 15
 cont.renderAnim()
 
-#print "Removendo ParamDir e ParamEsq da pasta ScriptsPython"
-#sub.call(["rm", ""+nomeSinal+"Dir", ""+nomeSinal+"Esq"])
 print
 print"Convertendo AVI em FLV usando ffmpeg"
 
-num = endFrame + 30
+num = endFrame + 15
 if(num > 100):
 	s = "0" + str(num);
 else: 
@@ -274,5 +292,11 @@ sub.call(["ffmpeg", "-y", "-i", cont.renderPath + "0001_" + s + ".avi", "-r", "2
 sub.call(["rm", cont.renderPath + "0001_" + s + ".avi"])
 
 print idUsuario + "**********************************************"
+
+#final = time.time()
+#diff = final - init
+#print "Tempo total de execução: " + str(diff)
+#print "Threads " + str(cont.threads)
+#print "xPart " + str(cont.xParts) + " yPart " + str(cont.yParts)
 
 Blender.Quit()
