@@ -40,14 +40,10 @@
 
 <div class="skeleton"> <!-- Start Skeleton -->
     <div id="signal_video" style="float: left;">video here</div><!-- The video will be showed here -->
-<<<<<<< HEAD
-    <div id="avatar_video" style="float: right; margin-top: 0x; display: none;">video here</div>
-=======
     <div id="report-pane" style="position: relative; display: none">
       <div class="loading"><img src="http://imageshack.us/a/img843/1108/kf6.gif" width="256" height="256"/></div>
       <div id="avatar_video"></div>
     </div> <!-- End of repor-pane div -->
->>>>>>> 14c9a34c7627d6bce6103415138d66644bb7e4e0
   
     <div id="quantidade_maos" style="display: none"> <!-- Start DIV for the submission buttons -->
         <!-- If the user clicks this button, the saved answer will be value="yes"-->
@@ -609,7 +605,7 @@ pybossa.presentTask(function(task, deferred) {
 	autoplay_Id = toPlay ? 1 : 0;
         $('#signal_video').html(function(){
             var video_id = task.info.video_id;
-            return '<iframe type="text/html" width="535" height="450" src="http://www.youtube.com/embed/' + 
+            return '<iframe type="text/html" width="540" height="450" src="http://www.youtube.com/embed/' + 
             video_id + '?autoplay=' + autoplay_Id + '&version=3&loop=1&playlist=' + video_id + '" />'});
      }
 
@@ -620,7 +616,7 @@ pybossa.presentTask(function(task, deferred) {
 
 	stopAndPlaySignalVideo(true);
         $('#avatar_video').html(function(){
-	      return '<video width="400" height="400" controls="true" autoplay="autoplay" loop="true"> <source src="/libras-videos/' + result.rendered_video + '.webm"> </video>'});
+	      return '<video width="395" height="450" controls="true" autoplay="autoplay" loop="true"> <source src="/libras-videos/' + result.rendered_video + '.webm"> </video>'});
 	$('#avatar_video').show();
      }
 
@@ -760,6 +756,14 @@ pybossa.run('librasdictionary');
     box-shadow: inset 0 0 10px #F70;
   }
 
+  #tipos_de_mao li:last-child {
+    background: #FFF;
+  }
+ 
+  section#expressao_facial {
+    /*padding: 0;*/
+  }
+  
   section#expressao_facial li.exp {
     float: left;
     list-style: none;
