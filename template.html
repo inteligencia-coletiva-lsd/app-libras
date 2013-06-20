@@ -41,7 +41,7 @@
 <div class="skeleton"> <!-- Start Skeleton -->
     <div id="signal_video" style="float: left;">video here</div><!-- The video will be showed here -->
     <div id="report-pane" style="position: relative; display: none">
-      <div class="loading"><img src="http://imageshack.us/a/img843/1108/kf6.gif" width="256" height="256"/></div>
+      <div class="loading"><img src="http://imageshack.us/a/img843/1108/kf6.gif" width="128" height="128"/></div>
       <div id="avatar_video"></div>
     </div> <!-- End of repor-pane div -->
   
@@ -326,7 +326,7 @@ pybossa.presentTask(function(task, deferred) {
     var current_exp_group;
     var current_handshape_group;
     var parametros = {right : {}, left : {}};
-    var state = "TIPOS_MAO";
+    var state = "CONF_MAO";
     var isRightHand = true;
 
     var grupo = new Object();
@@ -517,7 +517,7 @@ pybossa.presentTask(function(task, deferred) {
         $('#ponto_de_articulacao').show();
         $("#avatar_completo_img").show();
       }
-      else if (state == "TIPOS_MAO") {
+      else if (state == "CONF_MAO") {
 	if (isRightHand) {
 		 pergunta = "Escolha a forma inicial da m&atilde;o direita.";
 	} else {
@@ -571,8 +571,7 @@ pybossa.presentTask(function(task, deferred) {
 	
 	var nextState = "";
 
-	if (state == "TIPOS_MAO") {
-	     // nextState = "CONF_MAO";
+	if (state == "CONF_MAO") {
 	     nextState = "ORIENT_PALMA";
 	} else if (state == "CONF_MAO") {
 	     nextState = "ORIENT_PALMA";
@@ -590,7 +589,7 @@ pybossa.presentTask(function(task, deferred) {
 	     if (answer == "uma") {
 		nextState = "EXP_FACIAL";
 	     } else {
-		nextState = "TIPOS_MAO";
+		nextState = "CONF_MAO";
 		isRightHand = false;
              }
 	} else if (state == "EXP_FACIAL") {
@@ -703,7 +702,7 @@ pybossa.presentTask(function(task, deferred) {
          $(".handshape").off("click").on( "click", function() {
 	   answer = $(this).data('handshape');
 
-	   if (state == "TIPOS_MAO") {
+	   if (state == "CONF_MAO") {
 	 	/*formasDeMaoLiBg(answer);
 	 	updateState(answer);*/
 		saveAnswer(answer); 
@@ -782,9 +781,8 @@ pybossa.run('librasdictionary');
 
   .loading {
     position: absolute;
-    border: 1px solid #5c9ccc;
     padding: 2px;
-    background-color: #5c9ccc;
+    background-color: #FFFFFF;
     color: #FFFFFF;
     opacity: 0.90;
     -webkit-border-radius: 5px;
