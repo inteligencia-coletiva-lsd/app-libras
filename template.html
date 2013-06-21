@@ -248,15 +248,6 @@
 
 <div class="row skeleton">
     <div class="span6">
-        <!-- Feedback items for the user -->
-        <p>You are working now on task: <span id="task-id" class="label label-warning">#</span></p>
-        <p>You have completed: <span id="done" class="label label-info"></span> tasks from
-        <!-- Progress bar for the user -->
-        <span id="total" class="label label-inverse"></span></p>
-        <div class="progress progress-striped">
-            <div id="progress" rel="tooltip" title="#" class="bar" style="width: 0%;"></div>
-        </div>
-       
         <!-- 
             This application uses Disqus to allow users to provide some feedback.
             The next section includes a button that when a user clicks on it will
@@ -294,16 +285,6 @@
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 <script>
-function loadUserProgress() {
-    pybossa.userProgress('flickrperson').done(function(data){
-        var pct = Math.round((data.done*100)/data.total);
-        $("#progress").css("width", pct.toString() +"%");
-        $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'});
-        $("#total").text(data.total);
-        $("#done").text(data.done);
-    });
-}
 
 $("#report-pane").ajaxStart(function(){
   var width = $(this).width();
@@ -565,7 +546,7 @@ pybossa.presentTask(function(task, deferred) {
 
         $('#ponto_de_articulacao').show();
       }
-      else if (state == "RENDER") {
+      else if (state == "RENDER" || state == "CONFIRM_AVATAR") {
 	pergunta = "O avatar renderizado est&aacute; correto?";
         $("#report-pane").show();
       }
@@ -575,14 +556,19 @@ pybossa.presentTask(function(task, deferred) {
 
     function saveAnswer(answer) {
 
+	if (state == "CONFIRM_AVATAR") {
+		return;
+	}
+
 	if (state == "RENDER") {
+		parametros.avatar_video = answer;
 		return;
 	}
 
 	if (state == "EXP_FACIAL" || state == "QTD_MAOS") {
 		parametros[state] = answer;
 		return;
-	} 		
+	}
 
 	saveState = state;
 	if (saveState == "DIST_MAOS") {
@@ -624,11 +610,14 @@ pybossa.presentTask(function(task, deferred) {
 	} else if (state == "EXP_FACIAL") {
 		nextState = "RENDER";
 	} else if (state == "RENDER") {
+		nextState = "CONFIRM_AVATAR";
+	} else if (state == "CONFIRM_AVATAR") {
 	     if (answer == "Sim") {
 		nextState = "TASK_END";
 	     } else {
 		nextState = "CONF_MAO";
 		isRightHand = true;
+		parametros = {signal_name : parametros.signal_name, right : {}, left : {}};
 	     }
 	}
 
@@ -644,14 +633,10 @@ pybossa.presentTask(function(task, deferred) {
             video_id + '?autoplay=' + autoplay_Id + '&version=3&loop=1&playlist=' + video_id + '" />'});
      }
 
-     function showRenderedVideo(result) {
-	console.log(result);
-	$.unblockUI();
-	mostrarPergunta();
-
+     function showRenderedVideo(video) {
 	stopAndPlaySignalVideo(true);
         $('#avatar_video').html(function(){
-	      return '<video width="400" height="400" controls="true" autoplay="autoplay" loop="true"> <source src="/libras-videos/' + result.rendered_video + '.webm"> </video>'});
+	      return '<video width="400" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/libras-videos/' + video + '> </video>'});
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
      }
@@ -660,8 +645,6 @@ pybossa.presentTask(function(task, deferred) {
         console.log(parametros);
 	console.log(parametros.right);
 	console.log(parametros.left);
-
-//	$.blockUI({message: "Rendering..."});
 	
         stopAndPlaySignalVideo(false);
 
@@ -671,7 +654,12 @@ pybossa.presentTask(function(task, deferred) {
 	  contentType: 'application/json',
 	  data: JSON.stringify(parametros),
 	  success: function(result) {
-	    showRenderedVideo(result);
+	    video = result.rendered_video;
+	    saveAnswer(video);
+	    updateState(video);
+	    mostrarPergunta();
+
+	    showRenderedVideo(video);
 	  },
 	  error: function(result) {
 	    alert("error!");
@@ -698,11 +686,10 @@ pybossa.presentTask(function(task, deferred) {
               mostrarPergunta(state);
 
 	      if (state == "TASK_END") {
-	            console.log(parametros);
 		    pybossa.saveTask(task.id, parametros).done(function() {
-                    deferred.resolve(); 
-                });
-	      }	
+      	              deferred.resolve(); 
+                    });
+	      } 
             } else{
               $("#error").show();
             }

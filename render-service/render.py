@@ -1,7 +1,6 @@
 from flask import (Flask, jsonify, request)
 import json
 import os
-import time
 import random
 
 app = Flask(__name__)
@@ -59,11 +58,11 @@ def render():
      finally:
 	f.close()
 
-     #time.sleep(1000)
      cmd = "cd " + SCRIPTS_BLENDER_DIR + "; blender -b " + BLEND_FILE + " -o " + VIDEOS_DIR + " -P " + MOV_PONTUAL_SCRIPT + " " + path_dir + " " + path_esq
      exitcode = os.system(cmd)
+     avatar_file = signal_name + ".webm"
 
-     return jsonify(rendered_video=signal_name, exitcode=exitcode)
+     return jsonify(rendered_video=avatar_file, exitcode=exitcode)
 
 if __name__ == "__main__":
     app.run(debug=True)
