@@ -497,9 +497,9 @@ pybossa.presentTask(function(task, deferred) {
         
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
-		pergunta = "Escolha a orienta&ccedil;&atilde;o inicial da palma da m&atilde;o direita.";
+		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
 	} else {
-		pergunta = "Escolha a orienta&ccedil;&atilde;o inicial da palma da m&atilde;o esquerda.";
+		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
 	}
         $('#orientacao_palma_da_mao').show();
       }
@@ -510,18 +510,18 @@ pybossa.presentTask(function(task, deferred) {
       }
       else if (state == "PONTO_ARTIC") {
 	if (isRightHand) {
-		pergunta = "Selecione o ponto de articula&ccedil;&atilde;o da m&atilde;o direita.";
+		pergunta = "A m&atilde;o direita fica suspensa em que ponto?";
 	} else {
-		pergunta = "Selecione o ponto de articula&ccedil;&atilde;o da m&atilde;o esquerda.";
+		pergunta = "A m&atilde;o esquerda fica suspensa em que ponto?";
 	}
         $('#ponto_de_articulacao').show();
         $("#avatar_completo_img").show();
       }
       else if (state == "CONF_MAO") {
 	if (isRightHand) {
-		 pergunta = "Escolha a forma inicial da m&atilde;o direita.";
+		 pergunta = "Escolha a forma da m&atilde;o direita.";
 	} else {
-		pergunta = "Escolha a forma inicial da m&atilde;o esquerda.";
+		pergunta = "Escolha a forma da m&atilde;o esquerda.";
 	}
 
 	formasDeMaoLiBg('group_1', isRightHand)
