@@ -41,8 +41,19 @@
 <div class="skeleton"> <!-- Start Skeleton -->
     <div id="signal_video" style="float: left;">video here</div><!-- The video will be showed here -->
     <div id="report-pane" style="position: relative; display: none">
-      <div class="loading"><img src="http://imageshack.us/a/img843/1108/kf6.gif" width="128" height="128"/></div>
+      <div class="loading"><img src="http://imageshack.us/a/img692/2121/6rd.gif" width="128" height="128"/><br /><strong>Renderizando</strong></div>
       <div id="avatar_video"></div>
+
+      <div id="confirmacao_avatar" style="display: none; margin-left: 50px; margin-right: 50px;"> 
+        <button class="btn btn-large btn-success btn-answer" style="width: 130px; float: left;" value='Sim'>
+            Correto
+        </button>
+        <!-- If the user clicks this button, the saved answer will be value="no"-->
+        <button class="btn btn-large btn-danger btn-answer" style="width: 130px; margin-left: 30px;"  value='Nao'>
+            Errado
+        </button>
+      </div>
+
     </div> <!-- End of repor-pane div -->
   
     <div id="quantidade_maos" style="display: none"> <!-- Start DIV for the submission buttons -->
@@ -294,6 +305,16 @@ function loadUserProgress() {
     });
 }
 
+$("#report-pane").ajaxStart(function(){
+  var width = $(this).width();
+  var height = $(this).height();
+  
+  $(".loading").fadeIn(200); 
+}).ajaxStop(function(){
+  $(".loading", this).fadeOut(1000); 
+});
+
+
 pybossa.taskLoaded(function(task, deferred) {
     if ( !$.isEmptyObject(task) ) {
         deferred.resolve(task);
@@ -492,14 +513,18 @@ pybossa.presentTask(function(task, deferred) {
       $('#expressao_facial').hide();
       $('#ponto_de_articulacao').hide();
       $('#tipos_de_mao').hide();
+      $("#expressao_facial").hide();
+      $('#report-pane').hide();
+      $('#avatar_video').hide();
+      $('#confirmacao_avatar').hide();
 	
       var pergunta;
         
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
-		pergunta = "Escolha a orienta&ccedil;&atilde;o inicial da palma da m&atilde;o direita.";
+		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
 	} else {
-		pergunta = "Escolha a orienta&ccedil;&atilde;o inicial da palma da m&atilde;o esquerda.";
+		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
 	}
         $('#orientacao_palma_da_mao').show();
       }
@@ -510,18 +535,18 @@ pybossa.presentTask(function(task, deferred) {
       }
       else if (state == "PONTO_ARTIC") {
 	if (isRightHand) {
-		pergunta = "Selecione o ponto de articula&ccedil;&atilde;o da m&atilde;o direita.";
+		pergunta = "A m&atilde;o direita fica suspensa em que ponto?";
 	} else {
-		pergunta = "Selecione o ponto de articula&ccedil;&atilde;o da m&atilde;o esquerda.";
+		pergunta = "A m&atilde;o esquerda fica suspensa em que ponto?";
 	}
         $('#ponto_de_articulacao').show();
         $("#avatar_completo_img").show();
       }
       else if (state == "CONF_MAO") {
 	if (isRightHand) {
-		 pergunta = "Escolha a forma inicial da m&atilde;o direita.";
+		 pergunta = "Escolha a forma da m&atilde;o direita.";
 	} else {
-		pergunta = "Escolha a forma inicial da m&atilde;o esquerda.";
+		pergunta = "Escolha a forma da m&atilde;o esquerda.";
 	}
 
 	formasDeMaoLiBg('group_1', isRightHand)
@@ -542,6 +567,7 @@ pybossa.presentTask(function(task, deferred) {
       }
       else if (state == "RENDER") {
 	pergunta = "O avatar renderizado est&aacute; correto?";
+        $("#report-pane").show();
       }
 
       $("#question").html( pergunta );
@@ -549,13 +575,16 @@ pybossa.presentTask(function(task, deferred) {
 
     function saveAnswer(answer) {
 
+	if (state == "RENDER") {
+		return;
+	}
+
 	if (state == "EXP_FACIAL" || state == "QTD_MAOS") {
 		parametros[state] = answer;
 		return;
 	} 		
 
 	saveState = state;
-
 	if (saveState == "DIST_MAOS") {
 		saveState = "PONTO_ARTIC";
 	}
@@ -594,6 +623,13 @@ pybossa.presentTask(function(task, deferred) {
              }
 	} else if (state == "EXP_FACIAL") {
 		nextState = "RENDER";
+	} else if (state == "RENDER") {
+	     if (answer == "Sim") {
+		nextState = "TASK_END";
+	     } else {
+		nextState = "CONF_MAO";
+		isRightHand = true;
+	     }
 	}
 
 	state = nextState;
@@ -615,8 +651,9 @@ pybossa.presentTask(function(task, deferred) {
 
 	stopAndPlaySignalVideo(true);
         $('#avatar_video').html(function(){
-	      return '<video width="395" height="450" controls="true" autoplay="autoplay" loop="true"> <source src="/libras-videos/' + result.rendered_video + '.webm"> </video>'});
+	      return '<video width="400" height="400" controls="true" autoplay="autoplay" loop="true"> <source src="/libras-videos/' + result.rendered_video + '.webm"> </video>'});
 	$('#avatar_video').show();
+	$('#confirmacao_avatar').show();
      }
 
     function renderizarVideo() {
@@ -625,18 +662,6 @@ pybossa.presentTask(function(task, deferred) {
 	console.log(parametros.left);
 
 //	$.blockUI({message: "Rendering..."});
-        
-        $("#expressao_facial").hide();
-        $("#report-pane").show();
-
-        $("#report-pane").ajaxStart(function(){
-          var width = $(this).width();
-          var height = $(this).height();
-          
-          $(".loading").fadeIn(200); 
-        }).ajaxStop(function(){
-          $(".loading", this).fadeOut(1000); 
-        });
 	
         stopAndPlaySignalVideo(false);
 
@@ -671,7 +696,14 @@ pybossa.presentTask(function(task, deferred) {
               saveAnswer(answer);
               updateState(answer);	
               mostrarPergunta(state);
-            }else{
+
+	      if (state == "TASK_END") {
+	            console.log(parametros);
+		    pybossa.saveTask(task.id, parametros).done(function() {
+                    deferred.resolve(); 
+                });
+	      }	
+            } else{
               $("#error").show();
             }
         });
@@ -721,7 +753,8 @@ pybossa.presentTask(function(task, deferred) {
            exp_answer = $(this).data('exp_facial');
            saveAnswer(exp_answer);
            updateState(exp_answer);
-          
+           mostrarPergunta();
+
            renderizarVideo();
          });
     }
@@ -783,7 +816,7 @@ pybossa.run('librasdictionary');
     position: absolute;
     padding: 2px;
     background-color: #FFFFFF;
-    color: #FFFFFF;
+    color: #99FF99;
     opacity: 0.90;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
