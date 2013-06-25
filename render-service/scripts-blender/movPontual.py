@@ -256,8 +256,6 @@ cena = Blender.Scene.GetCurrent()
 cont = cena.getRenderingContext()
 cont.imageSizeX(400)
 cont.imageSizeY(400)
-#cont.imageSizeX(200)
-#cont.imageSizeY(200)
 cont.enableShadow(0)
 cont.enableRayTracing(0)
 cont.enableEnvironmentMap(0)
@@ -265,6 +263,7 @@ cont.enablePanorama(0)
 cont.enableRadiosityRender(0)
 cont.enableMotionBlur(0)
 cont.enableOversampling(0)
+cont.framesPerSec(18)
 
 # threads e particionamento da imagem
 cont.threads = 4
