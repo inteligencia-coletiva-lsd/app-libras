@@ -46,11 +46,10 @@
 
       <div id="confirmacao_avatar" style="display: none; margin-left: 50px; margin-right: 50px;"> 
         <button class="btn btn-large btn-success btn-answer" style="width: 130px; float: left;" value='Sim'>
-            Correto
+            Confirmar
         </button>
-        <!-- If the user clicks this button, the saved answer will be value="no"-->
         <button class="btn btn-large btn-danger btn-answer" style="width: 130px; margin-left: 30px;"  value='Nao'>
-            Errado
+            Corrigir
         </button>
       </div>
 
@@ -248,17 +247,24 @@
 
 <div class="row skeleton">
     <div class="span6">
+
         <!-- 
             This application uses Disqus to allow users to provide some feedback.
             The next section includes a button that when a user clicks on it will
             load the comments, if any, for the given task
         -->
-        <div id="disqus_show_btn" style="margin-top:5px;">
-            <button class="btn btn-primary btn-large btn-disqus" onclick="loadDisqus()"><i class="icon-comments"></i> Show comments</button>
-            <button class="btn btn-large btn-disqus" onclick="loadDisqus()" style="display:none"><i class="icon-comments"></i> Hide comments</button>
+        <div id="disqus_show_btn" style="margin-top:5px; float: left;">
+            <button class="btn btn-primary btn-large btn-disqus" onclick="loadDisqus()"><i class="icon-comments"></i> Mostra coment&aacute;rios</button>
+            <button class="btn btn-large btn-disqus" onclick="loadDisqus()" style="display:none"><i class="icon-comments"></i> Oculta coment&aacute;rios</button>
         </div><!-- End of Disqus Button section -->
+
+	<!-- Pular tarefa -->
+	<button class="btn btn-large btn-warning" style="margin: 5px 0 0 5px; width: 130px;" value='Pular'>
+            Pular sinal
+        </button>
+
         <!-- Disqus thread for the given task -->
-        <div id="disqus_thread" style="margin-top:5px;display:none"></div>
+        <div id="disqus_thread" style="margin-top:5px; display:none"></div>
     </div>
 </div>
 
@@ -297,12 +303,7 @@ $("#report-pane").ajaxStart(function(){
 
 
 pybossa.taskLoaded(function(task, deferred) {
-    if ( !$.isEmptyObject(task) ) {
-        deferred.resolve(task);
-    }
-    else {
-        deferred.resolve(task);
-    }
+    deferred.resolve(task);
 });
 
 pybossa.presentTask(function(task, deferred) {
@@ -617,7 +618,7 @@ pybossa.presentTask(function(task, deferred) {
 	     } else {
 		nextState = "CONF_MAO";
 		isRightHand = true;
-		parametros = {signal_name : parametros.signal_name, right : {}, left : {}};
+		resetParametros();
 	     }
 	}
 
@@ -625,21 +626,26 @@ pybossa.presentTask(function(task, deferred) {
 	console.log(state);
      }
 
-     function stopAndPlaySignalVideo (toPlay) {
+    function resetParametros() {
+	parametros = {signal_name : parametros.signal_name, right : {}, left : {}};
+    }
+
+
+    function stopAndPlaySignalVideo (toPlay) {
 	autoplay_Id = toPlay ? 1 : 0;
         $('#signal_video').html(function(){
             var video_id = task.info.video_id;
             return '<iframe type="text/html" width="540" height="450" src="http://www.youtube.com/embed/' + 
             video_id + '?autoplay=' + autoplay_Id + '&version=3&loop=1&playlist=' + video_id + '" />'});
-     }
+    }
 
-     function showRenderedVideo(video) {
+    function showRenderedVideo(video) {
 	stopAndPlaySignalVideo(true);
         $('#avatar_video').html(function(){
 	      return '<video width="400" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/libras-videos/' + video + '> </video>'});
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
-     }
+    }
 
     function renderizarVideo() {
         console.log(parametros);
@@ -681,11 +687,13 @@ pybossa.presentTask(function(task, deferred) {
         $('.btn-answer').off('click').on('click', function(){
             var answer = $(this).attr('value');
             if( typeof answer != 'undefined' ){
+
               saveAnswer(answer);
               updateState(answer);	
               mostrarPergunta(state);
 
 	      if (state == "TASK_END") {
+		    parametros.final_state = "completed";
 		    pybossa.saveTask(task.id, parametros).done(function() {
       	              deferred.resolve(); 
                     });
@@ -695,6 +703,21 @@ pybossa.presentTask(function(task, deferred) {
             }
         });
          
+	// Evento de clique em pular tarefa
+        $('.btn-warning').off('click').on('click', function(){
+            var answer = $(this).attr('value');
+            if( typeof answer != 'undefined' ){
+	      if (answer == "Pular") {
+		    parametros.final_state = "skipped";
+		    pybossa.saveTask(task.id, parametros).done(function() {
+      	              deferred.resolve(); 
+                    });
+	      }
+            } else {
+              $("#error").show();
+            }
+        });
+
 	 // Eventos de cliques em pontos de articulação
          var local_answer;
          $("#avatar_completo").find("area").off('click').on('click', function(event){
