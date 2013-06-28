@@ -229,8 +229,8 @@
       </div>
     </section> <!-- End of tipos_de_mao -->
 
-    <div id="report-pane" style="float: left; display: none">
-      <div class="loading"><img src="http://imageshack.us/a/img692/2121/6rd.gif" width="128" height="128"/><br /><strong>Renderizando</strong></div>
+    <div id="report-pane" style="float: left; display: none;">
+      <div id="render_progress" class="progress progress-striped active" style="display: none; height: 30px; width: 300px; margin-top: 200px; margin-left: 50px; position: absolute; z-index: 1;"></div>
       <div id="confirmacao_avatar" style="display: none; margin: 0 50px 10px 50px;"> 
         <button class="btn btn-large btn-success btn-answer" style="width: 130px; float: left;" value='Sim'>
             Confirmar
@@ -239,8 +239,8 @@
             Corrigir
         </button>
       </div>
-      <div id="avatar_video"></div>
-    </div> <!-- End of repor-pane div -->
+      <div id="avatar_video" style="display: none;"></div>
+    </div> <!-- End of report-pane div -->
    </div> <!-- Parametros do sinal -->
 
    <div id="signal_video" style="float: right; width: 540px; height: 450px;"></div><!-- The video will be showed here -->
@@ -248,57 +248,15 @@
 
 <div class="row skeleton">
     <div style="margin-top: 30px; margin-bottom: 30px; float: right;">
-        <!-- 
-            This application uses Disqus to allow users to provide some feedback.
-            The next section includes a button that when a user clicks on it will
-            load the comments, if any, for the given task
-        -->
-        <div id="disqus_show_btn">
-	<!-- Pular tarefa -->
-	<button class="btn btn-large btn-warning" style="margin: 0 0 0 5px; width: 130px; float: right;" value='Pular'>
-            Pular sinal
-        </button>
-            <button class="btn btn-primary btn-large btn-disqus" onclick="loadDisqus()"><i class="icon-comments"></i> Mostra coment&aacute;rios</button>
-            <button class="btn btn-large btn-disqus" onclick="loadDisqus()" style="display:none"><i class="icon-comments"></i> Oculta coment&aacute;rios</button>
-        </div><!-- End of Disqus Button section -->
-        <!-- Disqus thread for the given task -->
-        <div id="disqus_thread" style="margin-top:5px; display:none"></div>
+        <div id="pular_tarefa">
+	   <button class="btn btn-large btn-warning" style="margin: 0 0 0 5px; width: 130px; float: right;" value='Pular'>
+	       Pular sinal
+	   </button>
+        </div> <!-- Pular tarefa -->
     </div>
 </div>
 
-
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    function loadDisqus() {
-    $("#disqus_thread").toggle();
-    $(".btn-disqus").toggle();
-    var disqus_shortname = 'pybossa'; // required: replace example with your forum shortname
-    //var disqus_identifier = taskId;
-    var disqus_developer = 1;
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    }
-
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
 <script>
-
-$("#report-pane").ajaxStart(function(){
-  var width = $(this).width();
-  var height = $(this).height();
-  
-  $(".loading").fadeIn(200); 
-}).ajaxStop(function(){
-  $(".loading", this).fadeOut(1000); 
-});
-
 
 pybossa.taskLoaded(function(task, deferred) {
     deferred.resolve(task);
@@ -307,16 +265,16 @@ pybossa.taskLoaded(function(task, deferred) {
 pybossa.presentTask(function(task, deferred) {
     var exp_facial = { "group_1" : { "Exp_1" : "Bico", 
                                      "Exp_2" : "Bochechas infladas", 
-                                     "Exp_3" : "Bochechas contraidas",
-                                     "Exp_4" : "Labios contradidos",
+                                     "Exp_3" : "Bochechas contraídas",
+                                     "Exp_4" : "Lábios contraídos",
                                      "Exp_5" : "Olhos para a direita",
                                      "Exp_6" : "Olhos para a esquerda" },
-                       "group_2" : { "Exp_7" : "Lingua para baixo",
-                                     "Exp_8" : "Lingua reta",
-                                     "Exp_9" : "Neutra",
+                       "group_2" : { "Exp_7" : "Língua para baixo",
+                                     "Exp_8" : "Língua reta",
+				     "Exp_9" : "Neutra",
                                      "Exp_10" : "Olhos arregalados",
                                      "Exp_11" : "Sobrancelhas levantadas",
-                                     "Exp_12" : "Sobrancelha franzida"  },
+                                     "Exp_12" : "Sobrancelhas franzidas"  },
                        "group_3" : { "Exp_13" : "Bochecha direita inflada",
                                      "Exp_14" : "Susto",
                                      "Exp_15" : "Triste",
@@ -367,11 +325,11 @@ pybossa.presentTask(function(task, deferred) {
       for( var key in exp_facial[group] ) {
         exp_num = parseInt( key.split("_")[1]  );
       
-        if( ( exp_num % 6 ) == 0 ){
+        if (( exp_num % 6 ) == 0 ) {
           nth_li = ":nth-child(" + 6  + ")";
           exp_num_x = '-' + ( 5 * 133 ) + 'px';
           exp_num_y = '-' + Math.floor( ( exp_num / 6 ) - 1 ) * 135 + 'px';
-        }else{
+        } else {
           nth_li = ":nth-child(" +  (exp_num % 6)  + ")";
           exp_num_x = '-' + ( ( exp_num % 6 ) - 1 ) * 133 + 'px';
           exp_num_y = '-' + Math.floor( ( exp_num / 6 ) ) * 135 + 'px' ;
@@ -645,11 +603,39 @@ pybossa.presentTask(function(task, deferred) {
 	$('#confirmacao_avatar').show();
     }
 
+    var tid;
+    var progress_width;
+    function updateRenderProgressBar(width) {
+	progress_width = width
+        $('#render_progress').html(function(){
+	      return '<div class="bar" style="width: ' + width + '%"></div>'});
+    }
+
+    function updateRenderProgress() {
+	if (progress_width < 100) {
+		progress_width += 7;
+		updateRenderProgressBar(progress_width);
+	}
+    }
+
+    function stopRenderProgress() {
+	updateRenderProgressBar(100);
+	clearInterval(tid);
+	$('#render_progress').fadeOut(1000);
+    }
+
+    function showRenderProgress() {
+	updateRenderProgressBar(0);
+	tid = setInterval(updateRenderProgress, 1000);
+	$("#render_progress").show();
+    }
+
     function renderizarVideo() {
         console.log(parametros);
 	console.log(parametros.right);
 	console.log(parametros.left);
-	
+
+	showRenderProgress();
         stopAndPlaySignalVideo(false);
 
 	jQuery.ajax({
@@ -663,10 +649,11 @@ pybossa.presentTask(function(task, deferred) {
 	    updateState(video);
 	    mostrarPergunta();
 
+	    stopRenderProgress();
 	    showRenderedVideo(video);
 	  },
 	  error: function(result) {
-	    alert("error!");
+	    alert("Error!");
 	  },
 	  async: true
 	});
@@ -768,7 +755,6 @@ pybossa.presentTask(function(task, deferred) {
     }
     else {
         $(".skeleton").hide();
-        $("#loading").hide();
         $("#finish").fadeIn(500);
     } 
 });
@@ -819,22 +805,4 @@ pybossa.run('librasdictionary');
     -moz-box-shadow: inset 0 0 10px #F70;
     box-shadow: inset 0 0 10px #F70;
   }
-
-  .loading {
-    position: absolute;
-    padding: 2px;
-    background-color: #FFFFFF;
-    color: #99FF99;
-    opacity: 0.90;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    width: 380px;
-    height: 448px;
-    text-align: center;
-    z-index: 100000;
-  }
-
-  .loading img {  margin-top: 92px; }
-
 </style>
