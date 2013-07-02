@@ -52,80 +52,25 @@
         </button>
     </div><!-- End of DIV for the submission buttons -->
 
-    <div id="orientacao_palma_da_mao" style="display: none; float: left;">
-        <!-- Ori 1 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_1">
-                <img src="http://bit.ly/166zJWo" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 2 -->
-        <div class="palma_image"style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_2">
-                <img src="http://bit.ly/10IL8Zp" width="82px" height="106px"/>
-            </button>   
-        </div>
-        <!-- Ori 3 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_3">
-                <img src="http://bit.ly/11yVCw2" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 4 -->
-        <div class="palma_image" style="margin: 0px  0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_4">
-                <img src="http://bit.ly/10o8PEB" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 5 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_5">
-                <img src="http://bit.ly/15G9cPA"  width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 6 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_6">
-                <img src="http://bit.ly/14hLm8f" width="82px" height="106px"/>
-            </button> 
-        </div>
-        <!-- Ori 7 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_7">
-                <img src="http://bit.ly/YFbHMK" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 8 -->
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_8">
-                <img src="http://bit.ly/YFbxF3" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 9 -->
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_9">
-                <img src="http://bit.ly/11yVwo9" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 10 --> 
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_10">
-                <img src="http://bit.ly/10EeUtF"  width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 11 -->
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left">
-            <button class="btn btn-answer" type="button" value="Ori_11">
-                <img src="http://bit.ly/18G71uf" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 12 --> 
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left">
-            <button class="btn btn-answer" type="button" value="Ori_12">
-                <img src="http://bit.ly/13n6Ql3"  width="82px" height="106px"/>
-            </button>
-        </div>
-    </div><!-- End of orientacao_palma_da_mao -->
+    <!-- Begin of orientacao_palma_da_mao -->
+    <section id="orientacao_palma_da_mao" style="display: none">
+      <ul>
+        <li class="ori" data-orientacao="Ori_1"></li>
+        <li class="ori" data-orientacao="Ori_2"></li>
+        <li class="ori" data-orientacao="Ori_3"></li>
+        <li class="ori" data-orientacao="Ori_4"></li>
+        <li class="ori" data-orientacao="Ori_5"></li>
+        <li class="ori" data-orientacao="Ori_6"></li>
+        <li class="ori" data-orientacao="Ori_7"></li>
+        <li class="ori" data-orientacao="Ori_8"></li>
+        <li class="ori" data-orientacao="Ori_9"></li>
+        <li class="ori" data-orientacao="Ori_10"></li>
+        <li class="ori" data-orientacao="Ori_11"></li>
+        <li class="ori" data-orientacao="Ori_12"></li>
+      </ul>
+    </section>
+    <!-- End of orientacao_palma_da_mao -->
+
     <!-- Begin of expressao_facial -->
     <section id="expressao_facial" style="display: none; float: left;">
       <div class="pagination expressao_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%;">
@@ -303,6 +248,26 @@ pybossa.presentTask(function(task, deferred) {
                                  "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
                                  "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");
 
+    // Modifica o background dos li DOM da section orientacao_palma_da_mao
+    function set_orientacao_li_bg() {
+      var nth_li;
+      var ori_num_x;
+      var ori_num_y;
+    
+      for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
+        if( ( ori_num % 3 ) == 0 ){
+          nth_li = ":nth-child(" + ori_num  + ")";
+          ori_num_x = '-' + ( 2 * 110 ) + 'px';
+          ori_num_y = '-' + Math.floor( ( ori_num / 3 ) - 1 ) * 110 + 'px';
+        }else{
+          nth_li = ":nth-child(" +  ori_num  + ")";
+          ori_num_x = '-' + ( ( ori_num % 3 ) - 1 ) * 110 + 'px';
+          ori_num_y = '-' + Math.floor( ( ori_num / 3 ) ) * 110 + 'px' ;
+        }
+        $("#orientacao_palma_da_mao").find("li").filter(nth_li).css({'background-position': ori_num_x + " " + ori_num_y});
+      } // Fim do for
+    } // Fim da funcao set_orientacao_li_bg
+
     // Modifica o background dos li DOM da section expressao_facial
     function set_button_bg( group ) {
       var nth_li;
@@ -461,9 +426,12 @@ pybossa.presentTask(function(task, deferred) {
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
+                $("#orientacao_palma_da_mao").find("li").css({"background" : 'url("http://imageshack.us/a/img825/4760/86v.png")'});
 	} else {
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
+                $("#orientacao_palma_da_mao").find("li").css({"background" : 'url("http://imageshack.us/a/img51/2479/o6y0.png")'});
 	}
+        set_orientacao_li_bg();
         $('#orientacao_palma_da_mao').show();
       }
       else if (state == "EXP_FACIAL") {
@@ -752,6 +720,14 @@ pybossa.presentTask(function(task, deferred) {
 
            renderizarVideo();
          });
+
+	 // Eventos de cliques em orientacao da mao
+         $(".ori").off("click").on("click", function() {
+           answer = $(this).data('orientacao');
+           saveAnswer(answer);
+           updateState(answer);
+           mostrarPergunta();
+         });
     }
     else {
         $(".skeleton").hide();
@@ -781,14 +757,6 @@ pybossa.run('librasdictionary');
     -moz-box-shadow: inset 0 0 10px #F70;
     box-shadow: inset 0 0 10px #F70;
   }
-
-  #tipos_de_mao li:last-child {
-    background: #FFF;
-  }
- 
-  section#expressao_facial {
-    /*padding: 0;*/
-  }
   
   section#expressao_facial li.exp {
     float: left;
@@ -801,6 +769,21 @@ pybossa.run('librasdictionary');
   }
   
   section#expressao_facial li.exp:hover {
+    -webkit-box-shadow: inset 0 0 10px #F70;
+    -moz-box-shadow: inset 0 0 10px #F70;
+    box-shadow: inset 0 0 10px #F70;
+  }
+
+  section#orientacao_palma_da_mao li.ori {
+    float: left;
+    list-style: none;
+    width: 110px;
+    height: 110px;
+    margin: 1px 0 0 1px;
+    background: url("http://imageshack.us/a/img825/4760/86v.png");
+  }
+
+  section#orientacao_palma_da_mao li.ori:hover {
     -webkit-box-shadow: inset 0 0 10px #F70;
     -moz-box-shadow: inset 0 0 10px #F70;
     box-shadow: inset 0 0 10px #F70;
