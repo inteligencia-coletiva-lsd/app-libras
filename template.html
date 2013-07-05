@@ -41,36 +41,89 @@
 <div class="skeleton"> <!-- Start Skeleton -->
 
    <div id="parametros_sinal" style="float: left; width:400px; height: 450px;">
-    <div id="quantidade_maos" style="display: none;"> <!-- Start DIV for the submission buttons -->
-        <!-- If the user clicks this button, the saved answer will be value="yes"-->
+    <div id="quantidade_maos" style="display: none;">
         <button class="btn btn-large btn-info btn-answer" style="width: 130px; display: block;" value='uma'>
             Uma m&atilde;o
         </button>
-        <!-- If the user clicks this button, the saved answer will be value="no"-->
         <button class="btn btn-large btn-info btn-answer" style="width: 130px; display: block; margin: 10px auto 0 0;" value='duas'>
 	    Duas m&atilde;os
         </button>
-    </div><!-- End of DIV for the submission buttons -->
+    </div>
 
-    <!-- Begin of orientacao_palma_da_mao -->
-    <section id="orientacao_palma_da_mao" style="display: none">
-      <ul>
-        <li class="ori" data-orientacao="Ori_1"></li>
-        <li class="ori" data-orientacao="Ori_2"></li>
-        <li class="ori" data-orientacao="Ori_3"></li>
-        <li class="ori" data-orientacao="Ori_4"></li>
-        <li class="ori" data-orientacao="Ori_5"></li>
-        <li class="ori" data-orientacao="Ori_6"></li>
-        <li class="ori" data-orientacao="Ori_7"></li>
-        <li class="ori" data-orientacao="Ori_8"></li>
-        <li class="ori" data-orientacao="Ori_9"></li>
-        <li class="ori" data-orientacao="Ori_10"></li>
-        <li class="ori" data-orientacao="Ori_11"></li>
-        <li class="ori" data-orientacao="Ori_12"></li>
-      </ul>
-    </section>
-    <!-- End of orientacao_palma_da_mao -->
-
+    <div id="orientacao_palma_da_mao" style="display: none; float: left;">
+        <!-- Ori 1 -->
+        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_1">
+                <img src="http://bit.ly/166zJWo" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 2 -->
+        <div class="palma_image"style="margin: 0px 0 0 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_2">
+                <img src="http://bit.ly/10IL8Zp" width="82px" height="106px"/>
+            </button>   
+        </div>
+        <!-- Ori 3 -->
+        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_3">
+                <img src="http://bit.ly/11yVCw2" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 4 -->
+        <div class="palma_image" style="margin: 0px  0px 0px 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_4">
+                <img src="http://bit.ly/10o8PEB" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 5 -->
+        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_5">
+                <img src="http://bit.ly/15G9cPA"  width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 6 -->
+        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_6">
+                <img src="http://bit.ly/14hLm8f" width="82px" height="106px"/>
+            </button> 
+        </div>
+        <!-- Ori 7 -->
+        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_7">
+                <img src="http://bit.ly/YFbHMK" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 8 -->
+        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_8">
+                <img src="http://bit.ly/YFbxF3" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 9 -->
+        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_9">
+                <img src="http://bit.ly/11yVwo9" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 10 --> 
+        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
+            <button class="btn btn-answer" type="button" value="Ori_10">
+                <img src="http://bit.ly/10EeUtF"  width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 11 -->
+        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left">
+            <button class="btn btn-answer" type="button" value="Ori_11">
+                <img src="http://bit.ly/18G71uf" width="82px" height="106px"/>
+            </button>
+        </div>
+        <!-- Ori 12 --> 
+        <div class="palma_image" style="margin: 0px 0 0 5px; float: left">
+            <button class="btn btn-answer" type="button" value="Ori_12">
+                <img src="http://bit.ly/13n6Ql3"  width="82px" height="106px"/>
+            </button>
+        </div>
+    </div><!-- End of orientacao_palma_da_mao -->
     <!-- Begin of expressao_facial -->
     <section id="expressao_facial" style="display: none; float: left;">
       <div class="pagination expressao_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%;">
@@ -103,8 +156,8 @@
           <area title="boca"              shape="rect" coords="145, 110, 175, 130" href="#"  data-local="Pa_6"  />
           <area title="queixo"            shape="rect" coords="145, 130, 175, 150" href="#"  data-local="Pa_57" />
           <area title="pescoco"           shape="rect" coords="145, 155, 175, 175" href="#"  data-local="Pa_56" />
-          <area title="bochecha direita"  shape="rect" coords="115, 100, 145, 120" href="#"  data-local="Pa_9"  />
-          <area title="bochecha esquerda" shape="rect" coords="180, 100, 210, 120" href="#"  data-local="Pa_9"  />
+          <area title="bochecha direita"  shape="rect" coords="115, 100, 145, 120" href="#"  data-local="Pa_9R"  />
+          <area title="bochecha esquerda" shape="rect" coords="180, 100, 210, 120" href="#"  data-local="Pa_9L"  />
           <area title="orelha direita"    shape="rect" coords="90, 70, 120, 95"    href="#"  data-local="Pa_50" />
           <area title="orelha esquerda"   shape="rect" coords="200, 70, 230, 95"   href="#"  data-local="Pa_53" />
           
@@ -141,36 +194,36 @@
         </ul>
       </div>
       <div id="maos">
-        <li class="handshape" data-handshape='tipo_1'></li>
-        <li class="handshape" data-handshape='tipo_2'></li>
-        <li class="handshape" data-handshape="tipo_3"></li>
-        <li class="handshape" data-handshape="tipo_4"></li>
-        <li class="handshape" data-handshape="tipo_5"></li>
-        <li class="handshape" data-handshape="tipo_6"></li>
-        <li class="handshape" data-handshape="tipo_7"></li>
-        <li class="handshape" data-handshape="tipo_8"></li>
-        <li class="handshape" data-handshape="tipo_9"></li>
-        <li class="handshape" data-handshape="tipo_10"></li>
-        <li class="handshape" data-handshape="tipo_11"></li>
-        <li class="handshape" data-handshape="tipo_12"></li>
-        <li class="handshape" data-handshape='tipo_13'></li>
-        <li class="handshape" data-handshape='tipo_14'></li>
-        <li class="handshape" data-handshape="tipo_15"></li>
-        <li class="handshape" data-handshape="tipo_16"></li>
-        <li class="handshape" data-handshape="tipo_17"></li>
-        <li class="handshape" data-handshape="tipo_18"></li>
-        <li class="handshape" data-handshape="tipo_19"></li>
-        <li class="handshape" data-handshape="tipo_20"></li>
-        <li class="handshape" data-handshape="tipo_21"></li>
-        <li class="handshape" data-handshape="tipo_22"></li>
-        <li class="handshape" data-handshape="tipo_23"></li>
-        <li class="handshape" data-handshape="tipo_24"></li>
-        <li class="handshape" data-handshape="tipo_25"></li>
-        <li class="handshape" data-handshape="tipo_26"></li>
-        <li class="handshape" data-handshape="tipo_27"></li>
-        <li class="handshape" data-handshape="tipo_28"></li>
-        <li class="handshape" data-handshape="tipo_29"></li>
-        <li class="handshape" data-handshape="tipo_30"></li>
+        <li class="handshape" data-handshape="conf_1"></li>
+        <li class="handshape" data-handshape="conf_2"></li>
+        <li class="handshape" data-handshape="conf_3"></li>
+        <li class="handshape" data-handshape="conf_4"></li>
+        <li class="handshape" data-handshape="conf_5"></li>
+        <li class="handshape" data-handshape="conf_6"></li>
+        <li class="handshape" data-handshape="conf_7"></li>
+        <li class="handshape" data-handshape="conf_8"></li>
+        <li class="handshape" data-handshape="conf_9"></li>
+        <li class="handshape" data-handshape="conf_10"></li>
+        <li class="handshape" data-handshape="conf_11"></li>
+        <li class="handshape" data-handshape="conf_12"></li>
+        <li class="handshape" data-handshape="conf_13"></li>
+        <li class="handshape" data-handshape="conf_14"></li>
+        <li class="handshape" data-handshape="conf_15"></li>
+        <li class="handshape" data-handshape="conf_16"></li>
+        <li class="handshape" data-handshape="conf_17"></li>
+        <li class="handshape" data-handshape="conf_18"></li>
+        <li class="handshape" data-handshape="conf_19"></li>
+        <li class="handshape" data-handshape="conf_20"></li>
+        <li class="handshape" data-handshape="conf_21"></li>
+        <li class="handshape" data-handshape="conf_22"></li>
+        <li class="handshape" data-handshape="conf_23"></li>
+        <li class="handshape" data-handshape="conf_24"></li>
+        <li class="handshape" data-handshape="conf_25"></li>
+        <li class="handshape" data-handshape="conf_26"></li>
+        <li class="handshape" data-handshape="conf_27"></li>
+        <li class="handshape" data-handshape="conf_28"></li>
+        <li class="handshape" data-handshape="conf_29"></li>
+        <li class="handshape" data-handshape="conf_30"></li>
       </div>
     </section> <!-- End of tipos_de_mao -->
 
@@ -186,6 +239,31 @@
       </div>
       <div id="avatar_video" style="display: none;"></div>
     </div> <!-- End of report-pane div -->
+
+    <div id="correcao" style="float: left; display: none;">
+      <div id="mao_direita" style="display: block;"><h1>M&atilde;o Direita</h1>
+        <div id="correcao_parametros_dir" style="height: 80px; margin-bottom: 30px;"></div>
+      </div>
+      <div id="mao_esquerda" style="display: block;">
+	<div id="header_mao_esquerda" style="margin-bottom: 10px">
+		<h1 style="float: left">M&atilde;o Esquerda</h1>
+		<div id="adicionar_remover_mao" style="display: inline; margin-left: 20px"> 
+			<button id="remover_mao" class="btn btn-large btn-info add-remove" style="width: 100px;" value='Remover'>
+			    Remover
+			</button>
+			<button id="adicionar_mao" class="btn btn-large btn-info add-remove" style="width: 100px;"  value='Adicionar'>
+			    Adicionar
+			</button>
+		</div>
+	</div>
+	<div id="correcao_parametros_esq" style="height: 80px; margin-bottom: 30px; display: none;"></div>
+      </div>
+      <div id="correcao_exp_facial" style="display: block; margin-top: 25px; height: 190px"></div>
+      <button id="render" class="btn btn-large btn-success btn-answer" style="width: 130px;" value='Render'>
+	  Gerar Avatar
+      </button>
+    </div> <!-- End of correcao div -->
+
    </div> <!-- Parametros do sinal -->
 
    <div id="signal_video" style="float: right; width: 540px; height: 450px;"></div><!-- The video will be showed here -->
@@ -208,6 +286,50 @@ pybossa.taskLoaded(function(task, deferred) {
 });
 
 pybossa.presentTask(function(task, deferred) {
+
+    var orient2sprite = { "Ori_1": "http://bit.ly/166zJWo",
+		       "Ori_2": "http://bit.ly/10IL8Zp",
+		       "Ori_3": "http://bit.ly/11yVCw2",
+   		       "Ori_4": "http://bit.ly/10o8PEB",
+ 		       "Ori_5": "http://bit.ly/15G9cPA",
+		       "Ori_6": "http://bit.ly/14hLm8f",
+		       "Ori_7": "http://bit.ly/YFbHMK",
+		       "Ori_8": "http://bit.ly/YFbxF3",
+		       "Ori_9": "http://bit.ly/11yVwo9",
+		       "Ori_10": "http://bit.ly/10EeUtF",
+		       "Ori_11": "http://bit.ly/18G71uf",
+		       "Ori_12": "http://bit.ly/13n6Ql3"};
+
+    var pa2sprite = { "Pa_63": {"x" : "-125px", "y" : "-20px"},
+	  	      "Pa_60": {"x" : "-125px", "y" : "-55px"},
+	  	      "Pa_35": {"x" : "-100px", "y" : "-85px"},
+	  	      "Pa_38": {"x" : "-150px", "y" : "-55px"},
+	  	      "Pa_32": {"x" : "-125px", "y" : "-105px"},
+	  	      "Pa_6":  {"x" : "-125px", "y" : "-135px"},
+	  	      "Pa_57": {"x" : "-125px", "y" : "-150px"},
+	  	      "Pa_56": {"x" : "-125px", "y" : "-175px"},
+	  	      "Pa_9R": {"x" : "-95px", "y" : "-125px"},
+	  	      "Pa_9L": {"x" : "-160px", "y" : "-125px"},
+	  	      "Pa_50": {"x" : "-70px", "y" : "-95px"},
+	  	      "Pa_53": {"x" : "-180px", "y" : "-95px"},
+	  	      "Pa_41": {"x" : "-125px", "y" : "-220px"},
+	  	      "Pa_44": {"x" : "-30px", "y" : "-220px"},
+	  	      "Pa_47": {"x" : "-220px", "y" : "-220px"},
+	  	      "Pa_12": {"x" : "-125px", "y" : "-285px"},
+	  	      "Pa_15": {"x" : "-65px", "y" : "-285px"},
+	  	      "Pa_18": {"x" : "-190px", "y" : "-285px"},
+	  	      "Pa_21": {"x" : "-125px", "y" : "-370px"},
+	  	      "Pa_66": {"x" : "-125px", "y" : "-440px"},
+	  	      "Pa_24": {"x" : "-55px", "y" : "-440px"},
+	  	      "Pa_27": {"x" : "-195px", "y" : "-440px"}};
+
+    var dist2sprite = { "0": {"x" : "-55px", "y" : "-190px"},
+	  	      "1": {"x" : "-135px", "y" : "-190px"},
+	  	      "2": {"x" : "-230px", "y" : "-190px"}};
+
+
+    var exp2sprite = {}
+
     var exp_facial = { "group_1" : { "Exp_1" : "Bico", 
                                      "Exp_2" : "Bochechas infladas", 
                                      "Exp_3" : "Bochechas contraídas",
@@ -226,12 +348,14 @@ pybossa.presentTask(function(task, deferred) {
                                      "Exp_16" : "Raiva",
                                      "Exp_17" : "Desconfiado" } 
                      };
-    
+ 
     var current_exp_group;
     var current_handshape_group;
     var parametros = {right : {}, left : {}};
     var state = "CONF_MAO";
     var isRightHand = true;
+    var umaMao = true;
+    var mao2sprite = {};
 
     var grupo = new Object();
     grupo['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
@@ -247,26 +371,6 @@ pybossa.presentTask(function(task, deferred) {
                                  "mao_44", "mao_43", "mao_45", "mao_46",
                                  "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
                                  "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");
-
-    // Modifica o background dos li DOM da section orientacao_palma_da_mao
-    function set_orientacao_li_bg() {
-      var nth_li;
-      var ori_num_x;
-      var ori_num_y;
-    
-      for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
-        if( ( ori_num % 3 ) == 0 ){
-          nth_li = ":nth-child(" + ori_num  + ")";
-          ori_num_x = '-' + ( 2 * 110 ) + 'px';
-          ori_num_y = '-' + Math.floor( ( ori_num / 3 ) - 1 ) * 110 + 'px';
-        }else{
-          nth_li = ":nth-child(" +  ori_num  + ")";
-          ori_num_x = '-' + ( ( ori_num % 3 ) - 1 ) * 110 + 'px';
-          ori_num_y = '-' + Math.floor( ( ori_num / 3 ) ) * 110 + 'px' ;
-        }
-        $("#orientacao_palma_da_mao").find("li").filter(nth_li).css({'background-position': ori_num_x + " " + ori_num_y});
-      } // Fim do for
-    } // Fim da funcao set_orientacao_li_bg
 
     // Modifica o background dos li DOM da section expressao_facial
     function set_button_bg( group ) {
@@ -299,6 +403,8 @@ pybossa.presentTask(function(task, deferred) {
           exp_num_x = '-' + ( ( exp_num % 6 ) - 1 ) * 133 + 'px';
           exp_num_y = '-' + Math.floor( ( exp_num / 6 ) ) * 135 + 'px' ;
         }
+
+	exp2sprite[key] = {"x": exp_num_x, "y": exp_num_y};
         $("#expressao_facial").find("li").filter(nth_li).css({'background-position': exp_num_x + " " + exp_num_y});
         $("#expressao_facial").find("li").filter(nth_li).attr("title", exp_facial[group][key]);
         $("#expressao_facial").find("li").filter(nth_li).data("exp_facial", key);
@@ -368,24 +474,24 @@ pybossa.presentTask(function(task, deferred) {
     }
 
     // Modifica o background dos li DOM da section formas_de_mao
-    function formasDeMaoLiBg(hand_type) {
+    function formasDeMaoLiBg(hand_group) {
       $("#tipos_de_mao").find('li').hide();
       
-     if( hand_type == "prev" ){
+      if( hand_group == "prev" ) {
           current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) - 1 );
-          hand_type = current_handshape_group;
-      }else if( hand_type == "next" ){
+          hand_group = current_handshape_group;
+      }else if ( hand_group == "next" ) {
           current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) + 1 );
-          hand_type = current_handshape_group;
-      }else{
-          current_handshape_group = hand_type;
+          hand_group = current_handshape_group;
+      } else {
+          current_handshape_group = hand_group;
       }
 
       set_handshape_pagination();
 
-      for( var i = 0; i < grupo[hand_type].length; i++ ) {
+      for( var i = 0; i < grupo[hand_group].length; i++) {
           var nth_li = ":nth-child(" + (i+1) + ")";
-          var mao_num = parseInt( grupo[hand_type][i].split("_")[1] );
+          var mao_num = parseInt( grupo[hand_group][i].split("_")[1] );
           var mao_num_x;
           var mao_num_y;
       
@@ -397,17 +503,14 @@ pybossa.presentTask(function(task, deferred) {
             mao_num_y = '-' + Math.floor( ( mao_num / 10 ) ) * 80 + 'px';
           }
       
+	  confMao = 'conf_' + mao_num;
+	  mao2sprite[confMao] = {x: mao_num_x, y: mao_num_y};
+	  $("#tipos_de_mao").find("li").filter(nth_li).data('handshape', confMao);
           $("#tipos_de_mao").find("li").filter(nth_li).css({'background-position' : mao_num_x + " " + mao_num_y });
-      
-	  if (hand_type == "tipos") { 
-            $("#tipos_de_mao").find("li").filter(nth_li).data('handshape', 'tipo_' + (i + 1));
-          } else {
-            $("#tipos_de_mao").find("li").filter(nth_li).data('handshape', 'conf_' + mao_num);
-          }
-
           $("#tipos_de_mao").find("li").filter(nth_li).fadeIn();
           $("#tipos_de_mao").find('li').last().fadeIn();
       } // Fim do for    
+	console.log(mao2sprite);
     } // Fim da funcao formasDeMaoLiBg
 
     function mostrarPergunta() {
@@ -420,18 +523,16 @@ pybossa.presentTask(function(task, deferred) {
       $('#report-pane').hide();
       $('#avatar_video').hide();
       $('#confirmacao_avatar').hide();
+      $("#correcao").hide();
 	
       var pergunta;
         
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
-                $("#orientacao_palma_da_mao").find("li").css({"background" : 'url("http://imageshack.us/a/img46/6119/l6o0.png")'});
 	} else {
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
-                $("#orientacao_palma_da_mao").find("li").css({"background" : 'url("http://imageshack.us/a/img19/115/3a8a.png")'});
 	}
-        set_orientacao_li_bg();
         $('#orientacao_palma_da_mao').show();
       }
       else if (state == "EXP_FACIAL") {
@@ -455,7 +556,7 @@ pybossa.presentTask(function(task, deferred) {
 		pergunta = "Escolha a forma da m&atilde;o esquerda.";
 	}
 
-	formasDeMaoLiBg('group_1', isRightHand)
+	formasDeMaoLiBg('group_1')
         $('#tipos_de_mao').show();
       }
       else if (state == "QTD_MAOS") {
@@ -471,13 +572,59 @@ pybossa.presentTask(function(task, deferred) {
 
         $('#ponto_de_articulacao').show();
       }
-      else if (state == "RENDER" || state == "CONFIRM_AVATAR") {
+      else if (state == "RENDER") {
 	pergunta = "O avatar renderizado est&aacute; correto?";
+	renderizarVideo();
         $("#report-pane").show();
       }
+      else if (state == "CONFIRM_AVATAR") {
+	$("#report-pane").show();
+      }
+      else if (state == "CORRECAO") {
+	pergunta = "Clique na parte do sinal que precisa ser corrigida."
+	$("#correcao").show();
 
+	$("#correcao_parametros_dir").html(getParametrosMaoHtml(true));
+	$("#correcao_parametros_esq").html(getParametrosMaoHtml(false));
+
+	if (!umaMao) {
+		$("#adicionar_mao").hide();
+		$("#remover_mao").show();
+		$("#correcao_parametros_esq").show();
+	} else {
+		$("#remover_mao").hide();
+		$("#adicionar_mao").show();
+		$("#correcao_parametros_esq").hide();
+	}
+
+	expFacial = exp2sprite[parametros["EXP_FACIAL"]];
+	$("#correcao_exp_facial").html("<h1>Express&atilde;o Facial</h1>"
+				+ "<li class='exp_facial' style='background-position: " + expFacial.x  + " " + expFacial.y + ";'></li>");
+	console.log(parametros);
+      }
       $("#question").html( pergunta );
     } // Fim da funcao mostrarPergunta
+
+    function getParametrosMaoHtml(rightHand) {
+	
+	var mao;
+	if (rightHand || jQuery.isEmptyObject(parametros.left)) {
+		mao = parametros.right;
+	} else {
+		mao = parametros.left;
+	}
+
+	confMao = mao2sprite[mao["CONF_MAO"]];
+	orientMao = orient2sprite[mao["ORIENT_PALMA"]];
+	paSinal = pa2sprite[mao["PONTO_ARTIC"]];
+	distMao = dist2sprite[mao["DIST_MAOS"]];
+
+	return "<li class='handshape' style='background-position: "
+			        + confMao.x  + " " + confMao.y + ";'></li>"
+				+ "<li class='orient_mao'> <img src='" + orientMao + "'></li>"
+				+ "<li class='ponto_articulacao' style='background-position: " + paSinal.x  + " " + paSinal.y + ";'></li>"
+				+ "<li class='distancia' style='background-position: " + distMao.x  + " " + distMao.y + ";'></li></div>";
+    }
 
     function saveAnswer(answer) {
 
@@ -495,15 +642,10 @@ pybossa.presentTask(function(task, deferred) {
 		return;
 	}
 
-	saveState = state;
-	if (saveState == "DIST_MAOS") {
-		saveState = "PONTO_ARTIC";
-	}
-
 	if (isRightHand) {
-		parametros.right[saveState] = answer;
+		parametros.right[state] = answer;
 	} else {
-		parametros.left[saveState] = answer;
+		parametros.left[state] = answer;
 	}	
     }
 
@@ -531,8 +673,10 @@ pybossa.presentTask(function(task, deferred) {
 	     } else {
 		nextState = "CONF_MAO";
 		isRightHand = false;
+		umaMao = false;
              }
 	} else if (state == "EXP_FACIAL") {
+		//nextState = "CORRECAO";
 		nextState = "RENDER";
 	} else if (state == "RENDER") {
 		nextState = "CONFIRM_AVATAR";
@@ -540,20 +684,37 @@ pybossa.presentTask(function(task, deferred) {
 	     if (answer == "Sim") {
 		nextState = "TASK_END";
 	     } else {
-		nextState = "CONF_MAO";
-		isRightHand = true;
-		resetParametros();
+		nextState = "CORRECAO";
 	     }
+	} else if (state == "CORRECAO") {
+	     nextState = "RENDER";
 	}
 
 	state = nextState;
 	console.log(state);
      }
 
-    function resetParametros() {
-	parametros = {signal_name : parametros.signal_name, right : {}, left : {}};
-    }
 
+    function updatePA(rightHand) {
+	var mao = rightHand ? parametros.right : parametros.left;
+	paId = mao["PONTO_ARTIC"];
+
+	if (paId == "Pa_9R" || paId == "Pa_9L") {
+		paId = "Pa_9";
+	}
+
+        paId = "Pa_" + (parseInt(paId.split('_')[1]) + parseInt(mao["DIST_MAOS"]));
+	mao["PONTO_ARTIC"] = paId;
+    }	
+
+    function preparaParametros() {
+        parametros.final_state = "completed";
+	updatePA(true);
+
+	if (!jQuery.isEmptyObject(parametros.left)) {
+		updatePA(false);
+	}
+    }
 
     function stopAndPlaySignalVideo (toPlay) {
 	autoplay_Id = toPlay ? 1 : 0;
@@ -565,8 +726,7 @@ pybossa.presentTask(function(task, deferred) {
 
     function showRenderedVideo(video) {
 	stopAndPlaySignalVideo(true);
-        $('#avatar_video').html(function(){
-	      return '<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/libras-videos/' + video + '> </video>'});
+        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/libras-videos/' + video + '> </video>');
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
     }
@@ -646,7 +806,7 @@ pybossa.presentTask(function(task, deferred) {
               mostrarPergunta(state);
 
 	      if (state == "TASK_END") {
-		    parametros.final_state = "completed";
+		    preparaParametros();
 		    pybossa.saveTask(task.id, parametros).done(function() {
       	              deferred.resolve(); 
                     });
@@ -672,42 +832,33 @@ pybossa.presentTask(function(task, deferred) {
         });
 
 	 // Eventos de cliques em pontos de articulação
-         var local_answer;
          $("#avatar_completo").find("area").off('click').on('click', function(event){
            event.preventDefault();         
-           local_answer = $(this).data('local');         
- 	   updateState(local_answer);
+           answer = $(this).data('local');    
+           saveAnswer(answer);      
+ 	   updateState(answer);
 	   mostrarPergunta();
 
            $("#avatar_completo_img").hide();
            $("#avatar_distancia_img").fadeIn();
          });
-  
+
          $("#avatar_distancia").find("area").off('click').on('click', function(event){
            event.preventDefault();
            $("#avatar_distancia_img").hide();
-           local_answer = "Pa_" + (parseInt(local_answer.split('_')[1]) + $(this).data('local'));
-
-           saveAnswer(local_answer); 
- 	   updateState(local_answer);
+	   answer = $(this).data('local');
+	   
+ 	   saveAnswer(answer); 
+	   updateState(answer);
 	   mostrarPergunta();
          });
 
 	// Eventos de cliques em tipos de mão
          $(".handshape").off("click").on( "click", function() {
 	   answer = $(this).data('handshape');
-
-	   if (state == "CONF_MAO") {
-	 	/*formasDeMaoLiBg(answer);
-	 	updateState(answer);*/
-		saveAnswer(answer); 
-	 	updateState(answer);
-	   	mostrarPergunta();
-	   } else if (state == "CONF_MAO") {
-		saveAnswer(answer); 
-	 	updateState(answer);
-	   	mostrarPergunta();
-	   }	
+  	   saveAnswer(answer); 
+	   updateState(answer);
+	   mostrarPergunta();	
          });
 
          // Eventos de cliques em expressao facial
@@ -717,17 +868,26 @@ pybossa.presentTask(function(task, deferred) {
            saveAnswer(exp_answer);
            updateState(exp_answer);
            mostrarPergunta();
-
-           renderizarVideo();
          });
 
-	 // Eventos de cliques em orientacao da mao
-         $(".ori").off("click").on("click", function() {
-           answer = $(this).data('orientacao');
-           saveAnswer(answer);
-           updateState(answer);
-           mostrarPergunta();
-         });
+
+        // Eventos de cliques no botão adicionar/remover mao da correção
+        $('.add-remove').off('click').on('click', function(){
+            var add_remove = $(this).attr('value');
+	    if (add_remove == "Adicionar") {
+		$("#remover_mao").show();
+		$("#adicionar_mao").hide();
+		$("#correcao_parametros_esq").show();
+		parametros.left = parametros.right;
+		parametros["QTD_MAOS"] = "duas";
+		console.log(parametros);
+	    } else {
+		$("#remover_mao").hide();
+		$("#adicionar_mao").show();
+		$("#correcao_parametros_esq").hide();
+		parametros.left = {};
+	    }
+        });
     }
     else {
         $(".skeleton").hide();
@@ -742,7 +902,7 @@ pybossa.run('librasdictionary');
 
 <style type="text/css">
 
-  section#tipos_de_mao li.handshape{
+  div#parametros_sinal li.handshape {
     margin: 1px 0 0 1px;
     float: left;
     width: 65px;
@@ -751,11 +911,19 @@ pybossa.run('librasdictionary');
     list-style: none;
     background: url("http://imageshack.us/a/img5/1439/spritehandsshape.png") no-repeat;
   }
-  
-  section#tipos_de_mao li.handshape:hover{
+
+  section#tipos_de_mao li.handshape:hover {
     -webkit-box-shadow: inset 0 0 10px #F70;
     -moz-box-shadow: inset 0 0 10px #F70;
     box-shadow: inset 0 0 10px #F70;
+  }
+
+  #tipos_de_mao li:last-child {
+    background: #FFF;
+  }
+ 
+  section#expressao_facial {
+    /*padding: 0;*/
   }
   
   section#expressao_facial li.exp {
@@ -774,18 +942,41 @@ pybossa.run('librasdictionary');
     box-shadow: inset 0 0 10px #F70;
   }
 
-  section#orientacao_palma_da_mao li.ori {
-    float: left;
-    list-style: none;
-    width: 110px;
-    height: 110px;
+  div#correcao li.orient_mao {
     margin: 1px 0 0 1px;
-    background: url("http://imageshack.us/a/img46/6119/l6o0.png");
+    float: left;
+    width: 61px;
+    height: 80px;
+    display: inline;
+    list-style: none;
   }
 
-  section#orientacao_palma_da_mao li.ori:hover {
-    -webkit-box-shadow: inset 0 0 10px #F70;
-    -moz-box-shadow: inset 0 0 10px #F70;
-    box-shadow: inset 0 0 10px #F70;
+  div#correcao li.ponto_articulacao {
+    margin: 1px 0 0 1px;
+    float: left;
+    width: 65px;
+    height: 80px;
+    display: inline;
+    list-style: none;
+    background: url("http://img824.imageshack.us/img824/3774/gb5u.png") no-repeat;
+  }
+
+  div#correcao li.distancia {
+    margin: 1px 0 0 1px;
+    float: left;
+    width: 65px;
+    height: 80px;
+    display: inline;
+    list-style: none;
+    background: url("http://bit.ly/10Y64tS") no-repeat;
+  }
+
+  div#correcao li.exp_facial {
+    float: left;
+    list-style: none;
+    width: 133px;
+    height: 133px;
+    background: url("http://imageshack.us/a/img850/2828/l19.png") no-repeat;
+    position: relative;
   }
 </style>
