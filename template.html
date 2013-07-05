@@ -242,7 +242,7 @@
 
     <div id="correcao" style="float: left; display: none;">
       <div id="mao_direita" style="display: block;"><h1>M&atilde;o Direita</h1>
-        <div id="correcao_parametros_dir" style="height: 80px; margin-bottom: 30px;"></div>
+        <div id="parametros_dir" style="height: 80px; margin-bottom: 30px;"></div>
       </div>
       <div id="mao_esquerda" style="display: block;">
 	<div id="header_mao_esquerda" style="margin-bottom: 10px">
@@ -256,9 +256,9 @@
 			</button>
 		</div>
 	</div>
-	<div id="correcao_parametros_esq" style="height: 80px; margin-bottom: 30px; display: none;"></div>
+	<div id="parametros_esq" style="height: 80px; margin-bottom: 30px; display: none;"></div>
       </div>
-      <div id="correcao_exp_facial" style="display: block; margin-top: 25px; height: 190px"></div>
+      <div id="parametro_exp_facial" style="display: block; margin-top: 25px; height: 190px"></div>
       <button id="render" class="btn btn-large btn-success btn-answer" style="width: 130px;" value='Render'>
 	  Gerar Avatar
       </button>
@@ -354,7 +354,6 @@ pybossa.presentTask(function(task, deferred) {
     var parametros = {right : {}, left : {}};
     var state = "CONF_MAO";
     var isRightHand = true;
-    var umaMao = true;
     var mao2sprite = {};
 
     var grupo = new Object();
@@ -509,8 +508,7 @@ pybossa.presentTask(function(task, deferred) {
           $("#tipos_de_mao").find("li").filter(nth_li).css({'background-position' : mao_num_x + " " + mao_num_y });
           $("#tipos_de_mao").find("li").filter(nth_li).fadeIn();
           $("#tipos_de_mao").find('li').last().fadeIn();
-      } // Fim do for    
-	console.log(mao2sprite);
+      } // Fim do for
     } // Fim da funcao formasDeMaoLiBg
 
     function mostrarPergunta() {
@@ -582,33 +580,40 @@ pybossa.presentTask(function(task, deferred) {
       }
       else if (state == "CORRECAO") {
 	pergunta = "Clique na parte do sinal que precisa ser corrigida."
-	$("#correcao").show();
-
-	$("#correcao_parametros_dir").html(getParametrosMaoHtml(true));
-	$("#correcao_parametros_esq").html(getParametrosMaoHtml(false));
-
-	if (!umaMao) {
-		$("#adicionar_mao").hide();
-		$("#remover_mao").show();
-		$("#correcao_parametros_esq").show();
-	} else {
-		$("#remover_mao").hide();
-		$("#adicionar_mao").show();
-		$("#correcao_parametros_esq").hide();
-	}
-
-	expFacial = exp2sprite[parametros["EXP_FACIAL"]];
-	$("#correcao_exp_facial").html("<h1>Express&atilde;o Facial</h1>"
-				+ "<li class='exp_facial' style='background-position: " + expFacial.x  + " " + expFacial.y + ";'></li>");
-	console.log(parametros);
+	showCorrecaoDiv();
       }
       $("#question").html( pergunta );
     } // Fim da funcao mostrarPergunta
 
+
+    function showCorrecaoDiv() {
+	$("#parametros_dir").html(getParametrosMaoHtml(true));
+	$("#parametros_esq").html(getParametrosMaoHtml(false));
+
+	configureCorrecaoDiv();
+
+	expFacial = exp2sprite[parametros["EXP_FACIAL"]];
+	$("#parametro_exp_facial").html("<h1>Express&atilde;o Facial</h1>"
+				+ "<li class='exp_facial' style='background-position: " + expFacial.x  + " " + expFacial.y + ";'></li>");
+	$("#correcao").show();
+    }
+
+    function configureCorrecaoDiv() {
+	if (parametros["QTD_MAOS"] == "duas") {
+		$("#remover_mao").show();
+		$("#adicionar_mao").hide();
+		$("#parametros_esq").show();
+	} else {
+		$("#remover_mao").hide();
+		$("#adicionar_mao").show();
+		$("#parametros_esq").hide();
+	}
+    }
+
     function getParametrosMaoHtml(rightHand) {
 	
 	var mao;
-	if (rightHand || jQuery.isEmptyObject(parametros.left)) {
+	if (rightHand || parametros["QTD_MAOS"] == "uma") {
 		mao = parametros.right;
 	} else {
 		mao = parametros.left;
@@ -628,7 +633,7 @@ pybossa.presentTask(function(task, deferred) {
 
     function saveAnswer(answer) {
 
-	if (state == "CONFIRM_AVATAR") {
+	if (state == "CONFIRM_AVATAR" || state == "CORRECAO") {
 		return;
 	}
 
@@ -673,10 +678,8 @@ pybossa.presentTask(function(task, deferred) {
 	     } else {
 		nextState = "CONF_MAO";
 		isRightHand = false;
-		umaMao = false;
              }
 	} else if (state == "EXP_FACIAL") {
-		//nextState = "CORRECAO";
 		nextState = "RENDER";
 	} else if (state == "RENDER") {
 		nextState = "CONFIRM_AVATAR";
@@ -709,11 +712,11 @@ pybossa.presentTask(function(task, deferred) {
 
     function preparaParametros() {
         parametros.final_state = "completed";
-	updatePA(true);
 
-	if (!jQuery.isEmptyObject(parametros.left)) {
+	if (parametros["QTD_MAOS"] == "duas") {
 		updatePA(false);
 	}
+	updatePA(true);
     }
 
     function stopAndPlaySignalVideo (toPlay) {
@@ -870,23 +873,17 @@ pybossa.presentTask(function(task, deferred) {
            mostrarPergunta();
          });
 
-
         // Eventos de cliques no botão adicionar/remover mao da correção
         $('.add-remove').off('click').on('click', function(){
             var add_remove = $(this).attr('value');
 	    if (add_remove == "Adicionar") {
-		$("#remover_mao").show();
-		$("#adicionar_mao").hide();
-		$("#correcao_parametros_esq").show();
 		parametros.left = parametros.right;
 		parametros["QTD_MAOS"] = "duas";
-		console.log(parametros);
 	    } else {
-		$("#remover_mao").hide();
-		$("#adicionar_mao").show();
-		$("#correcao_parametros_esq").hide();
 		parametros.left = {};
+		parametros["QTD_MAOS"] = "uma";
 	    }
+	    configureCorrecaoDiv();
         });
     }
     else {
