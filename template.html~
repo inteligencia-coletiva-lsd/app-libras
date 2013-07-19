@@ -758,9 +758,6 @@ pybossa.presentTask(function(task, deferred) {
         }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
           content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
-        }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
-          content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao ao corpo
           content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
@@ -780,12 +777,6 @@ pybossa.presentTask(function(task, deferred) {
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
             content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(nth_li).html(content);
-          }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
-            if ( parametros.left[p] == "Pa_9" )
-              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
-            else
-              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao esquerda ao corpo
             content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
