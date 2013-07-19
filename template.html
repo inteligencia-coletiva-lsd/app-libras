@@ -5,129 +5,163 @@
     <div class="span6 offset2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
-            <strong>Well done!</strong> Your answer has been saved
+            <strong>Bom trabalho!</strong> A sua resposta foi salva
         </div>
         <div id="loading" class="alert alert-info" style="display:none;">
             <a class="close">×</a>
-            Loading next task...
+            Carregando a pr&oacute;xima tarefa...
         </div>
         <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong>The task has been completed!</strong> Thanks a lot!
+            <strong>A tarefa foi conclu&iacute;da!</strong> Muito obrigado!
         </div>
         <div id="finish" class="alert alert-success" style="display:none;">
-            <strong>Congratulations!</strong> You have participated in all available tasks!
+            <strong>Parab&eacute;ns!</strong> Voc&ecirc; participou em todas as tarefas!
             <br/>
             <div class="alert-actions">
-                <a class="btn small" href="/">Go back</a>
-                <a class="btn small" href="/app">or, Check other applications</a>
+                <a class="btn small" href="/">Home</a>
+                <a class="btn small" href="/app">Outras aplica&ccedil;&otilde;es</a>
             </div>
         </div>
         <div id="error" class="alert alert-error" style="display:none;">
             <a class="close">×</a>
-            <strong>Error!</strong> Something went wrong, please contact the site administrators
+            <strong>Erro!</strong> Algo deu errado, contacte o administrador do site por favor!
         </div>
     </div> <!-- End Success and Error Messages for the user -->
 </div> <!-- End of Row -->
 
 <!--
-    Task DOM for loading the Flickr Images
-    It uses the class="skeleton" to identify the elements that belong to the
+    The class="skeleton" is used to identify the elements that belong to the
     task.
 -->
-<div class="skeleton" style="margin-top: 30px; margin-bottom: 30px"> <!-- Start Skeleton -->
+<div class="skeleton" style="margin: 5px 0 5px 0"> <!-- Start Skeleton -->
     <h1 id="question"></h1> <!-- The question will be loaded here -->
 </div><!-- End of Skeleton -->
 
 <div class="skeleton"> <!-- Start Skeleton -->
+  <div id="parametros_sinal">
 
-   <div id="parametros_sinal" style="float: left; width:400px; height: 450px;">
-    <div id="quantidade_maos" style="display: none;">
-        <button class="btn btn-large btn-info btn-answer" style="width: 130px; display: block;" value='uma'>
-            Uma m&atilde;o
-        </button>
-        <button class="btn btn-large btn-info btn-answer" style="width: 130px; display: block; margin: 10px auto 0 0;" value='duas'>
-	    Duas m&atilde;os
-        </button>
-    </div>
+    <!-- Begin of hand_shapes -->
+    <section id="hand_shapes" style="display: none">
+      <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%; float: right;">
+        <ul style="margin: 0">
+          <li data-handshape_group="prev"><a href="#">Prev</a></li>
+          <li data-handshape_group="group_1"><a href="#">1</a></li>
+          <li data-handshape_group="group_2"><a href="#">2</a></li>
+          <li data-handshape_group="next"><a href="#">Next</a></li>
+        </ul>
+      </div>
+      <section id="maos">
+        <ul style="margin: 0">
+          <li class="handshape" data-handshape="conf_1"><!--  img from js --></li>
+          <li class="handshape" data-handshape="conf_2"><!--  img from js --></li>
+          <li class="handshape" data-handshape="conf_3"><!--  img from js --></li>
+          <li class="handshape" data-handshape="conf_4"><!--  img from js  --></li>
+          <li class="handshape" data-handshape="conf_5"><!--  img from js  --></li>
+          <li class="handshape" data-handshape="conf_6"><!--  img from js --></li>
+          <li class="handshape" data-handshape="conf_7"><!--  img from js --></li> 
+          <li class="handshape" data-handshape="conf_8"><!--  img from js --></li>
+          <li class="handshape" data-handshape="conf_9"><!--  img from js --></li>
+          <li class="handshape" data-handshape="conf_10"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_11"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_12"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_13"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_14"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_15"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_16"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_17"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_18"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_19"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_20"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_21"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_22"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_23"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_24"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_25"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_26"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_27"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_28"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_29"><!-- img from js --></li>
+          <li class="handshape" data-handshape="conf_30"><!-- img from js --></li>
+        </ul>
+      </section> <!-- End of maos div -->
+    </section> <!-- End of hand_shapes section -->
+    <!-- End of hand_shapes -->
 
-    <div id="orientacao_palma_da_mao" style="display: none; float: left;">
-        <!-- Ori 1 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_1">
-                <img src="http://bit.ly/166zJWo" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 2 -->
-        <div class="palma_image"style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_2">
-                <img src="http://bit.ly/10IL8Zp" width="82px" height="106px"/>
-            </button>   
-        </div>
-        <!-- Ori 3 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_3">
-                <img src="http://bit.ly/11yVCw2" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 4 -->
-        <div class="palma_image" style="margin: 0px  0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_4">
-                <img src="http://bit.ly/10o8PEB" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 5 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_5">
-                <img src="http://bit.ly/15G9cPA"  width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 6 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_6">
-                <img src="http://bit.ly/14hLm8f" width="82px" height="106px"/>
-            </button> 
-        </div>
-        <!-- Ori 7 -->
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_7">
-                <img src="http://bit.ly/YFbHMK" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 8 -->
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_8">
-                <img src="http://bit.ly/YFbxF3" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 9 -->
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_9">
-                <img src="http://bit.ly/11yVwo9" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 10 --> 
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left;">
-            <button class="btn btn-answer" type="button" value="Ori_10">
-                <img src="http://bit.ly/10EeUtF"  width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 11 -->
-        <div class="palma_image" style="margin: 0px 0px 0px 5px; float: left">
-            <button class="btn btn-answer" type="button" value="Ori_11">
-                <img src="http://bit.ly/18G71uf" width="82px" height="106px"/>
-            </button>
-        </div>
-        <!-- Ori 12 --> 
-        <div class="palma_image" style="margin: 0px 0 0 5px; float: left">
-            <button class="btn btn-answer" type="button" value="Ori_12">
-                <img src="http://bit.ly/13n6Ql3"  width="82px" height="106px"/>
-            </button>
-        </div>
-    </div><!-- End of orientacao_palma_da_mao -->
+    <!-- Begin of orientacao_palma_da_mao -->
+    <section id="orientacao_palma_da_mao" style="display: none;">
+      <ul style="margin: 0; text-align: center">
+        <li class="ori" data-orientacao="Ori_1"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_2"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_3"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_4"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_5"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_6"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_7"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_8"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_9"><!--  img from js --></li>
+        <li class="ori" data-orientacao="Ori_10"><!-- img from js --></li>
+        <li class="ori" data-orientacao="Ori_11"><!-- img from js --></li>
+        <li class="ori" data-orientacao="Ori_12"><!-- img from js --></li>
+      </ul>
+    </section>
+    <!-- End of orientacao_palma_da_mao -->
+
+    <!-- Begin of ponto_de_articulacao -->
+    <section id="ponto_de_articulacao" style="display: none; text-align: center">
+      <map name="avatar_completo" id="avatar_completo">   
+        <!-- Cabeca -->
+        <area title="topo da cabeca"    shape="rect" coords="105, 0, 215, 25"    href="#"  data-local="Pa_63" />
+        <area title="testa"             shape="rect" coords="105, 30, 215, 55"   href="#"  data-local="Pa_60" />
+        <area title="olho direito"      shape="rect" coords="125, 65, 155, 90"   href="#"  data-local="Pa_35" />
+        <area title="olho esquerdo"     shape="rect" coords="170, 65, 200, 90"   href="#"  data-local="Pa_38" />
+        <area title="nariz"             shape="rect" coords="145, 85, 175, 105"  href="#"  data-local="Pa_32" />
+        <area title="boca"              shape="rect" coords="145, 110, 175, 130" href="#"  data-local="Pa_6"  />
+        <area title="queixo"            shape="rect" coords="145, 130, 175, 150" href="#"  data-local="Pa_57" />
+        <area title="pescoco"           shape="rect" coords="145, 155, 175, 175" href="#"  data-local="Pa_56" />
+        <area title="bochecha direita"  shape="rect" coords="115, 100, 145, 120" href="#"  data-local="Pa_9"  />
+        <area title="bochecha esquerda" shape="rect" coords="180, 100, 210, 120" href="#"  data-local="Pa_9"  />
+        <area title="orelha direita"    shape="rect" coords="90, 70, 120, 95"    href="#"  data-local="Pa_50" />
+        <area title="orelha esquerda"   shape="rect" coords="200, 70, 230, 95"   href="#"  data-local="Pa_53" />
+          
+        <!-- Tronco -->
+        <area title="ombro centro"     shape="rect" coords="145, 190, 160, 215" href="#"  data-local="Pa_41" /> 
+        <area title="ombro direito"    shape="rect" coords="55, 190, 80, 215"   href="#"  data-local="Pa_44" />
+        <area title="ombro esquerdo"   shape="rect" coords="240, 190, 265, 215" href="#"  data-local="Pa_47" />
+        <area title="busto centro"     shape="rect" coords="145, 260, 160, 285" href="#"  data-local="Pa_12" />
+        <area title="busto direito"    shape="rect" coords="85, 260, 110, 285"  href="#"  data-local="Pa_15" />
+        <area title="busto esquerdo"   shape="rect" coords="210, 260, 235, 285" href="#"  data-local="Pa_18" />
+        <area title="estomago"         shape="rect" coords="150, 350, 175, 375" href="#"  data-local="Pa_21" />
+        <area title="umbigo"           shape="rect" coords="150, 415, 175, 440" href="#"  data-local="Pa_66" />
+        <area title="cintura direita"  shape="rect" coords="80, 415, 105, 440"  href="#"  data-local="Pa_24" />
+        <area title="cintura esquerda" shape="rect" coords="215, 415, 240, 440" href="#"  data-local="Pa_27" />
+      </map>
+
+      <map name="avatar_distancia" id="avatar_distancia">
+        <area title="pequena" shape="rect" coords="65, 205, 115, 255"  href="#"  data-local="0" />
+        <area title="media"   shape="rect" coords="145, 205, 195, 255" href="#"  data-local="1" />
+        <area title="grande"  shape="rect" coords="240, 205, 290, 255" href="#"  data-local="2" />
+      </map>
+        
+      <img id="avatar_completo_img"  src="/static/images/ponto_de_articulacao/avatar_pontos.png" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
+      <img id="avatar_distancia_img" src="/static/images/ponto_de_articulacao/avatar_distancia.png" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
+    </section>
+    <!-- End of ponto_de_articulacao section -->
+
+    <!-- begin of quantidade_de_maos -->
+    <section id="quantidade_maos" style="display: none">
+      <button class="btn btn-large btn-info btn-answer" style="width: 130px; float: left; margin: 10px 0 0 48px" value='uma'>
+          Uma m&atilde;o
+      </button>
+      <button class="btn btn-large btn-info btn-answer" style="width: 130px; margin: 10px 0 0 10px;" value='duas'>
+	  Duas m&atilde;os
+      </button>
+    </section>
+    <!-- End of quantidade_de_maos -->
+
     <!-- Begin of expressao_facial -->
-    <section id="expressao_facial" style="display: none; float: left;">
-      <div class="pagination expressao_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%;">
-        <ul style="padding: 0; margin-left: 20%">
+    <section id="expressao_facial" style="display: none">
+      <div class="pagination expressao_pagination" style="padding: 0; margin: 0">
+        <ul style="padding: 0; margin: 0 0 0 74px">
           <li data-exp_group="prev"><a href="#">Prev</a></li>
           <li data-exp_group="group_1"><a href="#">1</a></li>
           <li data-exp_group="group_2"><a href="#">2</a></li>
@@ -135,100 +169,22 @@
           <li data-exp_group="next"><a href="#">Next</a></li>
         </ul>
       </div>
-      <div style="padding: 0; margin-left: 11%">
-        <li class="exp" title=""  data-exp_facial="" ></li>
-        <li class="exp" title=""  data-exp_facial="" ></li>
-        <li class="exp" title=""  data-exp_facial="" ></li>
-        <li class="exp" title=""  data-exp_facial="" ></li>
-        <li class="exp" title=""  data-exp_facial="" ></li>
-        <li class="exp" title=""  data-exp_facial="" ></li>
-      </div>
-    </section> <!-- End of expressao_facial -->
-    <!--Begin of ponto_de_articulacao -->
-    <div id="ponto_de_articulacao" style="display: none; float: left;">
-        <map name="avatar_completo" id="avatar_completo">   
-          <!-- Cabeca -->
-          <area title="topo da cabeca"    shape="rect" coords="105, 0, 215, 25"    href="#"  data-local="Pa_63" />
-          <area title="testa"             shape="rect" coords="105, 30, 215, 55"   href="#"  data-local="Pa_60" />
-          <area title="olho direito"      shape="rect" coords="125, 65, 155, 90"   href="#"  data-local="Pa_35" />
-          <area title="olho esquerdo"     shape="rect" coords="170, 65, 200, 90"   href="#"  data-local="Pa_38" />
-          <area title="nariz"             shape="rect" coords="145, 85, 175, 105"  href="#"  data-local="Pa_32" />
-          <area title="boca"              shape="rect" coords="145, 110, 175, 130" href="#"  data-local="Pa_6"  />
-          <area title="queixo"            shape="rect" coords="145, 130, 175, 150" href="#"  data-local="Pa_57" />
-          <area title="pescoco"           shape="rect" coords="145, 155, 175, 175" href="#"  data-local="Pa_56" />
-          <area title="bochecha direita"  shape="rect" coords="115, 100, 145, 120" href="#"  data-local="Pa_9R"  />
-          <area title="bochecha esquerda" shape="rect" coords="180, 100, 210, 120" href="#"  data-local="Pa_9L"  />
-          <area title="orelha direita"    shape="rect" coords="90, 70, 120, 95"    href="#"  data-local="Pa_50" />
-          <area title="orelha esquerda"   shape="rect" coords="200, 70, 230, 95"   href="#"  data-local="Pa_53" />
-          
-          <!-- Tronco -->
-          <area title="ombro centro"     shape="rect" coords="145, 190, 160, 215" href="#"  data-local="Pa_41" /> 
-          <area title="ombro direito"    shape="rect" coords="55, 190, 80, 215"   href="#"  data-local="Pa_44" />
-          <area title="ombro esquerdo"   shape="rect" coords="240, 190, 265, 215" href="#"  data-local="Pa_47" />
-          <area title="busto centro"     shape="rect" coords="145, 260, 160, 285" href="#"  data-local="Pa_12" />
-          <area title="busto direito"    shape="rect" coords="85, 260, 110, 285"  href="#"  data-local="Pa_15" />
-          <area title="busto esquerdo"   shape="rect" coords="210, 260, 235, 285" href="#"  data-local="Pa_18" />
-          <area title="estomago"         shape="rect" coords="150, 350, 175, 375" href="#"  data-local="Pa_21" />
-          <area title="umbigo"           shape="rect" coords="150, 415, 175, 440" href="#"  data-local="Pa_66" />
-          <area title="cintura direita"  shape="rect" coords="80, 415, 105, 440"  href="#"  data-local="Pa_24" />
-          <area title="cintura esquerda" shape="rect" coords="215, 415, 240, 440" href="#"  data-local="Pa_27" />
-        </map>
-
-        <map name="avatar_distancia" id="avatar_distancia">
-          <area title="pequena" shape="rect" coords="65, 205, 115, 255"  href="#"  data-local="0" />
-          <area title="media"   shape="rect" coords="145, 205, 195, 255" href="#"  data-local="1" />
-          <area title="grande"  shape="rect" coords="240, 205, 290, 255" href="#"  data-local="2" />
-        </map>
-        
-        <img id="avatar_completo_img"  src="http://bit.ly/10lA9nE" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
-        <img id="avatar_distancia_img" src="http://bit.ly/10Y64tS" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
-    </div><!-- End of ponto_de_articulacao -->
-    <!-- Begin of tipos_de_mao -->
-    <section id="tipos_de_mao" style="display: none;">
-      <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%; float: right;">
-        <ul style="padding: 0; margin: 0 0 0 0px">
-          <li data-handshape_group="prev"><a href="#">Prev</a></li>
-          <li data-handshape_group="group_1"><a href="#">1</a></li>
-          <li data-handshape_group="group_2"><a href="#">2</a></li>
-          <li data-handshape_group="next"><a href="#">Next</a></li>
+      <div id="expressoes" style="padding: 0; margin: 0 0 0 44px">
+        <ul style="margin: 0">
+          <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+          <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+          <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+          <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+          <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+          <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
         </ul>
       </div>
-      <div id="maos">
-        <li class="handshape" data-handshape="conf_1"></li>
-        <li class="handshape" data-handshape="conf_2"></li>
-        <li class="handshape" data-handshape="conf_3"></li>
-        <li class="handshape" data-handshape="conf_4"></li>
-        <li class="handshape" data-handshape="conf_5"></li>
-        <li class="handshape" data-handshape="conf_6"></li>
-        <li class="handshape" data-handshape="conf_7"></li>
-        <li class="handshape" data-handshape="conf_8"></li>
-        <li class="handshape" data-handshape="conf_9"></li>
-        <li class="handshape" data-handshape="conf_10"></li>
-        <li class="handshape" data-handshape="conf_11"></li>
-        <li class="handshape" data-handshape="conf_12"></li>
-        <li class="handshape" data-handshape="conf_13"></li>
-        <li class="handshape" data-handshape="conf_14"></li>
-        <li class="handshape" data-handshape="conf_15"></li>
-        <li class="handshape" data-handshape="conf_16"></li>
-        <li class="handshape" data-handshape="conf_17"></li>
-        <li class="handshape" data-handshape="conf_18"></li>
-        <li class="handshape" data-handshape="conf_19"></li>
-        <li class="handshape" data-handshape="conf_20"></li>
-        <li class="handshape" data-handshape="conf_21"></li>
-        <li class="handshape" data-handshape="conf_22"></li>
-        <li class="handshape" data-handshape="conf_23"></li>
-        <li class="handshape" data-handshape="conf_24"></li>
-        <li class="handshape" data-handshape="conf_25"></li>
-        <li class="handshape" data-handshape="conf_26"></li>
-        <li class="handshape" data-handshape="conf_27"></li>
-        <li class="handshape" data-handshape="conf_28"></li>
-        <li class="handshape" data-handshape="conf_29"></li>
-        <li class="handshape" data-handshape="conf_30"></li>
-      </div>
-    </section> <!-- End of tipos_de_mao -->
+    </section> 
+    <!-- End of expressao_facial -->
 
-    <div id="report-pane" style="float: left; display: none;">
-      <div id="render_progress" class="progress progress-striped active" style="display: none; height: 30px; width: 300px; margin-top: 200px; margin-left: 50px; position: absolute; z-index: 1;"></div>
+    <!-- Begin of wrap_avatar_video div -->
+    <div id="wrap_avatar_video" style="display: none;">
+      <div id="render_progress" class="progress progress-striped active" style="display: none; height: 30px; width: 300px; margin: 200px 0 0 50px; position: absolute; z-index: 1;"></div>
       <div id="confirmacao_avatar" style="display: none; margin: 0 50px 10px 50px;"> 
         <button class="btn btn-large btn-success btn-answer" style="width: 130px; float: left;" value='Sim'>
             Confirmar
@@ -236,47 +192,248 @@
         <button class="btn btn-large btn-danger btn-answer" style="width: 130px; margin-left: 30px;"  value='Nao'>
             Corrigir
         </button>
-      </div>
+      </div> <!-- End of confirmacao_avatar div -->
       <div id="avatar_video" style="display: none;"></div>
-    </div> <!-- End of report-pane div -->
+    </div> 
+    <!-- End of wrap_avatar_video div -->
 
-    <div id="correcao" style="float: left; display: none;">
-      <div id="mao_direita" style="display: block;"><h1>M&atilde;o Direita</h1>
-        <div id="parametros_dir" style="height: 80px; margin-bottom: 30px;"></div>
+    <!-- Begin of correcao section -->
+    <section id="correcao" style="display: none">
+      <section id="right_hand">
+        <h1>M&atilde;o direita</h1>
+        <ul style="margin: 0">
+          <li class="fix" data-parametro="conf" data-fix_hand="right"></li>
+          <li class="fix" data-parametro="ori" data-fix_hand="right"></li>
+          <li class="fix" data-parametro="pa_xy" data-fix_hand="right">
+            <a href="#modalPontos" data-toggle="modal">
+              <img width="98px" height="98px" src="/static/images/ponto_de_articulacao/avatar_pontos.png" />
+            </a>
+          </li>
+          <li class="fix" data-parametro="pa_z" data-fix_hand="right"></li>
+        </ul>
+      </section>
+
+      <div class="clear" style="float: both"></div>
+
+      <header id="fix_header_lhand">
+        <h1>
+          M&atilde;o esquerda
+          <a class="btn btn-mini add_button" style="margin-left: 5px" href="#">
+            <i class="icon-plus"></i>Adicionar
+          </a>
+          <a class="btn btn-mini remove_button" style="display: none; margin-left: 5px" href="#">
+            <i class="icon-minus"></i>Remover
+          </a>
+        </h1>
+      </header>
+
+      <section id="left_hand" style="display: none; margin: 5px 0 0 0">
+        <ul style="margin: 0">
+          <li class="fix" data-parametro="conf" data-fix_hand="left"></li>
+          <li class="fix" data-parametro="ori" data-fix_hand="left"></li>
+          <li class="fix" data-parametro="pa_xy" data-fix_hand="left">
+            <a href="#modalPontos" data-toggle="modal">
+              <img width="98px" height="98px" src="/static/images/ponto_de_articulacao/avatar_pontos.png" />
+            </a>
+          </li>
+          <li class="fix" data-parametro="pa_z" data-fix_hand="left"></li>
+        </ul>
+      </section>
+
+      <div class="clear" style="float: both"></div>
+        
+      <h1>Express&atilde;o facial</h1>
+      <ul id="fix_expressao" style="margin: 0; float: left">
+        <li class="fix" data-parametro="exp" data-fix_hand="exp"></li>
+      </ul>
+      
+      <button class="btn btn-large btn-success ready" type="button" value="sim" style="width: 110px; height: 98px; margin: 0 0 0 98px">Pronto</button>
+
+      <!-- Modal Formas de Mao -->
+      <div id="modalFormas" class="modal hide fade modal-formas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 id="myModalLabel">Qual &eacute; a forma da m&atilde;o?</h2>
+        </div>
+        <div class="modal-body">
+          <section id="hand_shapes">
+            <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%; float: right;">
+              <ul style="margin: 0">
+                <li data-handshape_group="prev"><a href="#">Prev</a></li>
+                <li data-handshape_group="group_1"><a href="#">1</a></li>
+                <li data-handshape_group="group_2"><a href="#">2</a></li>
+                <li data-handshape_group="next"><a href="#">Next</a></li>
+              </ul>
+            </div>
+            <section id="modal_maos">
+              <ul style="margin: 0">
+                <li class="handshape" data-handshape="conf_1"><!-- img from js--></li>
+                <li class="handshape" data-handshape="conf_2"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_3"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_4"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_5"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_6"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_7"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_8"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_9"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_10"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_11"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_12"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_13"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_14"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_15"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_16"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_17"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_18"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_19"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_20"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_21"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_22"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_23"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_24"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_25"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_26"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_27"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_28"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_29"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_30"><!-- img --></li>
+              </ul>
+            </section> <!-- End of maos div -->
+          </section> <!-- End of hand_shapes section -->
+        </div> <!-- End of modal-body div -->
+      </div> <!-- End of modalFormas div -->
+      <!-- Modal Formas de Mao -->
+
+      <!-- Modal Orientacao -->
+      <div id="modalOri" class="modal hide fade modal-ori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 id="myModalLabel">Qual &eacute; a orienta&ccedil;&atilde;o da m&atilde;o?</h2>
+        </div>
+        <div class="modal-body">
+          <section id="modal_orientacao_mao">
+            <ul style="margin: 0">
+              <li class="ori" data-orientacao="Ori_1"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_2"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_3"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_4"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_5"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_6"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_7"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_8"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_9"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_10"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_11"><!-- img from js --></li>
+              <li class="ori" data-orientacao="Ori_12"><!-- img from js --></li>
+            </ul>
+          </section>
+        </div>
       </div>
-      <div id="mao_esquerda" style="display: block;">
-	<div id="header_mao_esquerda" style="margin-bottom: 10px">
-		<h1 style="float: left">M&atilde;o Esquerda</h1>
-		<div id="adicionar_remover_mao" style="display: inline; margin-left: 20px"> 
-			<button id="remover_mao" class="btn btn-large btn-info add-remove" style="width: 100px;" value='Remover'>
-			    Remover
-			</button>
-			<button id="adicionar_mao" class="btn btn-large btn-info add-remove" style="width: 100px;"  value='Adicionar'>
-			    Adicionar
-			</button>
-		</div>
-	</div>
-	<div id="parametros_esq" style="height: 80px; margin-bottom: 30px; display: none;"></div>
+      <!-- Modal Orientacao -->
+
+      <!-- Modal Pontos de Articulacao -->
+      <div id="modalPontos" class="modal hide fade modal-pontos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 id="myModalLabel">Em que ponto a m&atilde;o fica suspensa?</h2>
+        </div>
+        <div class="modal-body">
+          <section id="modal_ponto_de_articulacao">
+            <map name="avatar_completo" id="avatar_completo">   
+              <!-- Cabeca -->
+              <area title="topo da cabeca"    shape="rect" coords="105, 0, 215, 25"    href="#"  data-local="Pa_63" />
+              <area title="testa"             shape="rect" coords="105, 30, 215, 55"   href="#"  data-local="Pa_60" />
+              <area title="olho direito"      shape="rect" coords="125, 65, 155, 90"   href="#"  data-local="Pa_35" />
+              <area title="olho esquerdo"     shape="rect" coords="170, 65, 200, 90"   href="#"  data-local="Pa_38" />
+              <area title="nariz"             shape="rect" coords="145, 85, 175, 105"  href="#"  data-local="Pa_32" />
+              <area title="boca"              shape="rect" coords="145, 110, 175, 130" href="#"  data-local="Pa_6"  />
+              <area title="queixo"            shape="rect" coords="145, 130, 175, 150" href="#"  data-local="Pa_57" />
+              <area title="pescoco"           shape="rect" coords="145, 155, 175, 175" href="#"  data-local="Pa_56" />
+              <area title="bochecha direita"  shape="rect" coords="115, 100, 145, 120" href="#"  data-local="Pa_9R"  />
+              <area title="bochecha esquerda" shape="rect" coords="180, 100, 210, 120" href="#"  data-local="Pa_9L"  />
+              <area title="orelha direita"    shape="rect" coords="90, 70, 120, 95"    href="#"  data-local="Pa_50" />
+              <area title="orelha esquerda"   shape="rect" coords="200, 70, 230, 95"   href="#"  data-local="Pa_53" />
+          
+              <!-- Tronco -->
+              <area title="ombro centro"     shape="rect" coords="145, 190, 160, 215" href="#"  data-local="Pa_41" /> 
+              <area title="ombro direito"    shape="rect" coords="55, 190, 80, 215"   href="#"  data-local="Pa_44" />
+              <area title="ombro esquerdo"   shape="rect" coords="240, 190, 265, 215" href="#"  data-local="Pa_47" />
+              <area title="busto centro"     shape="rect" coords="145, 260, 160, 285" href="#"  data-local="Pa_12" />
+              <area title="busto direito"    shape="rect" coords="85, 260, 110, 285"  href="#"  data-local="Pa_15" />
+              <area title="busto esquerdo"   shape="rect" coords="210, 260, 235, 285" href="#"  data-local="Pa_18" />
+              <area title="estomago"         shape="rect" coords="150, 350, 175, 375" href="#"  data-local="Pa_21" />
+              <area title="umbigo"           shape="rect" coords="150, 415, 175, 440" href="#"  data-local="Pa_66" />
+              <area title="cintura direita"  shape="rect" coords="80, 415, 105, 440"  href="#"  data-local="Pa_24" />
+              <area title="cintura esquerda" shape="rect" coords="215, 415, 240, 440" href="#"  data-local="Pa_27" />
+            </map>        
+            <img id="avatar_completo_img"  src="http://bit.ly/10lA9nE" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
+          </section>
+        </div>
       </div>
-      <div id="parametro_exp_facial" style="display: block; margin-top: 25px; height: 190px"></div>
-      <button id="render" class="btn btn-large btn-success btn-answer" style="width: 130px;" value='Render'>
-	  Gerar Avatar
-      </button>
-    </div> <!-- End of correcao div -->
+      <!-- Modal Pontos de Articulacao -->
 
-   </div> <!-- Parametros do sinal -->
+      <!-- Modal Pontos de Articulacao Distancia -->
+      <div id="modalDistancia" class="modal hide fade modal-distancia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 id="myModalLabel">A que dist&atilde;ncia se faz o sinal?</h2>
+        </div>
+        <div class="modal-body">
+          <section id="modal_distancia">
+            <map name="avatar_distancia" id="avatar_distancia">
+              <area title="pequena" shape="rect" coords="65, 205, 115, 255"  href="#"  data-local="0" />
+              <area title="media"   shape="rect" coords="145, 205, 195, 255" href="#"  data-local="1" />
+              <area title="grande"  shape="rect" coords="240, 205, 290, 255" href="#"  data-local="2" />
+            </map>
+            <img id="avatar_distancia_img" src="http://bit.ly/10Y64tS" style="margin: 2px 0 0 2px;" usemap="#avatar_distancia" />
+          </section>
+        </div>
+      </div>
+      <!-- Modal Pontos de Articulacao Distancia -->
 
-   <div id="signal_video" style="float: right; width: 540px; height: 450px;"></div><!-- The video will be showed here -->
+      <!-- Modal Expressao Facial -->
+      <div id="modalExp" class="modal hide fade modal-exp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 id="myModalLabel">Express&atilde;o facial?</h2>
+        </div>
+        <div class="modal-body">
+          <section id="expressao_facial">
+            <div class="pagination expressao_pagination" style="padding: 0; margin: 0">
+              <ul style="margin: 0">
+                <li data-exp_group="prev"><a href="#">Prev</a></li>
+                <li data-exp_group="group_1"><a href="#">1</a></li>
+                <li data-exp_group="group_2"><a href="#">2</a></li>
+                <li data-exp_group="group_3"><a href="#">3</a></li>
+                <li data-exp_group="next"><a href="#">Next</a></li>
+              </ul>
+            </div>
+            <div id="modal_expressoes">
+              <ul style="margin: 0">
+                <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+                <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+                <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+                <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+                <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+                <li class="exp" title=""  data-exp_facial="" ><!-- img from js --></li>
+              </ul>
+            </div>
+          </section> 
+        </div>
+      </div>
+      <!-- Modal Expressao Facial -->
+
+    </section>
+    <!-- End of correcao section -->
+ </div> <!-- End of Parametros do sinal -->
+
+ <div id="signal_video" style="float: right; width: 540px; height: 450px;"></div><!-- The video will be showed here -->
 </div><!-- End of Skeleton -->
 
 <div class="row skeleton">
-    <div style="margin-top: 30px; margin-bottom: 30px; float: right;">
-        <div id="pular_tarefa">
-	   <button class="btn btn-large btn-warning" style="margin: 0 0 0 5px; width: 130px; float: right;" value='Pular'>
-	       Pular sinal
-	   </button>
-        </div> <!-- Pular tarefa -->
-    </div>
+  <button class="btn btn-large btn-warning" style="margin: 10px 0 10px 0; width: 130px; float: right;" value='Pular'>
+    Pular sinal
+  </button>
 </div>
 
 <script>
@@ -286,19 +443,6 @@ pybossa.taskLoaded(function(task, deferred) {
 });
 
 pybossa.presentTask(function(task, deferred) {
-
-    var orient2sprite = { "Ori_1": "http://bit.ly/166zJWo",
-		       "Ori_2": "http://bit.ly/10IL8Zp",
-		       "Ori_3": "http://bit.ly/11yVCw2",
-   		       "Ori_4": "http://bit.ly/10o8PEB",
- 		       "Ori_5": "http://bit.ly/15G9cPA",
-		       "Ori_6": "http://bit.ly/14hLm8f",
-		       "Ori_7": "http://bit.ly/YFbHMK",
-		       "Ori_8": "http://bit.ly/YFbxF3",
-		       "Ori_9": "http://bit.ly/11yVwo9",
-		       "Ori_10": "http://bit.ly/10EeUtF",
-		       "Ori_11": "http://bit.ly/18G71uf",
-		       "Ori_12": "http://bit.ly/13n6Ql3"};
 
     var pa2sprite = { "Pa_63": {"x" : "-125px", "y" : "-20px"},
 	  	      "Pa_60": {"x" : "-125px", "y" : "-55px"},
@@ -327,10 +471,7 @@ pybossa.presentTask(function(task, deferred) {
 	  	      "1": {"x" : "-135px", "y" : "-190px"},
 	  	      "2": {"x" : "-230px", "y" : "-190px"}};
 
-
-    var exp2sprite = {}
-
-    var exp_facial = { "group_1" : { "Exp_1" : "Bico", 
+    var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
                                      "Exp_3" : "Bochechas contraídas",
                                      "Exp_4" : "Lábios contraídos",
@@ -338,7 +479,7 @@ pybossa.presentTask(function(task, deferred) {
                                      "Exp_6" : "Olhos para a esquerda" },
                        "group_2" : { "Exp_7" : "Língua para baixo",
                                      "Exp_8" : "Língua reta",
-				     "Exp_9" : "Neutra",
+				     "Exp_1" : "Bico",
                                      "Exp_10" : "Olhos arregalados",
                                      "Exp_11" : "Sobrancelhas levantadas",
                                      "Exp_12" : "Sobrancelhas franzidas"  },
@@ -351,33 +492,85 @@ pybossa.presentTask(function(task, deferred) {
  
     var current_exp_group;
     var current_handshape_group;
+    var current_fix_hand;
     var parametros = {right : {}, left : {}};
     var state = "CONF_MAO";
     var isRightHand = true;
-    var mao2sprite = {};
 
-    var grupo = new Object();
-    grupo['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
+    var hands_shapes = new Object();
+    hands_shapes['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
                                  "mao_48", "mao_33", "mao_34", "mao_47",
                                  "mao_36", "mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_37", "mao_49",
                                  "mao_54", "mao_8", "mao_52",
                                  "mao_60", "mao_25", "mao_53", "mao_55", "mao_56", "mao_57", "mao_59",
                                  "mao_26", "mao_27", "mao_29", "mao_30" );
 
-    grupo['group_2'] = new Array("mao_28", "mao_22", "mao_58",
+    hands_shapes['group_2'] = new Array("mao_28", "mao_22", "mao_58",
                                  "mao_50", "mao_3", "mao_4", "mao_5", "mao_6", "mao_39", "mao_40", "mao_51",
                                  "mao_42", "mao_41",
                                  "mao_44", "mao_43", "mao_45", "mao_46",
                                  "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
                                  "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");
 
-    // Modifica o background dos li DOM da section expressao_facial
-    function set_button_bg( group ) {
+    // Modifica as imagens dos elementos li da section formas_de_mao
+    function setFormasDeMao(hand_page) {
+      var nth_li;
+
+      // "limpa" a pagina de maos
+      $("#maos").find('li').hide();
+
+      $("#modal_maos").find('li').hide();
+      
+      // Dertermina a pagina de maos a ser mostrada 
+      if( hand_page == "prev" ) {
+          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) - 1 );
+          hand_page = current_handshape_group;
+      }else if ( hand_page == "next" ) {
+          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) + 1 );
+          hand_page = current_handshape_group;
+      } else {
+          current_handshape_group = hand_page;
+      }
+
+      // Modifica a aparencia do pagination
+      set_handshape_pagination();
+      
+      // Cria as tags img e poe nos elementos li
+      for( var i = 0; i < hands_shapes[hand_page].length; i++) {
+          nth_li = ":nth-child(" + (i+1) + ")";
+	  conf_mao = 'conf_' + parseInt( hands_shapes[hand_page][i].split("_")[1] );
+          
+          $("#maos").find("li").filter(nth_li).data('handshape', conf_mao);
+          $("#maos").find("li").filter(nth_li).html('<img src="/static/images/formas_de_mao/' + conf_mao + '.png" />');
+
+          $("#modal_maos").find("li").filter(nth_li).data('handshape', conf_mao);
+          $("#modal_maos").find("li").filter(nth_li).html('<img src="/static/images/formas_de_mao/' + conf_mao + '.png" />');
+      } // Fim do for
+
+      $("#maos").find('li').fadeIn();
+      $("#modal_maos").find('li').fadeIn();
+
+    } // Fim da funcao setFormasDeMao
+
+    // Modifica as imagens dos elementos li da section orientacao_palma_da_mao
+    function setOrientacaoMao() {
+      var nth_li;
+    
+      for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
+        nth_li = ":nth-child(" +  ori_num  + ")";
+
+        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/Ori_' + ori_num + '.png" />');
+        $("#modal_orientacao_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/Ori_' + ori_num + '.png" />');
+      } // Fim do for
+
+    } // Fim da funcao setOrientacaoMao
+
+    // Modifica as imagens dos elementos li da section expressao_facial
+    function setExpressaoFacial( group ) {
       var nth_li;
       var exp_num;
-      var exp_num_x;
-      var exp_num_y;
-    
+      
+      // Determina a pagina de expressoes faciais
       if( group == "prev" ){
           current_exp_group = "group_" + ( parseInt( current_exp_group.split("_")[1] ) - 1 );
           group = current_exp_group;
@@ -387,30 +580,29 @@ pybossa.presentTask(function(task, deferred) {
       }else{
           current_exp_group = group;
       }
-   
-      set_pagination();
-    
-      for( var key in exp_facial[group] ) {
-        exp_num = parseInt( key.split("_")[1]  );
       
-        if (( exp_num % 6 ) == 0 ) {
-          nth_li = ":nth-child(" + 6  + ")";
-          exp_num_x = '-' + ( 5 * 133 ) + 'px';
-          exp_num_y = '-' + Math.floor( ( exp_num / 6 ) - 1 ) * 135 + 'px';
-        } else {
-          nth_li = ":nth-child(" +  (exp_num % 6)  + ")";
-          exp_num_x = '-' + ( ( exp_num % 6 ) - 1 ) * 133 + 'px';
-          exp_num_y = '-' + Math.floor( ( exp_num / 6 ) ) * 135 + 'px' ;
-        }
+      // Modifica a aparencia do pagination de expressoes faciais  
+      set_pagination();
+      
+      // Modifica as images da expressao facial bem como os valores dos atributos title e data-sexp_facial
+      var contador = 1;
+      for( var exp in exp_facial[group] ) {
+        exp_num = parseInt( exp.split("_")[1]  );
+        nth_li = ":nth-child(" + contador + ")";
 
-	exp2sprite[key] = {"x": exp_num_x, "y": exp_num_y};
-        $("#expressao_facial").find("li").filter(nth_li).css({'background-position': exp_num_x + " " + exp_num_y});
-        $("#expressao_facial").find("li").filter(nth_li).attr("title", exp_facial[group][key]);
-        $("#expressao_facial").find("li").filter(nth_li).data("exp_facial", key);
+        $("#expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static/images/expressao_facial/' + exp + '.png" />');
+        $("#expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
+        $("#expressoes").find("li").filter(nth_li).data("exp_facial", exp);
+
+        $("#modal_expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static/images/expressao_facial/' + exp + '.png" />');
+        $("#modal_expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
+        $("#modal_expressoes").find("li").filter(nth_li).data("exp_facial", exp);
+      
+        contador = contador + 1;
       } // Fim do for
-    } // Fim da funcao set_button_bg  
+    } // Fim da funcao setExpressaoFacial  
     
-    // Modifica a aparencia do pagination 
+    // Modifica a aparencia do pagination da expressao facial
     function set_pagination() {
     
       if( current_exp_group == "group_1" ){
@@ -428,31 +620,31 @@ pybossa.presentTask(function(task, deferred) {
     } // Fim da funcao set_pagination
     
     // An expressao_pagination button is clicked 
-    $('.expressao_pagination').on( 'click', 'li', function(event){
+    $('.expressao_pagination').off('click').on( 'click', 'li', function(event){
       event.preventDefault();
       if ( ( $(this).data("exp_group") == "prev" ) && ( current_exp_group != "group_1" ) ){
-        set_button_bg( $(this).data("exp_group") );
+        setExpressaoFacial( $(this).data("exp_group") );
       }else if ( ( $(this).data("exp_group") == "next" ) && ( current_exp_group != "group_3" ) ){
-        set_button_bg( $(this).data("exp_group") );
+        setExpressaoFacial( $(this).data("exp_group") );
       }
     
       if ( ( $(this).data("exp_group") != "prev" )  && ( $(this).data("exp_group") != "next" ) ){
-        set_button_bg( $(this).data("exp_group") );
+        setExpressaoFacial( $(this).data("exp_group") );
       }
     
     });
     
     // A handshape_pagination button is clicked 
-    $('.handshape_pagination').on( 'click', 'li', function(event){
+    $('.handshape_pagination').off('click').on( 'click', 'li', function(event){
       event.preventDefault();
       if ( ( $(this).data("handshape_group") == "prev" ) && ( current_handshape_group != "group_1" ) ){
-        formasDeMaoLiBg( $(this).data("handshape_group") );
+        setFormasDeMao( $(this).data("handshape_group") );
       }else if ( ( $(this).data("handshape_group") == "next" ) && ( current_handshape_group != "group_2" ) ){
-        formasDeMaoLiBg( $(this).data("handshape_group") );
+        setFormasDeMao( $(this).data("handshape_group") );
       }
     
       if ( ( $(this).data("handshape_group") != "prev" )  && ( $(this).data("handshape_group") != "next" ) ){
-        formasDeMaoLiBg( $(this).data("handshape_group") );
+        setFormasDeMao( $(this).data("handshape_group") );
       }
     });
     
@@ -472,70 +664,36 @@ pybossa.presentTask(function(task, deferred) {
       }
     }
 
-    // Modifica o background dos li DOM da section formas_de_mao
-    function formasDeMaoLiBg(hand_group) {
-      $("#tipos_de_mao").find('li').hide();
-      
-      if( hand_group == "prev" ) {
-          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) - 1 );
-          hand_group = current_handshape_group;
-      }else if ( hand_group == "next" ) {
-          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) + 1 );
-          hand_group = current_handshape_group;
-      } else {
-          current_handshape_group = hand_group;
-      }
-
-      set_handshape_pagination();
-
-      for( var i = 0; i < grupo[hand_group].length; i++) {
-          var nth_li = ":nth-child(" + (i+1) + ")";
-          var mao_num = parseInt( grupo[hand_group][i].split("_")[1] );
-          var mao_num_x;
-          var mao_num_y;
-      
-          if( ( mao_num % 10 ) == 0 ) { // Ultima imagem da linha do sprite
-            mao_num_x = '-' + 9 * 65 + 'px'; 
-            mao_num_y = '-' + Math.floor( ( mao_num / 10 ) - 1 ) * 80 + 'px';
-          }else{
-            mao_num_x = '-' + ( ( mao_num % 10 ) - 1 ) * 65 + 'px';
-            mao_num_y = '-' + Math.floor( ( mao_num / 10 ) ) * 80 + 'px';
-          }
-      
-	  confMao = 'conf_' + mao_num;
-	  mao2sprite[confMao] = {x: mao_num_x, y: mao_num_y};
-	  $("#tipos_de_mao").find("li").filter(nth_li).data('handshape', confMao);
-          $("#tipos_de_mao").find("li").filter(nth_li).css({'background-position' : mao_num_x + " " + mao_num_y });
-          $("#tipos_de_mao").find("li").filter(nth_li).fadeIn();
-          $("#tipos_de_mao").find('li').last().fadeIn();
-      } // Fim do for
-    } // Fim da funcao formasDeMaoLiBg
-
+    // Modifica a pergunta a ser mostrada e mostra a div adequada
     function mostrarPergunta() {
       $('#quantidade_maos').hide();
       $('#orientacao_palma_da_mao').hide();
       $('#expressao_facial').hide();
       $('#ponto_de_articulacao').hide();
-      $('#tipos_de_mao').hide();
+      $('#avatar_distancia_img').hide();
+      $('#hand_shapes').hide();
       $("#expressao_facial").hide();
-      $('#report-pane').hide();
+      $('#wrap_avatar_video').hide();
       $('#avatar_video').hide();
-      $('#confirmacao_avatar').hide();
       $("#correcao").hide();
+      $("#left_hand").hide();
 	
       var pergunta;
         
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
+                // TODO setOrientacaoMao(right)
 	} else {
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
+                // TODO setOrientacaoMao(left)
 	}
+        setOrientacaoMao();
         $('#orientacao_palma_da_mao').show();
       }
       else if (state == "EXP_FACIAL") {
-	pergunta = "Com que express&atilde;o facial se faz o sinal?";
-        set_button_bg("group_1");  
+	pergunta = "Com que express&atilde;o se faz o sinal?";
+        setExpressaoFacial("group_1");  
         $('#expressao_facial').show();
       }
       else if (state == "PONTO_ARTIC") {
@@ -545,7 +703,7 @@ pybossa.presentTask(function(task, deferred) {
 		pergunta = "A m&atilde;o esquerda fica suspensa em que ponto?";
 	}
         $('#ponto_de_articulacao').show();
-        $("#avatar_completo_img").show();
+        $("#avatar_completo_img").show(); // mostrar no caso de mao esquerda pois foi hiden na mao direita
       }
       else if (state == "CONF_MAO") {
 	if (isRightHand) {
@@ -554,8 +712,8 @@ pybossa.presentTask(function(task, deferred) {
 		pergunta = "Escolha a forma da m&atilde;o esquerda.";
 	}
 
-	formasDeMaoLiBg('group_1')
-        $('#tipos_de_mao').show();
+	setFormasDeMao('group_1')
+        $('#hand_shapes').show();
       }
       else if (state == "QTD_MAOS") {
 	pergunta = "Com quantas m&atilde;os se faz o sinal?"
@@ -571,71 +729,117 @@ pybossa.presentTask(function(task, deferred) {
         $('#ponto_de_articulacao').show();
       }
       else if (state == "RENDER") {
-	pergunta = "O avatar renderizado est&aacute; correto?";
+	pergunta = "O avatar faz o sinal corretamente?";
 	renderizarVideo();
-        $("#report-pane").show();
+        $("#wrap_avatar_video").show();
       }
       else if (state == "CONFIRM_AVATAR") {
-	$("#report-pane").show();
+	$("#wrap_avatar_video").show();
       }
       else if (state == "CORRECAO") {
-	pergunta = "Clique na parte do sinal que precisa ser corrigida."
+	pergunta = "O que deve ser corrigido?"
 	showCorrecaoDiv();
       }
       $("#question").html( pergunta );
     } // Fim da funcao mostrarPergunta
 
+    
+    function setCorrecaoLi() {
+      var contador = 1;
+      var content;
+      var nth_li;   
+
+      for( var p in parametros.right ) {
+        nth_li = ":nth-child(" + contador + ")";
+        if( p.split('_')[0] == "CONF" ) {
+          content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
+          $('#right_hand').find("li").filter(nth_li).html(content);
+        }else if( p.split('_')[0] == "ORIENT" ){
+          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.right[p] + '.png" /></a>';
+          $('#right_hand').find("li").filter(nth_li).html(content);
+        }else if( p.split('_')[0] == "DIST" ){
+          content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
+          $('#right_hand').find("li").filter(nth_li).html(content);
+        }
+
+        contador = contador + 1; 
+      } // Fim do for
+      
+      if( parametros["QTD_MAOS"] == "duas" )
+      {
+        contador = 1;
+        for( var p in parametros.left ) {
+          nth_li = ":nth-child(" + contador + ")";
+          if( p.split('_')[0] == "CONF" ) {
+            content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
+            $('#left_hand').find("li").filter(nth_li).html(content);
+          }else if( p.split('_')[0] == "ORIENT" ){
+            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.left[p] + '.png" /></a>';
+            $('#left_hand').find("li").filter(nth_li).html(content);
+          }else if( p.split('_')[0] == "DIST" ){
+            content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
+            $('#left_hand').find("li").filter(nth_li).html(content);
+          }
+          contador = contador + 1; 
+        } // Fim do for
+
+        $('.remove_button').show();
+        $('.add_button').hide();
+        $('#left_hand').show();
+      } // Fim do if
+
+      $("#fix_expressao").find("li").first().html( '<a href="#modalExp" data-toggle="modal"><img width="100px" height="100px" src="/static/images/expressao_facial/' + parametros["EXP_FACIAL"] + '.png" /></a>' );
+
+          
+      
+    } // Fim da funcao setCorrecaoLi
+    
 
     function showCorrecaoDiv() {
-	$("#parametros_dir").html(getParametrosMaoHtml(true));
-	$("#parametros_esq").html(getParametrosMaoHtml(false));
-
-	configureCorrecaoDiv();
-
-	expFacial = exp2sprite[parametros["EXP_FACIAL"]];
-	$("#parametro_exp_facial").html("<h1>Express&atilde;o Facial</h1>"
-				+ "<li class='exp_facial' style='background-position: " + expFacial.x  + " " + expFacial.y + ";'></li>");
+        setCorrecaoLi();
 	$("#correcao").show();
-    }
-
-    function configureCorrecaoDiv() {
-	if (parametros["QTD_MAOS"] == "duas") {
-		$("#remover_mao").show();
-		$("#adicionar_mao").hide();
-		$("#parametros_esq").show();
-	} else {
-		$("#remover_mao").hide();
-		$("#adicionar_mao").show();
-		$("#parametros_esq").hide();
-	}
-    }
-
-    function getParametrosMaoHtml(rightHand) {
-	
-	var mao;
-	if (rightHand || parametros["QTD_MAOS"] == "uma") {
-		mao = parametros.right;
-	} else {
-		mao = parametros.left;
-	}
-
-	confMao = mao2sprite[mao["CONF_MAO"]];
-	orientMao = orient2sprite[mao["ORIENT_PALMA"]];
-	paSinal = pa2sprite[mao["PONTO_ARTIC"]];
-	distMao = dist2sprite[mao["DIST_MAOS"]];
-
-	return "<li class='handshape' style='background-position: "
-			        + confMao.x  + " " + confMao.y + ";'></li>"
-				+ "<li class='orient_mao'> <img src='" + orientMao + "'></li>"
-				+ "<li class='ponto_articulacao' style='background-position: " + paSinal.x  + " " + paSinal.y + ";'></li>"
-				+ "<li class='distancia' style='background-position: " + distMao.x  + " " + distMao.y + ";'></li></div>";
     }
 
     function saveAnswer(answer) {
 
-	if (state == "CONFIRM_AVATAR" || state == "CORRECAO") {
-		return;
+	if ( state == "CONFIRM_AVATAR" ) {
+          return;
 	}
+
+        if ( state == "CORRECAO" ) {
+          console.log(answer);
+          if ( current_fix_hand == "right" ){
+            if ( answer in [0, 1, 2] ) {
+              parametros.right["DIST_MAOS"] = answer;              
+            }else if ( answer.split("_")[0] == "conf" ) {
+              parametros.right["CONF_MAO"] = answer;
+            }else if ( answer.split("_")[0] == "Ori" ) {
+              parametros.right["ORIENT_PALMA"] = answer;              
+            }else if ( answer.split("_")[0] == "Pa" ) {
+              parametros.right["PONTO_ARTIC"] = answer;              
+            }           
+          }else if ( current_fix_hand == "left" ){
+            if ( answer in [0, 1, 2] ) {
+              parametros.left["DIST_MAOS"] = answer;              
+            }else if ( answer.split("_")[0] == "conf" ) {
+              parametros.left["CONF_MAO"] = answer;
+            }else if ( answer.split("_")[0] == "Ori" ) {
+              parametros.left["ORIENT_PALMA"] = answer;              
+            }else if ( answer.split("_")[0] == "Pa" ) {
+              parametros.left["PONTO_ARTIC"] = answer;              
+          } 
+          }else {
+            parametros["EXP_FACIAL"] = answer;                         
+          } // Fim do else
+          
+          
+          console.log( "==== CORRECOES ====" );
+          console.log(parametros);
+          console.log(parametros.right);
+          console.log(parametros.left);   
+         
+          return;
+        } // Fim do if CORRECAO
 
 	if (state == "RENDER") {
 		parametros.avatar_video = answer;
@@ -697,6 +901,7 @@ pybossa.presentTask(function(task, deferred) {
 	console.log(state);
      }
 
+
     function updatePA(rightHand) {
 	var mao = rightHand ? parametros.right : parametros.left;
 	paId = mao["PONTO_ARTIC"];
@@ -728,7 +933,7 @@ pybossa.presentTask(function(task, deferred) {
 
     function showRenderedVideo(video) {
 	stopAndPlaySignalVideo(true);
-        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/libras-videos/' + video + '> </video>');
+        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/static/libras-videos/' + video + '> </video>');
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
     }
@@ -808,7 +1013,7 @@ pybossa.presentTask(function(task, deferred) {
               mostrarPergunta(state);
 
 	      if (state == "TASK_END") {
-		    preparaParametros();
+		    //preparaParametros();
 		    pybossa.saveTask(task.id, parametros).done(function() {
       	              deferred.resolve(); 
                     });
@@ -817,28 +1022,27 @@ pybossa.presentTask(function(task, deferred) {
               $("#error").show();
             }
         });
-         
-	// Evento de clique em pular tarefa
-        $('.btn-warning').off('click').on('click', function(){
-            var answer = $(this).attr('value');
-            if( typeof answer != 'undefined' ){
-	      if (answer == "Pular") {
-		    parametros.final_state = "skipped";
-		    pybossa.saveTask(task.id, parametros).done(function() {
-      	              deferred.resolve(); 
-                    });
-	      }
-            } else {
-              $("#error").show();
-            }
+	
+        // Eventos de cliques em tipos de mao
+        $(".handshape").off("click").on( "click", function() {
+	  answer = $(this).data('handshape');
+  	  saveAnswer(answer);
+          if ( state != "CORRECAO" ) 
+	    updateState(answer);
+          else
+            $('.modal.in').modal("hide");
+	  mostrarPergunta();	
         });
 
-	 // Eventos de cliques em pontos de articulação
+	 // Eventos de cliques em pontos de articulacao
          $("#avatar_completo").find("area").off('click').on('click', function(event){
            event.preventDefault();         
            answer = $(this).data('local');    
-           saveAnswer(answer);      
- 	   updateState(answer);
+           saveAnswer(answer);
+           if ( state != "CORRECAO" )
+             updateState(answer);
+           else
+             $('.modal.in').modal("hide");
 	   mostrarPergunta();
 
            $("#avatar_completo_img").hide();
@@ -850,40 +1054,100 @@ pybossa.presentTask(function(task, deferred) {
            $("#avatar_distancia_img").hide();
 	   answer = $(this).data('local');
 	   
- 	   saveAnswer(answer); 
-	   updateState(answer);
+ 	   saveAnswer(answer);
+           if ( state != "CORRECAO" )
+	     updateState(answer);
+          else
+            $('.modal.in').modal("hide");
 	   mostrarPergunta();
          });
 
-	// Eventos de cliques em tipos de mão
-         $(".handshape").off("click").on( "click", function() {
-	   answer = $(this).data('handshape');
-  	   saveAnswer(answer); 
-	   updateState(answer);
-	   mostrarPergunta();	
-         });
 
          // Eventos de cliques em expressao facial
          var exp_answer;
          $('.exp').off('click').on( 'click', function(){
            exp_answer = $(this).data('exp_facial');
            saveAnswer(exp_answer);
-           updateState(exp_answer);
+           if ( state != "CORRECAO" )
+             updateState(exp_answer);
+          else
+            $('.modal.in').modal("hide");
            mostrarPergunta();
          });
 
-        // Eventos de cliques no botão adicionar/remover mao da correção
-        $('.add-remove').off('click').on('click', function(){
-            var add_remove = $(this).attr('value');
-	    if (add_remove == "Adicionar") {
-		parametros.left = parametros.right;
-		parametros["QTD_MAOS"] = "duas";
-	    } else {
-		parametros.left = {};
-		parametros["QTD_MAOS"] = "uma";
-	    }
-	    configureCorrecaoDiv();
-        });
+	 // Eventos de cliques em orientacao da mao
+         $(".ori").off("click").on("click", function() {
+           answer = $(this).data('orientacao');
+           saveAnswer(answer);
+           if ( state != "CORRECAO" )           
+             updateState(answer);
+          else
+            $('.modal.in').modal("hide");           
+           mostrarPergunta();
+         });
+
+	 // Evento de clique em pular tarefa
+         $('.btn-warning').off('click').on('click', function(){
+           var answer = $(this).attr('value');
+           if( typeof answer != 'undefined' ){
+	     if (answer == "Pular") {
+               parametros.final_state = "skipped";
+	       pybossa.saveTask(task.id, parametros).done(function() {
+      	         deferred.resolve(); 
+               });
+	     }
+           } else {
+             $("#error").show();
+           }
+         });
+
+         // Evento de clique no botao pronto
+         $('.ready').off('click').on('click', function(){
+           updateState( $(this).attr('value') );
+           $('#avatar_video').hide();
+           mostrarPergunta();
+         });
+
+         // Eventos de cliques nas opcoes de correcao
+         $(".fix").off("click").on("click", function(){
+           current_fix_hand = $(this).data("fix_hand");
+         });
+
+         // Eventos de cliques na opcao de remover mao esquerda
+         $('.remove_button').off('click').on('click', function(event) {
+           event.preventDefault();
+           $('.remove_button').hide();
+           $('.add_button').show();
+           $('#left_hand').hide();
+           console.log( parametros.left );
+           parametros["QTD_MAOS"] = "uma";
+           parametros.left = {};
+
+           console.log( parametros );
+           console.log( parametros.right );
+           console.log( parametros.left );
+         });
+
+         // Eventos de cliques no botao de adicionar mao esquerda
+         $('.add_button').off('click').on('click', function(event) {
+           event.preventDefault();
+           $('.remove_button').show();
+           $('.add_button').hide();
+           $('#left_hand').show();
+           console.log( parametros.left );
+           parametros["QTD_MAOS"] = "duas";
+           parametros.left["CONF_MAO"] = parametros.right["CONF_MAO"];
+           parametros.left["ORIENT_PALMA"] = parametros.right["ORIENT_PALMA"];
+           parametros.left["PONTO_ARTIC"] = parametros.right["PONTO_ARTIC"];
+           parametros.left["DIST_MAOS"] = parametros.right["DIST_MAOS"];
+
+           showCorrecaoDiv();
+
+           console.log( parametros );
+           console.log( parametros.right );
+           console.log( parametros.left );
+         });
+
     }
     else {
         $(".skeleton").hide();
@@ -898,81 +1162,90 @@ pybossa.run('librasdictionary');
 
 <style type="text/css">
 
-  div#parametros_sinal li.handshape {
+  #parametros_sinal {
+    float: left;
+    width: 400px;
+    height:450px;
+  }
+
+  .handshape {
     margin: 1px 0 0 1px;
     float: left;
     width: 65px;
     height: 80px;
     display: inline;
     list-style: none;
-    background: url("http://imageshack.us/a/img5/1439/spritehandsshape.png") no-repeat;
-  }
-
-  section#tipos_de_mao li.handshape:hover {
-    -webkit-box-shadow: inset 0 0 10px #F70;
-    -moz-box-shadow: inset 0 0 10px #F70;
-    box-shadow: inset 0 0 10px #F70;
-  }
-
-  #tipos_de_mao li:last-child {
-    background: #FFF;
-  }
- 
-  section#expressao_facial {
-    /*padding: 0;*/
   }
   
-  section#expressao_facial li.exp {
+  .exp {
     float: left;
     list-style: none;
     width: 133px;
     height: 133px;
-    margin: 6px 0 0 5px;
-    background: url("http://imageshack.us/a/img850/2828/l19.png") no-repeat;
+    margin: 5px 0 0 5px;
     position: relative;
-  }
-  
-  section#expressao_facial li.exp:hover {
-    -webkit-box-shadow: inset 0 0 10px #F70;
-    -moz-box-shadow: inset 0 0 10px #F70;
-    box-shadow: inset 0 0 10px #F70;
+    overflow: hidden;
   }
 
-  div#correcao li.orient_mao {
+  .ori {
+    float: left;
+    list-style: none;
+    width: 110px;
+    height: 110px;
     margin: 1px 0 0 1px;
-    float: left;
-    width: 61px;
-    height: 80px;
-    display: inline;
-    list-style: none;
   }
 
-  div#correcao li.ponto_articulacao {
-    margin: 1px 0 0 1px;
+  .fix{
     float: left;
-    width: 65px;
-    height: 80px;
-    display: inline;
     list-style: none;
-    background: url("http://img824.imageshack.us/img824/3774/gb5u.png") no-repeat;
+    width: 98px;
+    height: 98px;
+    margin: 0 0 10px 1px;
+    background: #ababab;
+    overflow: hidden;
   }
 
-  div#correcao li.distancia {
-    margin: 1px 0 0 1px;
-    float: left;
-    width: 65px;
-    height: 80px;
-    display: inline;
-    list-style: none;
-    background: url("http://bit.ly/10Y64tS") no-repeat;
-  }
-
-  div#correcao li.exp_facial {
-    float: left;
-    list-style: none;
-    width: 133px;
-    height: 133px;
-    background: url("http://imageshack.us/a/img850/2828/l19.png") no-repeat;
+  .modal-body {
     position: relative;
+    max-height: 600px;
+    padding: 2px;
+    text-align: center;
+    overflow-y: auto;
   }
+
+  .modal-formas{
+    width: 400px;
+    height: 514px;
+    left: 30%;
+    top: 50%;
+  }
+
+  .modal-ori{
+    width: 340px;
+    height: 514px;
+    left: 35%;
+    top: 50%;
+  }
+
+  .modal-pontos{
+    width: 334px;
+    height: 519px;
+    left: 35%;
+    top: 50%;
+  }
+
+  .modal-distancia{
+    width: 340px;
+    height: 530px;
+    left: 35%;
+    top: 50%;
+  }
+
+  .modal-exp{
+    width: 285px;
+    height: 520px;
+    left: 40%;
+    top: 50%;
+  }
+
 </style>

@@ -5,7 +5,7 @@ import random
 
 app = Flask(__name__)
 
-VIDEOS_DIR = "/home/thyagofas/web_dev/pybossa/app-libras/static/libras-videos/"
+VIDEOS_DIR = "/home/thyagofas/web_dev/pybossa/app-libras/static/libras-videos"
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS_BLENDER_DIR = os.path.join(APP_DIR, "scripts-blender")
 BLEND_FILE = os.path.join(SCRIPTS_BLENDER_DIR, "mulher05_iK_14_05.blend")
