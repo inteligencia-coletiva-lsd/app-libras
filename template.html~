@@ -267,15 +267,15 @@
             </div>
             <section id="modal_maos">
               <ul style="margin: 0">
-                <li class="handshape" data-handshape="conf_1"><!-- img from js--></li>
-                <li class="handshape" data-handshape="conf_2"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_3"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_4"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_5"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_6"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_7"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_8"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_9"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_1"><!--  img from js--></li>
+                <li class="handshape" data-handshape="conf_2"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_3"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_4"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_5"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_6"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_7"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_8"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_9"><!--  img --></li>
                 <li class="handshape" data-handshape="conf_10"><!-- img --></li>
                 <li class="handshape" data-handshape="conf_11"><!-- img --></li>
                 <li class="handshape" data-handshape="conf_12"><!-- img --></li>
@@ -444,41 +444,14 @@ pybossa.taskLoaded(function(task, deferred) {
 
 pybossa.presentTask(function(task, deferred) {
 
-    var pa2sprite = { "Pa_63": {"x" : "-125px", "y" : "-20px"},
-	  	      "Pa_60": {"x" : "-125px", "y" : "-55px"},
-	  	      "Pa_35": {"x" : "-100px", "y" : "-85px"},
-	  	      "Pa_38": {"x" : "-150px", "y" : "-55px"},
-	  	      "Pa_32": {"x" : "-125px", "y" : "-105px"},
-	  	      "Pa_6":  {"x" : "-125px", "y" : "-135px"},
-	  	      "Pa_57": {"x" : "-125px", "y" : "-150px"},
-	  	      "Pa_56": {"x" : "-125px", "y" : "-175px"},
-	  	      "Pa_9R": {"x" : "-95px", "y" : "-125px"},
-	  	      "Pa_9L": {"x" : "-160px", "y" : "-125px"},
-	  	      "Pa_50": {"x" : "-70px", "y" : "-95px"},
-	  	      "Pa_53": {"x" : "-180px", "y" : "-95px"},
-	  	      "Pa_41": {"x" : "-125px", "y" : "-220px"},
-	  	      "Pa_44": {"x" : "-30px", "y" : "-220px"},
-	  	      "Pa_47": {"x" : "-220px", "y" : "-220px"},
-	  	      "Pa_12": {"x" : "-125px", "y" : "-285px"},
-	  	      "Pa_15": {"x" : "-65px", "y" : "-285px"},
-	  	      "Pa_18": {"x" : "-190px", "y" : "-285px"},
-	  	      "Pa_21": {"x" : "-125px", "y" : "-370px"},
-	  	      "Pa_66": {"x" : "-125px", "y" : "-440px"},
-	  	      "Pa_24": {"x" : "-55px", "y" : "-440px"},
-	  	      "Pa_27": {"x" : "-195px", "y" : "-440px"}};
-
-    var dist2sprite = { "0": {"x" : "-55px", "y" : "-190px"},
-	  	      "1": {"x" : "-135px", "y" : "-190px"},
-	  	      "2": {"x" : "-230px", "y" : "-190px"}};
-
     var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
-                                     "Exp_3" : "Bochechas contraídas",
-                                     "Exp_4" : "Lábios contraídos",
+                                     "Exp_3" : "Bochechas contraidas",
+                                     "Exp_4" : "Labios contraidos",
                                      "Exp_5" : "Olhos para a direita",
                                      "Exp_6" : "Olhos para a esquerda" },
-                       "group_2" : { "Exp_7" : "Língua para baixo",
-                                     "Exp_8" : "Língua reta",
+                       "group_2" : { "Exp_7" : "Li�ngua para baixo",
+                                     "Exp_8" : "Li�ngua reta",
 				     "Exp_1" : "Bico",
                                      "Exp_10" : "Olhos arregalados",
                                      "Exp_11" : "Sobrancelhas levantadas",
@@ -553,14 +526,14 @@ pybossa.presentTask(function(task, deferred) {
     } // Fim da funcao setFormasDeMao
 
     // Modifica as imagens dos elementos li da section orientacao_palma_da_mao
-    function setOrientacaoMao() {
+    function setOrientacaoMao( hand ) {
       var nth_li;
     
       for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
         nth_li = ":nth-child(" +  ori_num  + ")";
 
-        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/Ori_' + ori_num + '.png" />');
-        $("#modal_orientacao_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/Ori_' + ori_num + '.png" />');
+        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />');
+        $("#modal_orientacao_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />');
       } // Fim do for
 
     } // Fim da funcao setOrientacaoMao
@@ -683,10 +656,10 @@ pybossa.presentTask(function(task, deferred) {
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
-                // TODO setOrientacaoMao(right)
+                setOrientacaoMao("right_hand");
 	} else {
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
-                // TODO setOrientacaoMao(left)
+                setOrientacaoMao("left_hand");
 	}
         setOrientacaoMao();
         $('#orientacao_palma_da_mao').show();
@@ -756,7 +729,10 @@ pybossa.presentTask(function(task, deferred) {
           content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
-          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.right[p] + '.png" /></a>';
+          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
+          $('#right_hand').find("li").filter(nth_li).html(content);
+        }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
+          content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao ao corpo
           content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
@@ -776,7 +752,13 @@ pybossa.presentTask(function(task, deferred) {
             content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
-            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.left[p] + '.png" /></a>';
+            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
+            $('#left_hand').find("li").filter(nth_li).html(content);
+          }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
+            if ( parametros.left[p] == "Pa_9" )
+              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
+            else
+              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao esquerda ao corpo
             content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
@@ -1112,6 +1094,12 @@ pybossa.presentTask(function(task, deferred) {
 
          // Eventos de cliques nas opcoes de correcao
          $(".fix").off("click").on("click", function(){
+           if ( ( $(this).data("parametro") == "ori" )
+             if ( $(this).data("fix_hand") ) == "right" )
+               setOrientacaoMao( "right_hand" );
+             else
+               setOrientacaoMao( "left_hand" );
+               
            current_fix_hand = $(this).data("fix_hand");
          });
 

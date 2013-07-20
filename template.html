@@ -4,11 +4,11 @@
     <!-- Success and Error Messages for the user -->
     <div class="span6 offset2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">×</a>
+            <a class="close">x</a>
             <strong>Bom trabalho!</strong> A sua resposta foi salva
         </div>
         <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">×</a>
+            <a class="close">x</a>
             Carregando a pr&oacute;xima tarefa...
         </div>
         <div id="taskcompleted" class="alert alert-info" style="display:none;">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div id="error" class="alert alert-error" style="display:none;">
-            <a class="close">×</a>
+            <a class="close">x</a>
             <strong>Erro!</strong> Algo deu errado, contacte o administrador do site por favor!
         </div>
     </div> <!-- End Success and Error Messages for the user -->
@@ -204,11 +204,7 @@
         <ul style="margin: 0">
           <li class="fix" data-parametro="conf" data-fix_hand="right"></li>
           <li class="fix" data-parametro="ori" data-fix_hand="right"></li>
-          <li class="fix" data-parametro="pa_xy" data-fix_hand="right">
-            <a href="#modalPontos" data-toggle="modal">
-              <img width="98px" height="98px" src="/static/images/ponto_de_articulacao/avatar_pontos.png" />
-            </a>
-          </li>
+          <li class="fix" data-parametro="pa_xy" data-fix_hand="right"></li>
           <li class="fix" data-parametro="pa_z" data-fix_hand="right"></li>
         </ul>
       </section>
@@ -218,12 +214,8 @@
       <header id="fix_header_lhand">
         <h1>
           M&atilde;o esquerda
-          <a class="btn btn-mini add_button" style="margin-left: 5px" href="#">
-            <i class="icon-plus"></i>Adicionar
-          </a>
-          <a class="btn btn-mini remove_button" style="display: none; margin-left: 5px" href="#">
-            <i class="icon-minus"></i>Remover
-          </a>
+          <a class="btn btn-mini add_button" style="margin-left: 5px" href="#"><i class="icon-plus"></i>Adicionar</a>
+          <a class="btn btn-mini remove_button" style="display: none; margin-left: 5px" href="#"><i class="icon-minus"></i>Remover</a>
         </h1>
       </header>
 
@@ -231,11 +223,7 @@
         <ul style="margin: 0">
           <li class="fix" data-parametro="conf" data-fix_hand="left"></li>
           <li class="fix" data-parametro="ori" data-fix_hand="left"></li>
-          <li class="fix" data-parametro="pa_xy" data-fix_hand="left">
-            <a href="#modalPontos" data-toggle="modal">
-              <img width="98px" height="98px" src="/static/images/ponto_de_articulacao/avatar_pontos.png" />
-            </a>
-          </li>
+          <li class="fix" data-parametro="pa_xy" data-fix_hand="left"></li>
           <li class="fix" data-parametro="pa_z" data-fix_hand="left"></li>
         </ul>
       </section>
@@ -252,7 +240,7 @@
       <!-- Modal Formas de Mao -->
       <div id="modalFormas" class="modal hide fade modal-formas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Qual &eacute; a forma da m&atilde;o?</h2>
         </div>
         <div class="modal-body">
@@ -267,15 +255,15 @@
             </div>
             <section id="modal_maos">
               <ul style="margin: 0">
-                <li class="handshape" data-handshape="conf_1"><!-- img from js--></li>
-                <li class="handshape" data-handshape="conf_2"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_3"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_4"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_5"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_6"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_7"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_8"><!-- img --></li>
-                <li class="handshape" data-handshape="conf_9"><!-- img --></li>
+                <li class="handshape" data-handshape="conf_1"><!--  img from js--></li>
+                <li class="handshape" data-handshape="conf_2"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_3"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_4"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_5"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_6"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_7"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_8"><!--  img --></li>
+                <li class="handshape" data-handshape="conf_9"><!--  img --></li>
                 <li class="handshape" data-handshape="conf_10"><!-- img --></li>
                 <li class="handshape" data-handshape="conf_11"><!-- img --></li>
                 <li class="handshape" data-handshape="conf_12"><!-- img --></li>
@@ -307,7 +295,7 @@
       <!-- Modal Orientacao -->
       <div id="modalOri" class="modal hide fade modal-ori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Qual &eacute; a orienta&ccedil;&atilde;o da m&atilde;o?</h2>
         </div>
         <div class="modal-body">
@@ -334,7 +322,7 @@
       <!-- Modal Pontos de Articulacao -->
       <div id="modalPontos" class="modal hide fade modal-pontos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Em que ponto a m&atilde;o fica suspensa?</h2>
         </div>
         <div class="modal-body">
@@ -375,7 +363,7 @@
       <!-- Modal Pontos de Articulacao Distancia -->
       <div id="modalDistancia" class="modal hide fade modal-distancia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">A que dist&atilde;ncia se faz o sinal?</h2>
         </div>
         <div class="modal-body">
@@ -394,7 +382,7 @@
       <!-- Modal Expressao Facial -->
       <div id="modalExp" class="modal hide fade modal-exp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Express&atilde;o facial?</h2>
         </div>
         <div class="modal-body">
@@ -444,41 +432,14 @@ pybossa.taskLoaded(function(task, deferred) {
 
 pybossa.presentTask(function(task, deferred) {
 
-    var pa2sprite = { "Pa_63": {"x" : "-125px", "y" : "-20px"},
-	  	      "Pa_60": {"x" : "-125px", "y" : "-55px"},
-	  	      "Pa_35": {"x" : "-100px", "y" : "-85px"},
-	  	      "Pa_38": {"x" : "-150px", "y" : "-55px"},
-	  	      "Pa_32": {"x" : "-125px", "y" : "-105px"},
-	  	      "Pa_6":  {"x" : "-125px", "y" : "-135px"},
-	  	      "Pa_57": {"x" : "-125px", "y" : "-150px"},
-	  	      "Pa_56": {"x" : "-125px", "y" : "-175px"},
-	  	      "Pa_9R": {"x" : "-95px", "y" : "-125px"},
-	  	      "Pa_9L": {"x" : "-160px", "y" : "-125px"},
-	  	      "Pa_50": {"x" : "-70px", "y" : "-95px"},
-	  	      "Pa_53": {"x" : "-180px", "y" : "-95px"},
-	  	      "Pa_41": {"x" : "-125px", "y" : "-220px"},
-	  	      "Pa_44": {"x" : "-30px", "y" : "-220px"},
-	  	      "Pa_47": {"x" : "-220px", "y" : "-220px"},
-	  	      "Pa_12": {"x" : "-125px", "y" : "-285px"},
-	  	      "Pa_15": {"x" : "-65px", "y" : "-285px"},
-	  	      "Pa_18": {"x" : "-190px", "y" : "-285px"},
-	  	      "Pa_21": {"x" : "-125px", "y" : "-370px"},
-	  	      "Pa_66": {"x" : "-125px", "y" : "-440px"},
-	  	      "Pa_24": {"x" : "-55px", "y" : "-440px"},
-	  	      "Pa_27": {"x" : "-195px", "y" : "-440px"}};
-
-    var dist2sprite = { "0": {"x" : "-55px", "y" : "-190px"},
-	  	      "1": {"x" : "-135px", "y" : "-190px"},
-	  	      "2": {"x" : "-230px", "y" : "-190px"}};
-
     var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
-                                     "Exp_3" : "Bochechas contraídas",
-                                     "Exp_4" : "Lábios contraídos",
+                                     "Exp_3" : "Bochechas contraidas",
+                                     "Exp_4" : "Labios contraidos",
                                      "Exp_5" : "Olhos para a direita",
                                      "Exp_6" : "Olhos para a esquerda" },
-                       "group_2" : { "Exp_7" : "Língua para baixo",
-                                     "Exp_8" : "Língua reta",
+                       "group_2" : { "Exp_7" : "Lingua para baixo",
+                                     "Exp_8" : "Lingua reta",
 				     "Exp_1" : "Bico",
                                      "Exp_10" : "Olhos arregalados",
                                      "Exp_11" : "Sobrancelhas levantadas",
@@ -553,14 +514,17 @@ pybossa.presentTask(function(task, deferred) {
     } // Fim da funcao setFormasDeMao
 
     // Modifica as imagens dos elementos li da section orientacao_palma_da_mao
-    function setOrientacaoMao() {
+    function setOrientacaoMao( hand ) {
       var nth_li;
-    
+      console.log( hand );
+      var img_ori;
       for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
         nth_li = ":nth-child(" +  ori_num  + ")";
+        img_ori = '<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
+        console.log( img_ori );
 
-        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/Ori_' + ori_num + '.png" />');
-        $("#modal_orientacao_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/Ori_' + ori_num + '.png" />');
+        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html( img_ori );
+        $("#modal_orientacao_mao").find("li").filter(nth_li).html( img_ori );
       } // Fim do for
 
     } // Fim da funcao setOrientacaoMao
@@ -683,12 +647,11 @@ pybossa.presentTask(function(task, deferred) {
       if (state == "ORIENT_PALMA"){
 	if (isRightHand){
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
-                // TODO setOrientacaoMao(right)
+                setOrientacaoMao("right_hand");
 	} else {
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
-                // TODO setOrientacaoMao(left)
+                setOrientacaoMao("left_hand");
 	}
-        setOrientacaoMao();
         $('#orientacao_palma_da_mao').show();
       }
       else if (state == "EXP_FACIAL") {
@@ -756,7 +719,7 @@ pybossa.presentTask(function(task, deferred) {
           content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
-          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.right[p] + '.png" /></a>';
+          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
           content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
@@ -779,7 +742,7 @@ pybossa.presentTask(function(task, deferred) {
             content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
-            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + parametros.left[p] + '.png" /></a>';
+            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
             if ( parametros.left[p] == "Pa_9" )
@@ -818,7 +781,7 @@ pybossa.presentTask(function(task, deferred) {
 	}
 
         if ( state == "CORRECAO" ) {
-          console.log(answer);
+          //console.log(answer);
           if ( current_fix_hand == "right" ){
             if ( answer in [0, 1, 2] ) {
               parametros.right["DIST_MAOS"] = answer;              
@@ -844,10 +807,10 @@ pybossa.presentTask(function(task, deferred) {
           } // Fim do else
           
           
-          console.log( "==== CORRECOES ====" );
-          console.log(parametros);
-          console.log(parametros.right);
-          console.log(parametros.left);   
+          //console.log( "==== CORRECOES ====" );
+          //console.log(parametros);
+          //console.log(parametros.right);
+          //console.log(parametros.left);   
          
           return;
         } // Fim do if CORRECAO
@@ -977,9 +940,9 @@ pybossa.presentTask(function(task, deferred) {
     }
 
     function renderizarVideo() {
-        console.log(parametros);
-	console.log(parametros.right);
-	console.log(parametros.left);
+        //console.log(parametros);
+	//console.log(parametros.right);
+	//console.log(parametros.left);
 
 	showRenderProgress();
         stopAndPlaySignalVideo(false);
@@ -1121,6 +1084,12 @@ pybossa.presentTask(function(task, deferred) {
 
          // Eventos de cliques nas opcoes de correcao
          $(".fix").off("click").on("click", function(){
+           if ( $(this).data("parametro") == "ori" )
+             if ( $(this).data("fix_hand") == "right" )
+               setOrientacaoMao( "right_hand" );
+             else
+               setOrientacaoMao( "left_hand" );
+               
            current_fix_hand = $(this).data("fix_hand");
          });
 
@@ -1130,7 +1099,7 @@ pybossa.presentTask(function(task, deferred) {
            $('.remove_button').hide();
            $('.add_button').show();
            $('#left_hand').hide();
-           console.log( parametros.left );
+           //console.log( parametros.left );
            parametros["QTD_MAOS"] = "uma";
            parametros.left = {};
 
