@@ -89,7 +89,7 @@
 
     <!-- Begin of orientacao_palma_da_mao -->
     <section id="orientacao_palma_da_mao" style="display: none;">
-      <ul style="margin: 2px 0 0 20px">
+      <ul style="margin: 2px 0 0 22px">
         <li class="ori" data-orientacao="Ori_1"><!--  img from js --></li>
         <li class="ori" data-orientacao="Ori_2"><!--  img from js --></li>
         <li class="ori" data-orientacao="Ori_3"><!--  img from js --></li>
@@ -419,6 +419,7 @@
 </div><!-- End of Skeleton -->
 
 <div class="row skeleton">
+  <div class="progress"><div class="bar" style="width: 60%;"></div></div>
   <button class="btn btn-large btn-warning" style="margin: 10px 0 10px 0; width: 130px; float: right;" value='Pular'>
     Pular sinal
   </button>
