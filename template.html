@@ -51,7 +51,7 @@
         </ul>
       </div>
       <section id="maos">
-        <ul style="margin: 0">
+        <ul style="margin: 1px 0 0 0">
           <li class="handshape" data-handshape="conf_1"><!--  img from js --></li>
           <li class="handshape" data-handshape="conf_2"><!--  img from js --></li>
           <li class="handshape" data-handshape="conf_3"><!--  img from js --></li>
@@ -89,7 +89,7 @@
 
     <!-- Begin of orientacao_palma_da_mao -->
     <section id="orientacao_palma_da_mao" style="display: none;">
-      <ul style="margin: 0; text-align: center">
+      <ul style="margin: 2px 0 0 22px">
         <li class="ori" data-orientacao="Ori_1"><!--  img from js --></li>
         <li class="ori" data-orientacao="Ori_2"><!--  img from js --></li>
         <li class="ori" data-orientacao="Ori_3"><!--  img from js --></li>
@@ -107,7 +107,7 @@
     <!-- End of orientacao_palma_da_mao -->
 
     <!-- Begin of ponto_de_articulacao -->
-    <section id="ponto_de_articulacao" style="display: none; text-align: center">
+    <section id="ponto_de_articulacao" style="display: none; margin: 2px 0 0 0; text-align: center">
       <map name="avatar_completo" id="avatar_completo">   
         <!-- Cabeca -->
         <area title="topo da cabeca"    shape="rect" coords="105, 0, 215, 25"    href="#"  data-local="Pa_63" />
@@ -455,7 +455,7 @@ pybossa.presentTask(function(task, deferred) {
     var current_handshape_group;
     var current_fix_hand;
     var parametros = {right : {}, left : {}};
-    var state = "CONF_MAO";
+    var state = "QTD_MAOS";
     var isRightHand = true;
 
     var hands_shapes = new Object();
@@ -836,39 +836,43 @@ pybossa.presentTask(function(task, deferred) {
 	
 	var nextState = "";
 
-	if (state == "CONF_MAO") {
-	     nextState = "ORIENT_PALMA";
-	} else if (state == "CONF_MAO") {
-	     nextState = "ORIENT_PALMA";
-	} else if (state == "ORIENT_PALMA") {
-	     nextState = "PONTO_ARTIC";
-	} else if (state == "PONTO_ARTIC") {
-	     nextState = "DIST_MAOS";
-	} else if (state == "DIST_MAOS"){
-	     if (isRightHand) {
-		nextState = "QTD_MAOS";
-	     } else {
-		nextState = "EXP_FACIAL";
-	     }
-	} else if (state == "QTD_MAOS") {
+
+        if (state == "QTD_MAOS") {
+          nextState = "CONF_MAO";
 	     if (answer == "uma") {
-		nextState = "EXP_FACIAL";
+               // TODO
 	     } else {
-		nextState = "CONF_MAO";
-		isRightHand = false;
+               // TODO
              }
+	} else if (state == "CONF_MAO") {
+          nextState = "ORIENT_PALMA";
+	} else if (state == "CONF_MAO") {
+          nextState = "ORIENT_PALMA";
+	} else if (state == "ORIENT_PALMA") {
+          nextState = "PONTO_ARTIC";
+	} else if (state == "PONTO_ARTIC") {
+          nextState = "DIST_MAOS";
+	} else if (state == "DIST_MAOS"){
+          if ( parametros["QTD_MAOS"] == "uma" ) {
+            nextState = "EXP_FACIAL";
+          } else if( isRightHand ){
+            nextState = "CONF_MAO";
+            isRightHand = false;
+	  } else {
+            nextState = "EXP_FACIAL";
+          }
 	} else if (state == "EXP_FACIAL") {
-		nextState = "RENDER";
+          nextState = "RENDER";
 	} else if (state == "RENDER") {
-		nextState = "CONFIRM_AVATAR";
+          nextState = "CONFIRM_AVATAR";
 	} else if (state == "CONFIRM_AVATAR") {
-	     if (answer == "Sim") {
-		nextState = "TASK_END";
-	     } else {
-		nextState = "CORRECAO";
-	     }
+          if (answer == "Sim") {
+            nextState = "TASK_END";
+          } else {
+            nextState = "CORRECAO";
+          }
 	} else if (state == "CORRECAO") {
-	     nextState = "RENDER";
+          nextState = "RENDER";
 	}
 
 	state = nextState;

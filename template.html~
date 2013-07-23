@@ -4,11 +4,11 @@
     <!-- Success and Error Messages for the user -->
     <div class="span6 offset2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">×</a>
+            <a class="close">x</a>
             <strong>Bom trabalho!</strong> A sua resposta foi salva
         </div>
         <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">×</a>
+            <a class="close">x</a>
             Carregando a pr&oacute;xima tarefa...
         </div>
         <div id="taskcompleted" class="alert alert-info" style="display:none;">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div id="error" class="alert alert-error" style="display:none;">
-            <a class="close">×</a>
+            <a class="close">x</a>
             <strong>Erro!</strong> Algo deu errado, contacte o administrador do site por favor!
         </div>
     </div> <!-- End Success and Error Messages for the user -->
@@ -51,7 +51,7 @@
         </ul>
       </div>
       <section id="maos">
-        <ul style="margin: 0">
+        <ul style="margin: 1px 0 0 0">
           <li class="handshape" data-handshape="conf_1"><!--  img from js --></li>
           <li class="handshape" data-handshape="conf_2"><!--  img from js --></li>
           <li class="handshape" data-handshape="conf_3"><!--  img from js --></li>
@@ -89,7 +89,7 @@
 
     <!-- Begin of orientacao_palma_da_mao -->
     <section id="orientacao_palma_da_mao" style="display: none;">
-      <ul style="margin: 0; text-align: center">
+      <ul style="margin: 2px 0 0 20px">
         <li class="ori" data-orientacao="Ori_1"><!--  img from js --></li>
         <li class="ori" data-orientacao="Ori_2"><!--  img from js --></li>
         <li class="ori" data-orientacao="Ori_3"><!--  img from js --></li>
@@ -107,7 +107,7 @@
     <!-- End of orientacao_palma_da_mao -->
 
     <!-- Begin of ponto_de_articulacao -->
-    <section id="ponto_de_articulacao" style="display: none; text-align: center">
+    <section id="ponto_de_articulacao" style="display: none; margin: 2px 0 0 0; text-align: center">
       <map name="avatar_completo" id="avatar_completo">   
         <!-- Cabeca -->
         <area title="topo da cabeca"    shape="rect" coords="105, 0, 215, 25"    href="#"  data-local="Pa_63" />
@@ -204,11 +204,7 @@
         <ul style="margin: 0">
           <li class="fix" data-parametro="conf" data-fix_hand="right"></li>
           <li class="fix" data-parametro="ori" data-fix_hand="right"></li>
-          <li class="fix" data-parametro="pa_xy" data-fix_hand="right">
-            <a href="#modalPontos" data-toggle="modal">
-              <img width="98px" height="98px" src="/static/images/ponto_de_articulacao/avatar_pontos.png" />
-            </a>
-          </li>
+          <li class="fix" data-parametro="pa_xy" data-fix_hand="right"></li>
           <li class="fix" data-parametro="pa_z" data-fix_hand="right"></li>
         </ul>
       </section>
@@ -218,12 +214,8 @@
       <header id="fix_header_lhand">
         <h1>
           M&atilde;o esquerda
-          <a class="btn btn-mini add_button" style="margin-left: 5px" href="#">
-            <i class="icon-plus"></i>Adicionar
-          </a>
-          <a class="btn btn-mini remove_button" style="display: none; margin-left: 5px" href="#">
-            <i class="icon-minus"></i>Remover
-          </a>
+          <a class="btn btn-mini add_button" style="margin-left: 5px" href="#"><i class="icon-plus"></i>Adicionar</a>
+          <a class="btn btn-mini remove_button" style="display: none; margin-left: 5px" href="#"><i class="icon-minus"></i>Remover</a>
         </h1>
       </header>
 
@@ -231,11 +223,7 @@
         <ul style="margin: 0">
           <li class="fix" data-parametro="conf" data-fix_hand="left"></li>
           <li class="fix" data-parametro="ori" data-fix_hand="left"></li>
-          <li class="fix" data-parametro="pa_xy" data-fix_hand="left">
-            <a href="#modalPontos" data-toggle="modal">
-              <img width="98px" height="98px" src="/static/images/ponto_de_articulacao/avatar_pontos.png" />
-            </a>
-          </li>
+          <li class="fix" data-parametro="pa_xy" data-fix_hand="left"></li>
           <li class="fix" data-parametro="pa_z" data-fix_hand="left"></li>
         </ul>
       </section>
@@ -252,7 +240,7 @@
       <!-- Modal Formas de Mao -->
       <div id="modalFormas" class="modal hide fade modal-formas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Qual &eacute; a forma da m&atilde;o?</h2>
         </div>
         <div class="modal-body">
@@ -307,7 +295,7 @@
       <!-- Modal Orientacao -->
       <div id="modalOri" class="modal hide fade modal-ori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Qual &eacute; a orienta&ccedil;&atilde;o da m&atilde;o?</h2>
         </div>
         <div class="modal-body">
@@ -334,7 +322,7 @@
       <!-- Modal Pontos de Articulacao -->
       <div id="modalPontos" class="modal hide fade modal-pontos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Em que ponto a m&atilde;o fica suspensa?</h2>
         </div>
         <div class="modal-body">
@@ -375,7 +363,7 @@
       <!-- Modal Pontos de Articulacao Distancia -->
       <div id="modalDistancia" class="modal hide fade modal-distancia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">A que dist&atilde;ncia se faz o sinal?</h2>
         </div>
         <div class="modal-body">
@@ -394,7 +382,7 @@
       <!-- Modal Expressao Facial -->
       <div id="modalExp" class="modal hide fade modal-exp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h2 id="myModalLabel">Express&atilde;o facial?</h2>
         </div>
         <div class="modal-body">
@@ -450,8 +438,8 @@ pybossa.presentTask(function(task, deferred) {
                                      "Exp_4" : "Labios contraidos",
                                      "Exp_5" : "Olhos para a direita",
                                      "Exp_6" : "Olhos para a esquerda" },
-                       "group_2" : { "Exp_7" : "Li�ngua para baixo",
-                                     "Exp_8" : "Li�ngua reta",
+                       "group_2" : { "Exp_7" : "Lingua para baixo",
+                                     "Exp_8" : "Lingua reta",
 				     "Exp_1" : "Bico",
                                      "Exp_10" : "Olhos arregalados",
                                      "Exp_11" : "Sobrancelhas levantadas",
@@ -467,7 +455,7 @@ pybossa.presentTask(function(task, deferred) {
     var current_handshape_group;
     var current_fix_hand;
     var parametros = {right : {}, left : {}};
-    var state = "CONF_MAO";
+    var state = "QTD_MAOS";
     var isRightHand = true;
 
     var hands_shapes = new Object();
@@ -528,12 +516,15 @@ pybossa.presentTask(function(task, deferred) {
     // Modifica as imagens dos elementos li da section orientacao_palma_da_mao
     function setOrientacaoMao( hand ) {
       var nth_li;
-    
+      console.log( hand );
+      var img_ori;
       for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
         nth_li = ":nth-child(" +  ori_num  + ")";
+        img_ori = '<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
+        console.log( img_ori );
 
-        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />');
-        $("#modal_orientacao_mao").find("li").filter(nth_li).html('<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />');
+        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html( img_ori );
+        $("#modal_orientacao_mao").find("li").filter(nth_li).html( img_ori );
       } // Fim do for
 
     } // Fim da funcao setOrientacaoMao
@@ -661,7 +652,6 @@ pybossa.presentTask(function(task, deferred) {
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
                 setOrientacaoMao("left_hand");
 	}
-        setOrientacaoMao();
         $('#orientacao_palma_da_mao').show();
       }
       else if (state == "EXP_FACIAL") {
@@ -791,7 +781,7 @@ pybossa.presentTask(function(task, deferred) {
 	}
 
         if ( state == "CORRECAO" ) {
-          console.log(answer);
+          //console.log(answer);
           if ( current_fix_hand == "right" ){
             if ( answer in [0, 1, 2] ) {
               parametros.right["DIST_MAOS"] = answer;              
@@ -817,10 +807,10 @@ pybossa.presentTask(function(task, deferred) {
           } // Fim do else
           
           
-          console.log( "==== CORRECOES ====" );
-          console.log(parametros);
-          console.log(parametros.right);
-          console.log(parametros.left);   
+          //console.log( "==== CORRECOES ====" );
+          //console.log(parametros);
+          //console.log(parametros.right);
+          //console.log(parametros.left);   
          
           return;
         } // Fim do if CORRECAO
@@ -846,39 +836,43 @@ pybossa.presentTask(function(task, deferred) {
 	
 	var nextState = "";
 
-	if (state == "CONF_MAO") {
-	     nextState = "ORIENT_PALMA";
-	} else if (state == "CONF_MAO") {
-	     nextState = "ORIENT_PALMA";
-	} else if (state == "ORIENT_PALMA") {
-	     nextState = "PONTO_ARTIC";
-	} else if (state == "PONTO_ARTIC") {
-	     nextState = "DIST_MAOS";
-	} else if (state == "DIST_MAOS"){
-	     if (isRightHand) {
-		nextState = "QTD_MAOS";
-	     } else {
-		nextState = "EXP_FACIAL";
-	     }
-	} else if (state == "QTD_MAOS") {
+
+        if (state == "QTD_MAOS") {
+          nextState = "CONF_MAO";
 	     if (answer == "uma") {
-		nextState = "EXP_FACIAL";
+               // TODO
 	     } else {
-		nextState = "CONF_MAO";
-		isRightHand = false;
+               // TODO
              }
+	} else if (state == "CONF_MAO") {
+          nextState = "ORIENT_PALMA";
+	} else if (state == "CONF_MAO") {
+          nextState = "ORIENT_PALMA";
+	} else if (state == "ORIENT_PALMA") {
+          nextState = "PONTO_ARTIC";
+	} else if (state == "PONTO_ARTIC") {
+          nextState = "DIST_MAOS";
+	} else if (state == "DIST_MAOS"){
+          if ( parametros["QTD_MAOS"] == "uma" ) {
+            nextState = "EXP_FACIAL";
+          } else if( isRightHand ){
+            nextState = "CONF_MAO";
+            isRightHand = false;
+	  } else {
+            nextState = "EXP_FACIAL";
+          }
 	} else if (state == "EXP_FACIAL") {
-		nextState = "RENDER";
+          nextState = "RENDER";
 	} else if (state == "RENDER") {
-		nextState = "CONFIRM_AVATAR";
+          nextState = "CONFIRM_AVATAR";
 	} else if (state == "CONFIRM_AVATAR") {
-	     if (answer == "Sim") {
-		nextState = "TASK_END";
-	     } else {
-		nextState = "CORRECAO";
-	     }
+          if (answer == "Sim") {
+            nextState = "TASK_END";
+          } else {
+            nextState = "CORRECAO";
+          }
 	} else if (state == "CORRECAO") {
-	     nextState = "RENDER";
+          nextState = "RENDER";
 	}
 
 	state = nextState;
@@ -950,9 +944,9 @@ pybossa.presentTask(function(task, deferred) {
     }
 
     function renderizarVideo() {
-        console.log(parametros);
-	console.log(parametros.right);
-	console.log(parametros.left);
+        //console.log(parametros);
+	//console.log(parametros.right);
+	//console.log(parametros.left);
 
 	showRenderProgress();
         stopAndPlaySignalVideo(false);
@@ -1094,8 +1088,8 @@ pybossa.presentTask(function(task, deferred) {
 
          // Eventos de cliques nas opcoes de correcao
          $(".fix").off("click").on("click", function(){
-           if ( ( $(this).data("parametro") == "ori" )
-             if ( $(this).data("fix_hand") ) == "right" )
+           if ( $(this).data("parametro") == "ori" )
+             if ( $(this).data("fix_hand") == "right" )
                setOrientacaoMao( "right_hand" );
              else
                setOrientacaoMao( "left_hand" );
@@ -1109,7 +1103,7 @@ pybossa.presentTask(function(task, deferred) {
            $('.remove_button').hide();
            $('.add_button').show();
            $('#left_hand').hide();
-           console.log( parametros.left );
+           //console.log( parametros.left );
            parametros["QTD_MAOS"] = "uma";
            parametros.left = {};
 
