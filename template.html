@@ -33,12 +33,13 @@
     The class="skeleton" is used to identify the elements that belong to the
     task.
 -->
-<div class="skeleton" style="margin: 5px 0 5px 0"> <!-- Start Skeleton -->
-    <h1 id="question"></h1> <!-- The question will be loaded here -->
+
+<div class="row skeleton" style="height: 50px"> <!-- Start Skeleton -->
+    <h1 id="question" style="margin: 10px 0 0 10px"></h1> <!-- The question will be loaded here -->
 </div><!-- End of Skeleton -->
 
-<div class="skeleton"> <!-- Start Skeleton -->
-  <div id="parametros_sinal">
+<div class="skeleton" style="width: 1024px"> <!-- Start Skeleton -->
+  <div id="parametros_sinal" style="float: left">
 
     <!-- Begin of hand_shapes -->
     <section id="hand_shapes" style="display: none">
@@ -148,7 +149,7 @@
     <!-- End of ponto_de_articulacao section -->
 
     <!-- begin of quantidade_de_maos -->
-    <section id="quantidade_maos" style="display: none">
+    <section id="quantidade_maos" style="display: none; float: left">
       <button class="btn btn-large btn-info btn-answer" style="width: 130px; float: left; margin: 10px 0 0 48px" value='uma'>
           Uma m&atilde;o
       </button>
@@ -184,7 +185,7 @@
 
     <!-- Begin of wrap_avatar_video div -->
     <div id="wrap_avatar_video" style="display: none;">
-      <div id="render_progress" class="progress progress-striped active" style="display: none; height: 30px; width: 300px; margin: 200px 0 0 50px; position: absolute; z-index: 1;"></div>
+      <div id="render_progress" class="progress progress-striped active" style="display: none; height: 30px; width: 300px; margin: 200px 0 0 35px; position: absolute; z-index: 1;"></div>
       <div id="confirmacao_avatar" style="display: none; margin: 0 50px 10px 50px;"> 
         <button class="btn btn-large btn-success btn-answer" style="width: 130px; float: left;" value='Sim'>
             Confirmar
@@ -414,15 +415,14 @@
     </section>
     <!-- End of correcao section -->
  </div> <!-- End of Parametros do sinal -->
-
- <div id="signal_video" style="float: right; width: 540px; height: 450px;"></div><!-- The video will be showed here -->
+ <div id="signal_video"></div><!-- The video will be showed here -->
 </div><!-- End of Skeleton -->
 
-
-
 <div class="row skeleton">
-  
-  <button class="btn btn-large btn-warning" style="margin: 10px 0 10px 0; width: 130px; float: right;" value='Pular'>
+  <div class="progress progress-success" style="width: 400px; height: 25px; margin: 20px 0 0 15px; float: left">
+    <div class="bar task_bar" style="width: 0%;"></div>
+  </div>
+  <button class="btn btn-large btn-warning" style="margin: 10px 0 10px 0px; width: 130px; float: right" value='Pular'>
     Pular sinal
   </button>
 </div>
@@ -434,6 +434,15 @@ pybossa.taskLoaded(function(task, deferred) {
 });
 
 pybossa.presentTask(function(task, deferred) {
+
+    var params_amount;
+    var params_configured = 0;
+    var current_exp_group;
+    var current_handshape_group;
+    var current_fix_hand;
+    var state = "QTD_MAOS";
+    var isRightHand = true;
+    var parametros = {right : {}, left : {}};
 
     var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
@@ -453,13 +462,6 @@ pybossa.presentTask(function(task, deferred) {
                                      "Exp_16" : "Raiva",
                                      "Exp_17" : "Desconfiado" } 
                      };
- 
-    var current_exp_group;
-    var current_handshape_group;
-    var current_fix_hand;
-    var parametros = {right : {}, left : {}};
-    var state = "QTD_MAOS";
-    var isRightHand = true;
 
     var hands_shapes = new Object();
     hands_shapes['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
@@ -519,12 +521,12 @@ pybossa.presentTask(function(task, deferred) {
     // Modifica as imagens dos elementos li da section orientacao_palma_da_mao
     function setOrientacaoMao( hand ) {
       var nth_li;
-      console.log( hand );
+      //console.log( hand );
       var img_ori;
       for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
         nth_li = ":nth-child(" +  ori_num  + ")";
         img_ori = '<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
-        console.log( img_ori );
+        //console.log( img_ori );
 
         $("#orientacao_palma_da_mao").find("li").filter(nth_li).html( img_ori );
         $("#modal_orientacao_mao").find("li").filter(nth_li).html( img_ori );
@@ -680,6 +682,7 @@ pybossa.presentTask(function(task, deferred) {
 
 	setFormasDeMao('group_1')
         $('#hand_shapes').show();
+        $('.task_bar').show();
       }
       else if (state == "QTD_MAOS") {
 	pergunta = "Com quantas m&atilde;os se faz o sinal?"
@@ -706,7 +709,9 @@ pybossa.presentTask(function(task, deferred) {
 	pergunta = "O que deve ser corrigido?"
 	showCorrecaoDiv();
       }
+
       $("#question").html( pergunta );
+      $(".task_bar").css({"width" : ( ( params_configured / params_amount ) * 100 ) + "%" });
     } // Fim da funcao mostrarPergunta
 
     
@@ -778,6 +783,7 @@ pybossa.presentTask(function(task, deferred) {
     }
 
     function saveAnswer(answer) {
+        
 
 	if ( state == "CONFIRM_AVATAR" ) {
           return;
@@ -839,22 +845,27 @@ pybossa.presentTask(function(task, deferred) {
 	
 	var nextState = "";
 
-
         if (state == "QTD_MAOS") {
           nextState = "CONF_MAO";
-	     if (answer == "uma") {
-               // TODO
-	     } else {
-               // TODO
-             }
+
+	  if (answer == "uma") {
+            params_amount = 7;
+	  } else {
+            params_amount = 11;
+          }
+          params_configured = params_configured + 1;
 	} else if (state == "CONF_MAO") {
           nextState = "ORIENT_PALMA";
+          params_configured = params_configured + 1;
 	} else if (state == "CONF_MAO") {
           nextState = "ORIENT_PALMA";
+          params_configured = params_configured + 1;
 	} else if (state == "ORIENT_PALMA") {
           nextState = "PONTO_ARTIC";
+          params_configured = params_configured + 1;
 	} else if (state == "PONTO_ARTIC") {
           nextState = "DIST_MAOS";
+          params_configured = params_configured + 1;
 	} else if (state == "DIST_MAOS"){
           if ( parametros["QTD_MAOS"] == "uma" ) {
             nextState = "EXP_FACIAL";
@@ -864,22 +875,27 @@ pybossa.presentTask(function(task, deferred) {
 	  } else {
             nextState = "EXP_FACIAL";
           }
+          params_configured = params_configured + 1;
 	} else if (state == "EXP_FACIAL") {
           nextState = "RENDER";
+          params_configured = params_configured + 1;
 	} else if (state == "RENDER") {
           nextState = "CONFIRM_AVATAR";
 	} else if (state == "CONFIRM_AVATAR") {
           if (answer == "Sim") {
             nextState = "TASK_END";
+            params_configured = 0;
+            $('.task_bar').hide();
           } else {
             nextState = "CORRECAO";
           }
+          
 	} else if (state == "CORRECAO") {
           nextState = "RENDER";
 	}
 
 	state = nextState;
-	console.log(state);
+	//console.log(state);
      }
 
 
@@ -1110,9 +1126,9 @@ pybossa.presentTask(function(task, deferred) {
            parametros["QTD_MAOS"] = "uma";
            parametros.left = {};
 
-           console.log( parametros );
-           console.log( parametros.right );
-           console.log( parametros.left );
+           //console.log( parametros );
+           //console.log( parametros.right );
+           //console.log( parametros.left );
          });
 
          // Eventos de cliques no botao de adicionar mao esquerda
@@ -1121,7 +1137,7 @@ pybossa.presentTask(function(task, deferred) {
            $('.remove_button').show();
            $('.add_button').hide();
            $('#left_hand').show();
-           console.log( parametros.left );
+           //console.log( parametros.left );
            parametros["QTD_MAOS"] = "duas";
            parametros.left["CONF_MAO"] = parametros.right["CONF_MAO"];
            parametros.left["ORIENT_PALMA"] = parametros.right["ORIENT_PALMA"];
@@ -1130,9 +1146,9 @@ pybossa.presentTask(function(task, deferred) {
 
            showCorrecaoDiv();
 
-           console.log( parametros );
-           console.log( parametros.right );
-           console.log( parametros.left );
+           //console.log( parametros );
+           //console.log( parametros.right );
+           //console.log( parametros.left );
          });
 
     }
