@@ -1,45 +1,81 @@
 <script type="text/javascript" src="http://malsup.github.com/jquery.blockUI.js"></script>
-
-<div class="row">
-    <!-- Success and Error Messages for the user -->
-    <div class="span6 offset2" style="height:50px">
-        <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">x</a>
-            <strong>Bom trabalho!</strong> A sua resposta foi salva
-        </div>
-        <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">x</a>
-            Carregando a pr&oacute;xima tarefa...
-        </div>
-        <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong>A tarefa foi conclu&iacute;da!</strong> Muito obrigado!
-        </div>
-        <div id="finish" class="alert alert-success" style="display:none;">
-            <strong>Parab&eacute;ns!</strong> Voc&ecirc; participou em todas as tarefas!
-            <br/>
-            <div class="alert-actions">
-                <a class="btn small" href="/">Home</a>
-                <a class="btn small" href="/app">Outras aplica&ccedil;&otilde;es</a>
-            </div>
-        </div>
-        <div id="error" class="alert alert-error" style="display:none;">
-            <a class="close">x</a>
-            <strong>Erro!</strong> Algo deu errado, contacte o administrador do site por favor!
-        </div>
-    </div> <!-- End Success and Error Messages for the user -->
-</div> <!-- End of Row -->
-
 <!--
     The class="skeleton" is used to identify the elements that belong to the
     task.
 -->
 
-<div class="row skeleton" style="height: 50px"> <!-- Start Skeleton -->
-    <h1 id="question" style="margin: 10px 0 0 10px"></h1> <!-- The question will be loaded here -->
-</div><!-- End of Skeleton -->
+  <!-- Report -->
+  <div id="wrap" style="display: none; font-size: 14px">
+    <header id="top">
+      <label style="margin: 20px 0 0 300px; font-size: 36px;">Dicion&aacute;rio de LIBRAS</label>
+        <label style="margin: 20px 0 0 220px; font-size: 24px">Todos os sinais que você configurou na aplica&ccedil;&atilde;o.</label>
+    </header> <!-- End of top header -->
+    <section id="left">
+      <label class="signs_counter" style="float: left; margin: 10px 0 0  10px">Voc&ecirc; ainda n&atilde;o configurou sinais.</label>
+      <form class="form-search" style="margin: 10px 0 0 390px">
+        <input type="text" class="input-medium search-query" placeholder="Procurar Sinal" disabled style="height: 20px">
+        <button type="submit" disabled class="btn">Procurar</button>
+      </form>
+      <hr style="margin: 10px 0 10px 0; padding: 0" />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tarefas</th>
+            <th>M&eacute;dia</th>
+            <th>&Uacute;ltima configura&ccedil;&atilde;o</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="/static/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label><img src="/static/images/fixed_gray.png" style="margin: 0 0 0 10px; float: left"/><label class="signs_fix_counter">0</label></td>
+            <td><div id="star_avg" style="margin: 5px 0 0 0"></div></td>
+            <td><label class="last_time" style="margin: 10px 0 0 0"></label></td>
+          </tr>
+        </tbody>
+      </table> <!-- End of table -->
+      <table class="table table-striped user_signs_table">
+        <thead>
+          <tr>
+            <th>Sinal</th>
+            <th>Status</th>
+            <th>Grupo</th>
+          </tr>
+        </thead>
+        <tbody class="user_signs">
+        </tbody>
+      </table>
+    </section> <!-- End of left section -->
+    <section id="right"> 
+      <section id="overall_progress" style="padding: 10px">
+        <label style="font-size: 18px">Progresso geral</label>
+        <div class="progress progress-success" style="margin: 10px 0 0 0">
+          <div class="bar overall_progress_bar" style="width: 0%" "></div>
+        </div>
+      </section> <!-- End of section overall_progress -->
+      <section id="help_deaf" style="padding: 10px">
+        <label style="font-size: 18px">Ajude os surdos!</label>
+        <p style="text-align: justify">Enquanto voc&ecirc; traduz uma palavra de Portugu&ecirc;s para LIBRAS voc&ecirc; contribui para a cria&ccedil;&atilde;o do dicion&aacute;rio e assim promove a inclus&atilde;o social dos surdos.</p>
+        <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 200px; margin: 10px 0 0 66px">Colabore</button>
+      </section> <!-- End of section help_deaf -->
+      <section id="average_legend" style="padding: 10px">
+        <label style="font-size: 18px">M&eacute;dia de configura&ccedil;&atilde;o</label>
+        <p>Indica a rela&ccedil;&atilde;o entre a quantidade de tarefas que voc&ecirc; fez e quantidade que a comunidade fez em m&eacute;dia</p>
+        <ul style="margin: 0; list-style: none">
+          <li><div id="star_regular" data-number="3" data-score="1" style="float: left; margin-right: 20px"></div><label>Regular</label></li>
+          <li><div id="star_bom" data-number="3" data-score="3" style="float: left; margin-right: 20px"></div><label>Boa</label></li>
+          <li><div id="star_excelente" data-number="3" data-score="5" style="float: left; margin-right: 20px"></div><label>Excelente</label></li>
+        </ul>
+      </section> <!-- End of section average_legend -->
+    </section> <!-- End of right section -->      
+  </div> <!-- End of wrap div -->
+  <!-- End of Report -->
 
-<div class="skeleton" style="width: 1024px"> <!-- Start Skeleton -->
-  <div id="parametros_sinal" style="float: left">
+<div class="row skeleton question" style="height: 50px;"> <!-- Start Skeleton -->
+    <h1 id="question" style="margin: 10px 0 0 10px; float: left"></h1> <!-- The question will be loaded here -->
+</div><!-- End of Skeleton -->
+<div class="skeleton" style="width: 1024px;"> <!-- Start Skeleton -->
+
+  <div id="parametros_sinal" style="float: left;">
 
     <!-- Begin of hand_shapes -->
     <section id="hand_shapes" style="display: none">
@@ -125,7 +161,6 @@
         <area title="orelha esquerda"   shape="rect" coords="200, 70, 230, 95"   href="#"  data-local="Pa_53" />
           
         <!-- Tronco -->
-        <area title="ombro centro"     shape="rect" coords="145, 190, 160, 215" href="#"  data-local="Pa_41" /> 
         <area title="ombro direito"    shape="rect" coords="55, 190, 80, 215"   href="#"  data-local="Pa_44" />
         <area title="ombro esquerdo"   shape="rect" coords="240, 190, 265, 215" href="#"  data-local="Pa_47" />
         <area title="busto centro"     shape="rect" coords="145, 260, 160, 285" href="#"  data-local="Pa_12" />
@@ -418,16 +453,78 @@
  <div id="signal_video"></div><!-- The video will be showed here -->
 </div><!-- End of Skeleton -->
 
-<div class="row skeleton">
+<div class="row skeleton skip">
   <div class="progress progress-success" style="width: 400px; height: 25px; margin: 20px 0 0 15px; float: left">
-    <div class="bar task_bar" style="width: 0%;"></div>
+    <div class="bar task_progress_bar" style="width: 0%;"></div>
   </div>
-  <button class="btn btn-large btn-warning" style="margin: 10px 0 10px 0px; width: 130px; float: right" value='Pular'>
+  <button class="btn btn-large btn-info my_signs_button" style="margin: 10px 0 10px 275px; width: 130px; float: left" value='relatorio'>
+    Meus Sinais
+  </button>
+  <button class="btn btn-large btn-warning" style="margin: 10px 0 10px 10px; width: 130px; float: left" value='Pular'>
     Pular sinal
   </button>
 </div>
 
+<script src="/static/js/jquery.raty.min.js"></script>
+
 <script>
+function preloadImages( images ){
+  $(images).each(function(){
+    (new Image()).src = this;
+  });
+}
+
+preloadImages(['/static/images/formas_de_mao/conf_1.png','/static/images/formas_de_mao/conf_2.png',
+            '/static/images/formas_de_mao/conf_3.png','/static/images/formas_de_mao/conf_4.png',
+            '/static/images/formas_de_mao/conf_5.png','/static/images/formas_de_mao/conf_6.png',
+            '/static/images/formas_de_mao/conf_7.png','/static/images/formas_de_mao/conf_8.png',
+            '/static/images/formas_de_mao/conf_9.png','/static/images/formas_de_mao/conf_10.png',
+            '/static/images/formas_de_mao/conf_11.png','/static/images/formas_de_mao/conf_12.png',
+            '/static/images/formas_de_mao/conf_13.png','/static/images/formas_de_mao/conf_14.png',
+            '/static/images/formas_de_mao/conf_15.png','/static/images/formas_de_mao/conf_16.png',
+            '/static/images/formas_de_mao/conf_17.png','/static/images/formas_de_mao/conf_18.png',
+            '/static/images/formas_de_mao/conf_19.png','/static/images/formas_de_mao/conf_20.png',
+            '/static/images/formas_de_mao/conf_21.png','/static/images/formas_de_mao/conf_22.png',
+            '/static/images/formas_de_mao/conf_23.png','/static/images/formas_de_mao/conf_24.png',
+            '/static/images/formas_de_mao/conf_25.png','/static/images/formas_de_mao/conf_26.png',
+            '/static/images/formas_de_mao/conf_27.png','/static/images/formas_de_mao/conf_28.png',
+            '/static/images/formas_de_mao/conf_29.png','/static/images/formas_de_mao/conf_30.png',
+            '/static/images/formas_de_mao/conf_31.png','/static/images/formas_de_mao/conf_32.png',
+            '/static/images/formas_de_mao/conf_33.png','/static/images/formas_de_mao/conf_34.png',
+            '/static/images/formas_de_mao/conf_35.png','/static/images/formas_de_mao/conf_36.png',
+            '/static/images/formas_de_mao/conf_37.png','/static/images/formas_de_mao/conf_38.png',
+            '/static/images/formas_de_mao/conf_39.png','/static/images/formas_de_mao/conf_40.png',
+            '/static/images/formas_de_mao/conf_41.png','/static/images/formas_de_mao/conf_42.png',
+            '/static/images/formas_de_mao/conf_43.png','/static/images/formas_de_mao/conf_44.png',
+            '/static/images/formas_de_mao/conf_45.png','/static/images/formas_de_mao/conf_46.png',
+            '/static/images/formas_de_mao/conf_47.png','/static/images/formas_de_mao/conf_48.png',
+            '/static/images/formas_de_mao/conf_49.png','/static/images/formas_de_mao/conf_50.png',
+            '/static/images/formas_de_mao/conf_51.png','/static/images/formas_de_mao/conf_52.png',
+            '/static/images/formas_de_mao/conf_53.png','/static/images/formas_de_mao/conf_54.png',
+            '/static/images/formas_de_mao/conf_55.png','/static/images/formas_de_mao/conf_56.png',
+            '/static/images/formas_de_mao/conf_57.png','/static/images/formas_de_mao/conf_58.png',
+            '/static/images/formas_de_mao/conf_59.png','/static/images/formas_de_mao/conf_60.png',
+            '/static/images/orientacao_da_mao/left_hand/Ori_1.png','/static/images/orientacao_da_mao/left_hand/Ori_2.png',
+            '/static/images/orientacao_da_mao/left_hand/Ori_3.png','/static/images/orientacao_da_mao/left_hand/Ori_4.png',
+            '/static/images/orientacao_da_mao/left_hand/Ori_5.png','/static/images/orientacao_da_mao/left_hand/Ori_6.png',
+            '/static/images/orientacao_da_mao/left_hand/Ori_7.png','/static/images/orientacao_da_mao/left_hand/Ori_8.png',
+            '/static/images/orientacao_da_mao/left_hand/Ori_9.png','/static/images/orientacao_da_mao/left_hand/Ori_10.png',
+            '/static/images/orientacao_da_mao/left_hand/Ori_11.png','/static/images/orientacao_da_mao/left_hand/Ori_12.png',
+            '/static/images/orientacao_da_mao/right_hand/Ori_1.png','/static/images/orientacao_da_mao/right_hand/Ori_2.png',
+            '/static/images/orientacao_da_mao/right_hand/Ori_3.png','/static/images/orientacao_da_mao/right_hand/Ori_4.png',
+            '/static/images/orientacao_da_mao/right_hand/Ori_5.png','/static/images/orientacao_da_mao/right_hand/Ori_6.png',
+            '/static/images/orientacao_da_mao/right_hand/Ori_7.png','/static/images/orientacao_da_mao/right_hand/Ori_8.png',
+            '/static/images/orientacao_da_mao/right_hand/Ori_9.png','/static/images/orientacao_da_mao/right_hand/Ori_10.png',
+            '/static/images/orientacao_da_mao/right_hand/Ori_11.png','/static/images/orientacao_da_mao/right_hand/Ori_12.png',
+            '/static/images/expressao_facial/Exp_1.png','/static/images/expressao_facial/Exp_2.png',
+            '/static/images/expressao_facial/Exp_3.png','/static/images/expressao_facial/Exp_4.png',
+            '/static/images/expressao_facial/Exp_5.png','/static/images/expressao_facial/Exp_6.png',
+            '/static/images/expressao_facial/Exp_7.png','/static/images/expressao_facial/Exp_8.png',
+            '/static/images/expressao_facial/Exp_9.png','/static/images/expressao_facial/Exp_10.png',
+            '/static/images/expressao_facial/Exp_11.png','/static/images/expressao_facial/Exp_12.png',
+            '/static/images/expressao_facial/Exp_13.png','/static/images/expressao_facial/Exp_14.png',
+            '/static/images/expressao_facial/Exp_15.png','/static/images/expressao_facial/Exp_16.png',
+            '/static/images/expressao_facial/Exp_17.png']);
 
 pybossa.taskLoaded(function(task, deferred) {
     deferred.resolve(task);
@@ -435,16 +532,23 @@ pybossa.taskLoaded(function(task, deferred) {
 
 pybossa.presentTask(function(task, deferred) {
 
-    var params_amount;
-    var params_configured = 0;
-    var current_exp_group;
-    var current_handshape_group;
-    var current_fix_hand;
-    var state = "QTD_MAOS";
-    var isRightHand = true;
-    var parametros = {right : {}, left : {}};
+  $("#star_avg").raty( {numberMax: 3, number : 3 } );
 
-    var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
+  $("#star_regular").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 1} );
+  
+  $("#star_bom").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 2} );
+  $("#star_excelente").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 3} );
+
+  var params_amount;
+  var params_configured = 0;
+  var current_exp_group;
+  var current_handshape_group;
+  var current_fix_hand;
+  var state = "QTD_MAOS";
+  var isRightHand = true;
+  var parametros = {right : {}, left : {}};
+
+  var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
                                      "Exp_3" : "Bochechas contraidas",
                                      "Exp_4" : "Labios contraidos",
@@ -463,24 +567,26 @@ pybossa.presentTask(function(task, deferred) {
                                      "Exp_17" : "Desconfiado" } 
                      };
 
-    var hands_shapes = new Object();
-    hands_shapes['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
+  var hands_shapes = new Object();
+  hands_shapes['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
                                  "mao_48", "mao_33", "mao_34", "mao_47",
                                  "mao_36", "mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_37", "mao_49",
                                  "mao_54", "mao_8", "mao_52",
                                  "mao_60", "mao_25", "mao_53", "mao_55", "mao_56", "mao_57", "mao_59",
                                  "mao_26", "mao_27", "mao_29", "mao_30" );
 
-    hands_shapes['group_2'] = new Array("mao_28", "mao_22", "mao_58",
+  hands_shapes['group_2'] = new Array("mao_28", "mao_22", "mao_58",
                                  "mao_50", "mao_3", "mao_4", "mao_5", "mao_6", "mao_39", "mao_40", "mao_51",
                                  "mao_42", "mao_41",
                                  "mao_44", "mao_43", "mao_45", "mao_46",
                                  "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
-                                 "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");
+                                 "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");   
 
-    // Modifica as imagens dos elementos li da section formas_de_mao
-    function setFormasDeMao(hand_page) {
-      var nth_li;
+  var words_groups = { "abarrotado" : "Verbos", "calado" : "Verbos", "cama" : "Substantivos", "cartao" : "Substantivos", "espelho" : "Substantivos", "meu" : "Pronomes", "oculos" : "Substantivos", "silencio" : "Substantivos", "telefone" : "Substantivos", "adulto" : "Substantivos", "crianca" : "Substantivos", "distrito_federal" : "Cidades", "desculpe" : "Verbos", "televisao" : "Substantivos" };
+
+  // Modifica as imagens dos elementos li da section formas_de_mao
+  function setFormasDeMao(hand_page) {
+    var nth_li;
 
       // "limpa" a pagina de maos
       $("#maos").find('li').hide();
@@ -682,7 +788,7 @@ pybossa.presentTask(function(task, deferred) {
 
 	setFormasDeMao('group_1')
         $('#hand_shapes').show();
-        $('.task_bar').show();
+        $('.task_progress_bar').show();
       }
       else if (state == "QTD_MAOS") {
 	pergunta = "Com quantas m&atilde;os se faz o sinal?"
@@ -711,7 +817,7 @@ pybossa.presentTask(function(task, deferred) {
       }
 
       $("#question").html( pergunta );
-      $(".task_bar").css({"width" : ( ( params_configured / params_amount ) * 100 ) + "%" });
+      $(".task_progress_bar").css({"width" : ( ( params_configured / params_amount ) * 100 ) + "%" });
     } // Fim da funcao mostrarPergunta
 
     
@@ -885,7 +991,7 @@ pybossa.presentTask(function(task, deferred) {
           if (answer == "Sim") {
             nextState = "TASK_END";
             params_configured = 0;
-            $('.task_bar').hide();
+            $('.task_progress_bar').hide();
           } else {
             nextState = "CORRECAO";
           }
@@ -972,7 +1078,7 @@ pybossa.presentTask(function(task, deferred) {
 
 	jQuery.ajax({
  	  type: 'POST',
-	  url:    '/render',
+	  url:    '/LIBRAS_API/render',
 	  contentType: 'application/json',
 	  data: JSON.stringify(parametros),
 	  success: function(result) {
@@ -991,6 +1097,64 @@ pybossa.presentTask(function(task, deferred) {
 	});
 
     } // Fim da funcao renderizarVideo
+
+    function setCurrentUserSigns( user_signs ){
+      console.log( "Voce; configurou " + user_signs.length + " sinais." );
+      $(".signs_counter").html( "Voc&ecirc; configurou " + user_signs.length + " sinais." );
+      $(".signs_conf_counter").html( user_signs.length );
+      
+      if ( user_signs.length == 0 ){
+        $(".user_signs_table").hide();
+      }
+      else{
+        $(".user_signs_table").show();
+      }
+
+      $(".user_signs").html("");
+
+      for( var sign in user_signs ){
+        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static/images/hand_config.png"/><img class="img_sign_fix" src="/static/images/fixed_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
+      } // Fim do for
+
+
+
+    } // Fim da funcao setCurrentUserSigns
+
+    function showUserReport(){
+      $(".skeleton").hide();
+
+      // TODO tratar o erro de nao encontra id
+      pybossa.getCurrentUserId('librasdictionary').done( function(data){
+        console.log( "Current User Id: " + data.current_usr_id );
+        
+        $.ajax({
+          type: 'POST',
+	  url: '/LIBRAS_API/userReport',
+	  contentType: 'application/json',
+	  data: JSON.stringify( { current_user_id : data.current_usr_id } ),
+	  success: function(result) {
+            setCurrentUserSigns( result.user_signs );
+            $(".last_time").html( result.last_time );
+            setUserAverage( result.user_average );
+            $(".overall_progress_bar").css({"width" : overall_progress + "%" });          
+          },
+          error: function(result) {
+	    alert("Error!");
+	  },
+	  async: true
+        }); // Fim da chamada ajax
+
+      }); // Fim de getCurrentUserId
+
+
+      $("#wrap").show();
+
+    } // Fim da funcao showSignsReport
+
+    function setUserAverage( user_average ){
+      console.log( "USER AVERAGE: " + user_average )
+      $("#star_avg").raty( { noRatedMsg: "Quase lá!", hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score : user_average } );
+    }
 
     if ( !$.isEmptyObject(task) ) {
       
@@ -1085,6 +1249,8 @@ pybossa.presentTask(function(task, deferred) {
 
 	 // Evento de clique em pular tarefa
          $('.btn-warning').off('click').on('click', function(){
+           params_configured = 0;
+           $('.task_progress_bar').hide();
            var answer = $(this).attr('value');
            if( typeof answer != 'undefined' ){
 	     if (answer == "Pular") {
@@ -1151,10 +1317,20 @@ pybossa.presentTask(function(task, deferred) {
            //console.log( parametros.left );
          });
 
+         // Eventos de cliques no botao Colabore
+         $(".colabore_button").off('click').on('click', function(){
+           $("#wrap").hide();
+           $(".skeleton").show();
+         });
+
+         // Eventos de cliques no botao relatorio
+         $(".my_signs_button").off('click').on('click', function(){
+           showUserReport();
+         });
+
     }
     else {
-        $(".skeleton").hide();
-        $("#finish").fadeIn(500);
+      showUserReport();
     } 
 });
 
@@ -1250,5 +1426,33 @@ pybossa.run('librasdictionary');
     left: 40%;
     top: 50%;
   }
+
+  #wrap{
+    width: 1024px;
+    margin: 20px auto;
+    -moz-border-radius: 10px;  
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  #left{
+    width: 660px;
+    float: left;
+    margin: 20px 0 0 0;
+  }
+
+  #right{
+    width: 360px;
+    float: left;
+    margin: 20px 0 0 0;
+  }
+
+  .img_sign_conf{ float: left }
+  .img_sign_fix{ margin: 0 0 0 10px; float: left }
+
+  .signal_name{ margin: 7px 0 0 0; /*width: 105px*/ }
+
+  .signs_conf_counter{ margin: 10px 0 0 10px; float: left }
+  .signs_fix_counter{ margin: 10px 0 0 10px; float: left }
 
 </style>
