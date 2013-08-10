@@ -24,7 +24,7 @@ def userReport():
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
     current_user_ip = getUserIp();
     all_task_runs = getAllTaskRuns( app_id ) 
-    tasks_amount = getTasksAmount( app_id )
+    tasks_amount = getTasksAmount( app_id ) * 5
 
     user_task_runs = dict()
     user_signs = []
@@ -92,81 +92,6 @@ def getUsersAmount( all_task_runs ):
         else:
             users.add( task_run.user_id )
     return len( users )
-
-#@app.route( "/average", methods=['POST'] )
-#def average():
-#    info = json.loads( request.data )
-#    taskruns = getTaskRuns()
-#    taskruns_amount = len( taskruns )
-#
-#    users = set()
-#    for taskrun in taskruns:
-#        if "user_id" in taskrun:
-#          users.add(taskrun["user_id"])
-#    users_amount = len(users) 
-#
-#    print "USUARIOS :", users      
-#    print "QUANTIDADE DE USUARIOS :", users_amount      
-#
-#    current_user_id = info["current_user_id"]
-#    user_taskruns_amount = 0
-#    for taskrun in taskruns:
-#        if (current_user_id == taskrun["user_id"]):
-#            user_taskruns_amount += 1
-#
-#    comunity_average = taskruns_amount / float(users_amount)
-#
-#    user_average = round( user_taskruns_amount / comunity_average, 2 )
-#    
-#    print "TAREFAS DO USUARIO :", user_taskruns_amount      
-#    print "MEDIA DA COMUNIDADE :", comunity_average      
-#    
-#    if ( user_average < 0.5 ) and ( user_taskruns_amount != 0 ):
-#        user_average = 1
-#    elif user_average >= 0.5 and user_average < 1:
-#        user_average = 1 + user_average
-#    elif user_average >= 1 and user_average < 1.5:
-#        user_average = 2 + (1 - user_average)
-#    elif user_average >= 1.5:
-#        user_average = 3
-#    
-#    print "MEDIA DO USUARIO :", user_average      
-#    print "QUANTIDADE DE TAREFAS :", taskruns_amount      
-#  
-#    return jsonify( user_average = user_average )
-        
-#@app.route( "/overallProgress", methods=['POST'] )
-#def overallProgress():
-#    tasks_raw = urllib2.urlopen( "http://localhost:8080/pybossa/api/task?app_id=" + request.data )
-#    tasks_raw_read = tasks_raw.read()
-#    tasks_amount = 0
-#    if len( tasks_raw_read) > 0:
-#        tasks_json = json.loads( tasks_raw_read )
-#        tasks_amount = len( tasks_json ) * 5
-#
-#    taskruns_amount = len( getTaskRuns() )
-#
-#    return jsonify( tasks_amount = tasks_amount, taskruns_amount = taskruns_amount )    
-
-#@app.route( "/currentUser", methods=['POST'] )
-#def currentUser():
-    
-#    user_signs = []
-#    info = json.loads(request.data) 
-#    task_runs = getTaskRuns()
-#    if( len(task_runs) > 0 ):
-#        user_id = info["current_user_id"]
-#        print "THE USER ID IS ", user_id
-#        current_user_ip = getUserIp();
-#        for task_run in task_runs:
-#            if ( user_id is None ):
-#                if( task_run['user_ip'] == current_user_ip ):
-#                    user_signs.append( task_run['info']['signal_name'] )            
-#            elif( user_id == task_run['user_id'] ):
-#                user_signs.append( task_run['info']['signal_name'] )
-
-#    last_time = task_runs[-1]["finish_time"].split("T")[0]
-#    return jsonify( user_signs = user_signs, last_time = last_time )
 
 @app.route("/render", methods=['POST'])
 def render():

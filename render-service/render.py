@@ -24,7 +24,7 @@ def userReport():
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
     current_user_ip = getUserIp();
     all_task_runs = getAllTaskRuns( app_id ) 
-    tasks_amount = getTasksAmount( app_id )
+    tasks_amount = getTasksAmount( app_id ) * 5
 
     user_task_runs = dict()
     user_signs = []
@@ -50,7 +50,7 @@ def userReport():
         elif user_average >= 1.5:
             user_average = 3      
 
-        overall_progress = round( ( all_task_runs_amount / tasks_amount ) * 100, 2 )
+        overall_progress = round( ( all_task_runs_amount / float(tasks_amount) ) * 100, 2 )
 
         if ( user_task_runs_amount > 0 ):
             last_time = user_task_runs[-1].finish_time.split("T")[0]

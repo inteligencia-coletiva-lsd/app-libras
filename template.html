@@ -1136,7 +1136,7 @@ pybossa.presentTask(function(task, deferred) {
             setCurrentUserSigns( result.user_signs );
             $(".last_time").html( result.last_time );
             setUserAverage( result.user_average );
-            $(".overall_progress_bar").css({"width" : overall_progress + "%" });          
+            $(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
           },
           error: function(result) {
 	    alert("Error!");

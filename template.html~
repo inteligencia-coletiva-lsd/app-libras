@@ -1104,10 +1104,10 @@ pybossa.presentTask(function(task, deferred) {
       $(".signs_conf_counter").html( user_signs.length );
       
       if ( user_signs.length == 0 ){
-        $(".users_signs_table").hide();
+        $(".user_signs_table").hide();
       }
       else{
-        $(".users_signs_table").show();
+        $(".user_signs_table").show();
       }
 
       $(".user_signs").html("");
