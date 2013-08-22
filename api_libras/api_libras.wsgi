@@ -7,6 +7,6 @@ execfile(activate_this, dict(__file__=activate_this))
 import sys
 sys.stdout=sys.stderr
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0,'/home/thyagofas/web_dev/pybossa/app-libras/render-service')
+sys.path.insert(0,'/home/thyagofas/web_dev/pybossa/app-libras/api_libras')
 # Run the web-app
-from render import app as application
+from api_libras import app as application

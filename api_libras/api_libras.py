@@ -8,7 +8,7 @@ import pbclient
 
 app = Flask(__name__)
 
-VIDEOS_DIR = "/home/thyagofas/web_dev/pybossa/app-libras/static/libras-videos/"
+VIDEOS_DIR = "/home/thyagofas/web_dev/pybossa/app-libras/static_libras/libras-videos/"
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS_BLENDER_DIR = os.path.join(APP_DIR, "scripts-blender")
 BLEND_FILE = os.path.join(SCRIPTS_BLENDER_DIR, "mulher05_iK_14_05.blend")
@@ -39,7 +39,7 @@ def userReport():
         users_amount = getUsersAmount( all_task_runs )
         all_task_runs_amount = len( all_task_runs )
         comunity_average = all_task_runs_amount / float(users_amount)
-        user_average = round( user_task_runs_amount / comunity_average, 2 )
+        user_average = round( user_task_runs_amount / float(comunity_average), 2 )
         
         if ( user_average < 0.5 ) and ( user_task_runs_amount != 0 ):
             user_average = 1
@@ -50,7 +50,7 @@ def userReport():
         elif user_average >= 1.5:
             user_average = 3      
 
-        overall_progress = round( ( all_task_runs_amount / tasks_amount ) * 100, 2 )
+        overall_progress = round( ( all_task_runs_amount / float(tasks_amount) ) * 100, 2 )
 
         if ( user_task_runs_amount > 0 ):
             last_time = user_task_runs[-1].finish_time.split("T")[0]
@@ -143,8 +143,8 @@ def render():
 
      cmd = "cd " + SCRIPTS_BLENDER_DIR + "; blender -b " + BLEND_FILE + " -o " + VIDEOS_DIR + " -P " + MOV_PONTUAL_SCRIPT + " " + path_dir + " " + path_esq
      exitcode = os.system(cmd)
+     #avatar_file = signal_name + ".webm"
      avatar_file = signal_name + ".webm"
-
      return jsonify(rendered_video=avatar_file, exitcode=exitcode)
 
 if __name__ == "__main__":

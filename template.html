@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><img src="/static/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label><img src="/static/images/fixed_gray.png" style="margin: 0 0 0 10px; float: left"/><label class="signs_fix_counter">0</label></td>
+            <td><img src="/static_libras/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label><img src="/static_libras/images/fixed_gray.png" style="margin: 0 0 0 10px; float: left"/><label class="signs_fix_counter">0</label></td>
             <td><div id="star_avg" style="margin: 5px 0 0 0"></div></td>
             <td><label class="last_time" style="margin: 10px 0 0 0"></label></td>
           </tr>
@@ -178,8 +178,8 @@
         <area title="grande"  shape="rect" coords="240, 205, 290, 255" href="#"  data-local="2" />
       </map>
         
-      <img id="avatar_completo_img"  src="/static/images/ponto_de_articulacao/avatar_pontos.png" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
-      <img id="avatar_distancia_img" src="/static/images/ponto_de_articulacao/avatar_distancia.png" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
+      <img id="avatar_completo_img"  src="/static_libras/images/ponto_de_articulacao/avatar_pontos.png" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
+      <img id="avatar_distancia_img" src="/static_libras/images/ponto_de_articulacao/avatar_distancia.png" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
     </section>
     <!-- End of ponto_de_articulacao section -->
 
@@ -453,7 +453,7 @@
  <div id="signal_video"></div><!-- The video will be showed here -->
 </div><!-- End of Skeleton -->
 
-<div class="row skeleton skip">
+<div class="row skeleton skip" style="display: none">
   <div class="progress progress-success" style="width: 400px; height: 25px; margin: 20px 0 0 15px; float: left">
     <div class="bar task_progress_bar" style="width: 0%;"></div>
   </div>
@@ -465,72 +465,16 @@
   </button>
 </div>
 
-<script src="/static/js/jquery.raty.min.js"></script>
+<script src="/static_libras/js/jquery.raty.min.js"></script>
 
 <script>
-function preloadImages( images ){
-  $(images).each(function(){
-    (new Image()).src = this;
-  });
-}
-
-preloadImages(['/static/images/formas_de_mao/conf_1.png','/static/images/formas_de_mao/conf_2.png',
-            '/static/images/formas_de_mao/conf_3.png','/static/images/formas_de_mao/conf_4.png',
-            '/static/images/formas_de_mao/conf_5.png','/static/images/formas_de_mao/conf_6.png',
-            '/static/images/formas_de_mao/conf_7.png','/static/images/formas_de_mao/conf_8.png',
-            '/static/images/formas_de_mao/conf_9.png','/static/images/formas_de_mao/conf_10.png',
-            '/static/images/formas_de_mao/conf_11.png','/static/images/formas_de_mao/conf_12.png',
-            '/static/images/formas_de_mao/conf_13.png','/static/images/formas_de_mao/conf_14.png',
-            '/static/images/formas_de_mao/conf_15.png','/static/images/formas_de_mao/conf_16.png',
-            '/static/images/formas_de_mao/conf_17.png','/static/images/formas_de_mao/conf_18.png',
-            '/static/images/formas_de_mao/conf_19.png','/static/images/formas_de_mao/conf_20.png',
-            '/static/images/formas_de_mao/conf_21.png','/static/images/formas_de_mao/conf_22.png',
-            '/static/images/formas_de_mao/conf_23.png','/static/images/formas_de_mao/conf_24.png',
-            '/static/images/formas_de_mao/conf_25.png','/static/images/formas_de_mao/conf_26.png',
-            '/static/images/formas_de_mao/conf_27.png','/static/images/formas_de_mao/conf_28.png',
-            '/static/images/formas_de_mao/conf_29.png','/static/images/formas_de_mao/conf_30.png',
-            '/static/images/formas_de_mao/conf_31.png','/static/images/formas_de_mao/conf_32.png',
-            '/static/images/formas_de_mao/conf_33.png','/static/images/formas_de_mao/conf_34.png',
-            '/static/images/formas_de_mao/conf_35.png','/static/images/formas_de_mao/conf_36.png',
-            '/static/images/formas_de_mao/conf_37.png','/static/images/formas_de_mao/conf_38.png',
-            '/static/images/formas_de_mao/conf_39.png','/static/images/formas_de_mao/conf_40.png',
-            '/static/images/formas_de_mao/conf_41.png','/static/images/formas_de_mao/conf_42.png',
-            '/static/images/formas_de_mao/conf_43.png','/static/images/formas_de_mao/conf_44.png',
-            '/static/images/formas_de_mao/conf_45.png','/static/images/formas_de_mao/conf_46.png',
-            '/static/images/formas_de_mao/conf_47.png','/static/images/formas_de_mao/conf_48.png',
-            '/static/images/formas_de_mao/conf_49.png','/static/images/formas_de_mao/conf_50.png',
-            '/static/images/formas_de_mao/conf_51.png','/static/images/formas_de_mao/conf_52.png',
-            '/static/images/formas_de_mao/conf_53.png','/static/images/formas_de_mao/conf_54.png',
-            '/static/images/formas_de_mao/conf_55.png','/static/images/formas_de_mao/conf_56.png',
-            '/static/images/formas_de_mao/conf_57.png','/static/images/formas_de_mao/conf_58.png',
-            '/static/images/formas_de_mao/conf_59.png','/static/images/formas_de_mao/conf_60.png',
-            '/static/images/orientacao_da_mao/left_hand/Ori_1.png','/static/images/orientacao_da_mao/left_hand/Ori_2.png',
-            '/static/images/orientacao_da_mao/left_hand/Ori_3.png','/static/images/orientacao_da_mao/left_hand/Ori_4.png',
-            '/static/images/orientacao_da_mao/left_hand/Ori_5.png','/static/images/orientacao_da_mao/left_hand/Ori_6.png',
-            '/static/images/orientacao_da_mao/left_hand/Ori_7.png','/static/images/orientacao_da_mao/left_hand/Ori_8.png',
-            '/static/images/orientacao_da_mao/left_hand/Ori_9.png','/static/images/orientacao_da_mao/left_hand/Ori_10.png',
-            '/static/images/orientacao_da_mao/left_hand/Ori_11.png','/static/images/orientacao_da_mao/left_hand/Ori_12.png',
-            '/static/images/orientacao_da_mao/right_hand/Ori_1.png','/static/images/orientacao_da_mao/right_hand/Ori_2.png',
-            '/static/images/orientacao_da_mao/right_hand/Ori_3.png','/static/images/orientacao_da_mao/right_hand/Ori_4.png',
-            '/static/images/orientacao_da_mao/right_hand/Ori_5.png','/static/images/orientacao_da_mao/right_hand/Ori_6.png',
-            '/static/images/orientacao_da_mao/right_hand/Ori_7.png','/static/images/orientacao_da_mao/right_hand/Ori_8.png',
-            '/static/images/orientacao_da_mao/right_hand/Ori_9.png','/static/images/orientacao_da_mao/right_hand/Ori_10.png',
-            '/static/images/orientacao_da_mao/right_hand/Ori_11.png','/static/images/orientacao_da_mao/right_hand/Ori_12.png',
-            '/static/images/expressao_facial/Exp_1.png','/static/images/expressao_facial/Exp_2.png',
-            '/static/images/expressao_facial/Exp_3.png','/static/images/expressao_facial/Exp_4.png',
-            '/static/images/expressao_facial/Exp_5.png','/static/images/expressao_facial/Exp_6.png',
-            '/static/images/expressao_facial/Exp_7.png','/static/images/expressao_facial/Exp_8.png',
-            '/static/images/expressao_facial/Exp_9.png','/static/images/expressao_facial/Exp_10.png',
-            '/static/images/expressao_facial/Exp_11.png','/static/images/expressao_facial/Exp_12.png',
-            '/static/images/expressao_facial/Exp_13.png','/static/images/expressao_facial/Exp_14.png',
-            '/static/images/expressao_facial/Exp_15.png','/static/images/expressao_facial/Exp_16.png',
-            '/static/images/expressao_facial/Exp_17.png']);
-
 pybossa.taskLoaded(function(task, deferred) {
     deferred.resolve(task);
 });
 
 pybossa.presentTask(function(task, deferred) {
+
+  $(".skip").show();
 
   $("#star_avg").raty( {numberMax: 3, number : 3 } );
 
@@ -613,10 +557,10 @@ pybossa.presentTask(function(task, deferred) {
 	  conf_mao = 'conf_' + parseInt( hands_shapes[hand_page][i].split("_")[1] );
           
           $("#maos").find("li").filter(nth_li).data('handshape', conf_mao);
-          $("#maos").find("li").filter(nth_li).html('<img src="/static/images/formas_de_mao/' + conf_mao + '.png" />');
+          $("#maos").find("li").filter(nth_li).html('<img src="/static_libras/images/formas_de_mao/' + conf_mao + '.png" />');
 
           $("#modal_maos").find("li").filter(nth_li).data('handshape', conf_mao);
-          $("#modal_maos").find("li").filter(nth_li).html('<img src="/static/images/formas_de_mao/' + conf_mao + '.png" />');
+          $("#modal_maos").find("li").filter(nth_li).html('<img src="/static_libras/images/formas_de_mao/' + conf_mao + '.png" />');
       } // Fim do for
 
       $("#maos").find('li').fadeIn();
@@ -631,7 +575,7 @@ pybossa.presentTask(function(task, deferred) {
       var img_ori;
       for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
         nth_li = ":nth-child(" +  ori_num  + ")";
-        img_ori = '<img src="/static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
+        img_ori = '<img src="/static_libras/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
         //console.log( img_ori );
 
         $("#orientacao_palma_da_mao").find("li").filter(nth_li).html( img_ori );
@@ -665,11 +609,11 @@ pybossa.presentTask(function(task, deferred) {
         exp_num = parseInt( exp.split("_")[1]  );
         nth_li = ":nth-child(" + contador + ")";
 
-        $("#expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static/images/expressao_facial/' + exp + '.png" />');
+        $("#expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static_libras/images/expressao_facial/' + exp + '.png" />');
         $("#expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
         $("#expressoes").find("li").filter(nth_li).data("exp_facial", exp);
 
-        $("#modal_expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static/images/expressao_facial/' + exp + '.png" />');
+        $("#modal_expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static_libras/images/expressao_facial/' + exp + '.png" />');
         $("#modal_expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
         $("#modal_expressoes").find("li").filter(nth_li).data("exp_facial", exp);
       
@@ -830,16 +774,16 @@ pybossa.presentTask(function(task, deferred) {
       for( var p in parametros.right ) {
         nth_li = ":nth-child(" + contador + ")";
         if( p.split('_')[0] == "CONF" ) { // Forma da mao
-          content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
+          content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static_libras/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
-          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
+          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
-          content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
+          content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao ao corpo
-          content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
+          content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
           $('#right_hand').find("li").filter(nth_li).html(content);
         }
 
@@ -853,19 +797,19 @@ pybossa.presentTask(function(task, deferred) {
         for( var p in parametros.left ) { 
           nth_li = ":nth-child(" + contador + ")";
           if( p.split('_')[0] == "CONF" ) { // Forma da mao esquerda
-            content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
+            content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static_libras/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
-            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
+            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
             if ( parametros.left[p] == "Pa_9" )
-              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
+              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
             else
-              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
+              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao esquerda ao corpo
-            content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
+            content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
             $('#left_hand').find("li").filter(nth_li).html(content);
           }
           contador = contador + 1; 
@@ -876,7 +820,7 @@ pybossa.presentTask(function(task, deferred) {
         $('#left_hand').show();
       } // Fim do if
 
-      $("#fix_expressao").find("li").first().html( '<a href="#modalExp" data-toggle="modal"><img width="100px" height="100px" src="/static/images/expressao_facial/' + parametros["EXP_FACIAL"] + '.png" /></a>' );
+      $("#fix_expressao").find("li").first().html( '<a href="#modalExp" data-toggle="modal"><img width="100px" height="100px" src="/static_libras/images/expressao_facial/' + parametros["EXP_FACIAL"] + '.png" /></a>' );
 
           
       
@@ -1036,7 +980,7 @@ pybossa.presentTask(function(task, deferred) {
 
     function showRenderedVideo(video) {
 	stopAndPlaySignalVideo(false);
-        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/static/libras-videos/' + video + '> </video>');
+        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/static_libras/libras-videos/' + video + '> </video>');
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
     }
@@ -1113,7 +1057,7 @@ pybossa.presentTask(function(task, deferred) {
       $(".user_signs").html("");
 
       for( var sign in user_signs ){
-        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static/images/hand_config.png"/><img class="img_sign_fix" src="/static/images/fixed_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
+        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/hand_config.png"/><img class="img_sign_fix" src="/static_libras/images/fixed_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
       } // Fim do for
 
 

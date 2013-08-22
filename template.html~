@@ -453,7 +453,7 @@
  <div id="signal_video"></div><!-- The video will be showed here -->
 </div><!-- End of Skeleton -->
 
-<div class="row skeleton skip">
+<div class="row skeleton skip" style="display: none">
   <div class="progress progress-success" style="width: 400px; height: 25px; margin: 20px 0 0 15px; float: left">
     <div class="bar task_progress_bar" style="width: 0%;"></div>
   </div>
@@ -524,13 +524,28 @@ preloadImages(['/static/images/formas_de_mao/conf_1.png','/static/images/formas_
             '/static/images/expressao_facial/Exp_11.png','/static/images/expressao_facial/Exp_12.png',
             '/static/images/expressao_facial/Exp_13.png','/static/images/expressao_facial/Exp_14.png',
             '/static/images/expressao_facial/Exp_15.png','/static/images/expressao_facial/Exp_16.png',
-            '/static/images/expressao_facial/Exp_17.png']);
+            '/static/images/expressao_facial/Exp_17.png', '/static/images/ponto_de_articulacao/Pa_6.png', 
+            '/static/images/ponto_de_articulacao/Pa_9.png', '/static/images/ponto_de_articulacao/Pa_9_esq.png', 
+            '/static/images/ponto_de_articulacao/Pa_12.png', '/static/images/ponto_de_articulacao/Pa_15.png',
+            '/static/images/ponto_de_articulacao/Pa_18.png', '/static/images/ponto_de_articulacao/Pa_21.png', 
+            '/static/images/ponto_de_articulacao/Pa_24.png', '/static/images/ponto_de_articulacao/Pa_27.png',
+            '/static/images/ponto_de_articulacao/Pa_32.png', '/static/images/ponto_de_articulacao/Pa_35.png',
+            '/static/images/ponto_de_articulacao/Pa_38.png', '/static/images/ponto_de_articulacao/Pa_44.png', 
+            '/static/images/ponto_de_articulacao/Pa_47.png', '/static/images/ponto_de_articulacao/Pa_50.png', 
+            '/static/images/ponto_de_articulacao/Pa_53.png', '/static/images/ponto_de_articulacao/Pa_56.png', 
+            '/static/images/ponto_de_articulacao/Pa_57.png', '/static/images/ponto_de_articulacao/Pa_60.png', 
+            '/static/images/ponto_de_articulacao/Pa_63.png', '/static/images/ponto_de_articulacao/Pa_66.png', 
+            '/static/images/ponto_de_articulacao/distancia_0.png', '/static/images/ponto_de_articulacao/distancia_1.png', 
+            '/static/images/ponto_de_articulacao/distancia_2.png', '/static/images/ponto_de_articulacao/avatar_distancia.png', 
+            '/static/images/ponto_de_articulacao/avatar_ponstos.png' ]);
 
 pybossa.taskLoaded(function(task, deferred) {
     deferred.resolve(task);
 });
 
 pybossa.presentTask(function(task, deferred) {
+
+  $(".skip").show();
 
   $("#star_avg").raty( {numberMax: 3, number : 3 } );
 
@@ -1136,7 +1151,7 @@ pybossa.presentTask(function(task, deferred) {
             setCurrentUserSigns( result.user_signs );
             $(".last_time").html( result.last_time );
             setUserAverage( result.user_average );
-            $(".overall_progress_bar").css({"width" : overall_progress + "%" });          
+            $(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
           },
           error: function(result) {
 	    alert("Error!");

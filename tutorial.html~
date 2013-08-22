@@ -17,7 +17,7 @@
                     selecionando uma das op&ccedil;&otilde;es do lado esquerdo.
                 </p>
 
-                <img src="/static_libras/images/tutorial/forma_tuto.png" />
+                <img src="/static/images/tutorial/forma_tuto.png" />
 
                 <ul style="margin: 0; list-style: none">
                     <li><span class="badge badge-important">1</span> Instru&ccedil;&atilde;o que determina o par&acirc;metro do sinal a ser configurado</li>
@@ -43,7 +43,7 @@
                 </p> -->
             </div> <!-- Passo 1 -->
             <div id="2" class="modal-body" style="display: none; text-align: justify">
-                <img src="/static_libras/images/tutorial/ori_tuto.png" />
+                <img src="/static/images/tutorial/ori_tuto.png" />
                 <p>
                     Para o par&acirc;metro indicado em <span class="badge badge-important">1</span> voc&ecirc; deve observar a palma da m&atilde;o
                     e determinar para que lado ela est&aacute; voltada.
@@ -59,7 +59,7 @@
                     o local, em rela&ccedil;&atilde;o ao corpo, onde se faz o sinal.
                 </p>
 
-                <img src="/static_libras/images/tutorial/ponto_tuto.png" />
+                <img src="/static/images/tutorial/ori_tuto.png" />
             </div> <!-- Passo 3 -->
             <div class="modal-footer">
                 <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn">Previous</a>
