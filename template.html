@@ -7,7 +7,7 @@
   <!-- Report -->
   <div id="wrap" style="display: none; font-size: 14px">
     <header id="top">
-      <label style="margin: 20px 0 0 300px; font-size: 36px;">Dicion&aacute;rio de LIBRAS</label>
+      <label style="margin: 20px 0 0 300px; font-size: 36px;">Dicion&aacute;rio de Libras</label>
         <label style="margin: 20px 0 0 220px; font-size: 24px">Todos os sinais que você configurou na aplica&ccedil;&atilde;o.</label>
     </header> <!-- End of top header -->
     <section id="left">
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><img src="/static_libras/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label></td>
+            <td><img class="hand_conf_tooltip" href="#" title="Configuracao" data-placement="left" data-toggle="tooltip" src="/static_libras/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label></td>
             <td><div id="star_avg" style="margin: 5px 0 0 0; float: left"></div><label id="user_vs_comunity_avg" style="margin: 5px 0 0 5px;">(X/Y)</label></td>
             <td><label class="last_time" style="margin: 10px 0 0 0"></label></td>
           </tr>
@@ -60,7 +60,7 @@
         <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 300px; margin: 10px 0 0 20px">Continue colaborando</button>
       </section> <!-- End of section help_deaf -->
       <section id="average_legend" style="padding: 10px">
-        <label style="font-size: 18px">M&eacute;dia de configura&ccedil;&atilde;o</label>
+        <label style="font-size: 18px">M&eacute;dia de contribui&ccedil;&atilde;o</label>
         <p>Indica a rela&ccedil;&atilde;o entre a quantidade de tarefas que voc&ecirc; fez e quantidade que a comunidade fez em m&eacute;dia</p>
         <ul style="margin: 0; list-style: none">
           <li><div id="star_regular" data-number="3" data-score="1" style="float: left; margin-right: 20px"></div><label>Regular</label></li>
@@ -529,6 +529,8 @@ pybossa.presentTask(function(task, deferred) {
                                  "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");   
 
   var words_groups = { "abarrotado" : "Verbos", "calado" : "Verbos", "cama" : "Substantivos", "cartao" : "Substantivos", "espelho" : "Substantivos", "meu" : "Pronomes", "oculos" : "Substantivos", "silencio" : "Substantivos", "telefone" : "Substantivos", "adulto" : "Substantivos", "crianca" : "Substantivos", "distrito_federal" : "Cidades", "desculpe" : "Verbos", "televisao" : "Substantivos" };
+
+    $('.hand_conf_tooltip').tooltip();
 
   // Modifica as imagens dos elementos li da section formas_de_mao
   function setFormasDeMao(hand_page) {
@@ -1059,7 +1061,7 @@ pybossa.presentTask(function(task, deferred) {
       $(".user_signs").html("");
 
       for( var sign in user_signs ){
-        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/hand_config.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
+        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/check_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
       } // Fim do for
 
 
