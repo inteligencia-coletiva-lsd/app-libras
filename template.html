@@ -21,18 +21,20 @@
         <thead>
           <tr>
             <th>Tarefas</th>
-            <th>M&eacute;dia</th>
-            <th>&Uacute;ltima configura&ccedil;&atilde;o</th>
+            <th>M&eacute;dia (Voc&ecirc;/Comunidade)</th>
+            <th>&Uacute;ltima contribui&ccedil;&atilde;o</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><img src="/static_libras/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label><img src="/static_libras/images/fixed_gray.png" style="margin: 0 0 0 10px; float: left"/><label class="signs_fix_counter">0</label></td>
-            <td><div id="star_avg" style="margin: 5px 0 0 0"></div></td>
+            <td><img src="/static_libras/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label></td>
+            <td><div id="star_avg" style="margin: 5px 0 0 0; float: left"></div><label id="user_vs_comunity_avg" style="margin: 5px 0 0 5px;">(X/Y)</label></td>
             <td><label class="last_time" style="margin: 10px 0 0 0"></label></td>
           </tr>
         </tbody>
       </table> <!-- End of table -->
+      <label style="margin: 10px 0 0  10px">Sinais que voc&ecirc; fez.</label>
+      <hr style="margin: 10px 0 10px 0; padding: 0" />
       <table class="table table-striped user_signs_table">
         <thead>
           <tr>
@@ -55,7 +57,7 @@
       <section id="help_deaf" style="padding: 10px">
         <label style="font-size: 18px">Ajude os surdos!</label>
         <p style="text-align: justify">Enquanto voc&ecirc; traduz uma palavra de Portugu&ecirc;s para LIBRAS voc&ecirc; contribui para a cria&ccedil;&atilde;o do dicion&aacute;rio e assim promove a inclus&atilde;o social dos surdos.</p>
-        <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 200px; margin: 10px 0 0 66px">Colabore</button>
+        <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 300px; margin: 10px 0 0 20px">Continue colaborando</button>
       </section> <!-- End of section help_deaf -->
       <section id="average_legend" style="padding: 10px">
         <label style="font-size: 18px">M&eacute;dia de configura&ccedil;&atilde;o</label>
@@ -1057,7 +1059,7 @@ pybossa.presentTask(function(task, deferred) {
       $(".user_signs").html("");
 
       for( var sign in user_signs ){
-        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/hand_config.png"/><img class="img_sign_fix" src="/static_libras/images/fixed_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
+        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/hand_config.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
       } // Fim do for
 
 
@@ -1079,7 +1081,7 @@ pybossa.presentTask(function(task, deferred) {
 	  success: function(result) {
             setCurrentUserSigns( result.user_signs );
             $(".last_time").html( result.last_time );
-            setUserAverage( result.user_average );
+            setUserAverage( result.user_average, result.user_task_runs_amount, result.comunity_average );
             $(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
           },
           error: function(result) {
@@ -1095,10 +1097,11 @@ pybossa.presentTask(function(task, deferred) {
 
     } // Fim da funcao showSignsReport
 
-    function setUserAverage( user_average ){
-      console.log( "USER AVERAGE: " + user_average )
+    function setUserAverage( user_average, user_task_runs_amount, comunity_average ){
+      console.log( "USER AVERAGE: " + user_average.toString() )
       $("#star_avg").raty( { noRatedMsg: "Quase lá!", hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score : user_average } );
-    }
+      $("#user_vs_comunity_avg").html("(" + user_task_runs_amount.toString() + "/" + comunity_average.toString() + ")")
+    } 
 
     if ( !$.isEmptyObject(task) ) {
       

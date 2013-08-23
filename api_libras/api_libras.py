@@ -16,7 +16,6 @@ MOV_PONTUAL_SCRIPT = os.path.join(SCRIPTS_BLENDER_DIR, "movPontual.py")
 
 pbclient.set('endpoint', "http://localhost:8080/pybossa")
 
-# TODO
 @app.route( "/userReport", methods = ['POST'] )
 def userReport():
     info = json.loads(request.data)
@@ -57,7 +56,7 @@ def userReport():
         else:
             last_time = "Nunca"
 
-    return jsonify( user_signs = user_signs, last_time = last_time, overall_progress = overall_progress, user_average = user_average )
+    return jsonify( user_signs = user_signs, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
 
 
 def getUserIp():
