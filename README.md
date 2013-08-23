@@ -1,2 +1,2 @@
-APP-LIBRAS
+App-Libras
 ==========
