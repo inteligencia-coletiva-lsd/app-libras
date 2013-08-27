@@ -2,7 +2,7 @@
     <div class="span12">
         <div id="modal" class="modal hide fade">
             <div class="modal-header">
-                <h3>Tutorial do Libras Dictionary</h3>
+                <h3>Tutorial do Dicion&aacute;rio de Libras</h3>
             </div>
             <div id="0" class="modal-body" style="display: none; text-align: justify">
                 Ser&aacute;o apresentados para voc&ecirc; os elementos de interface da
@@ -11,10 +11,18 @@
             </div> <!-- Passo 0 -->
             <div id="1" class="modal-body" style="display:none; text-align: justify">
                 <p>
-                    Um v&iacute;deo de uma pessoa fazendo um sinal 
-                    em Libras é mostrado no lado direito da p&aacute;gina e 
-                    voc&ecirc; deve interagir com a aplica&ccedil;&atilde;o
-                    selecionando uma das op&ccedil;&otilde;es do lado esquerdo.
+                    Libras &eacute; uma l&iacute;ngua espa&ccedil;o visual realizada atrav&eacute;s
+                    de sinais onde cada sinal &eacute; constituido de par&acirc;metros tais como:
+                    Forma da m&atilde;o, Orienta&ccedil;&atilde;o da palma da m&atilde;o, 
+                    Ponto de articula&ccedil;o, tipo de Movimento e Express&atilde;o facial.
+                </p>
+                <p>
+                    Para configurar um sinal a aplica&ccedil;&atilde;o Dicion&aacute;rio
+                    de Libras pede para que o volunt&aacute;rio a cada passo configure um 
+                    dos par&acirc;metros, para isso um v&iacute;deo de uma pessoa fazendo um sinal 
+                    em Libras é mostrado no lado direito da p&aacute;gina e o volunt&aacute;rio 
+                    deve interagir com a aplica&ccedil;&atilde;o selecionando uma das 
+                    op&ccedil;&otilde;es do lado esquerdo.
                 </p>
 
                 <img src="/static_libras/images/tutorial/forma_tuto.png" />
@@ -28,12 +36,6 @@
                     <li><span class="badge badge-important">6</span> Mostra as suas contribui&ccedil;&otilde;es</li>
                     <li><span class="badge badge-important">7</span> Op&ccedil;&atilde;o de n&atilde;o contribuir com o sinal atual</li>
                 </ul>
-                <!-- 
-                <p>
-                    O conjunto de parâmetros selecionados são passados para um avatar, um agente virtual 
-                    sinalizador que faz o sinal e o voluntário confirma ou corrige o sinal feito pelo avatar.
-                </p>
-
                 <!-- imagem -->
                 <!-- 
                 <p>
@@ -61,6 +63,56 @@
 
                 <img src="/static_libras/images/tutorial/ponto_tuto.png" />
             </div> <!-- Passo 3 -->
+            <div id="4" class="modal-body" style="display: none; text-align: justify">
+                <p>
+                    Observe se a mão est&aacute; perto ou longe do corpo da pessoa que faz o sinal
+                    e selecione uma dos tr&ecirc;s alvos indicados na figura abaixo
+                </p>
+
+                <img src="/static_libras/images/tutorial/distancia.png" />
+            </div> <!-- Passo 4 -->
+            <div id="5" class="modal-body" style="display: none; text-align: justify">
+                <p>
+                    Apesar de a pessoa falar enquanto faz o sinal, voc&ecirc; deve observar
+                    se a express&atilde;o facial da pessoa caracteriza o sinal ou a id&eacute;ia que
+                    se quer passar.
+                </p>
+
+                <img src="/static_libras/images/tutorial/expressao.png" />
+            </div> <!-- Passo 5 -->
+            <div id="6" class="modal-body" style="display: none; text-align: justify">
+                <p>
+                    O conjunto de par&atilde;metros selecionados s&atilde;o passados para um avatar, um agente virtual 
+                    sinalizador que faz o sinal e o volunt&aacute;rio confirma ou corrige o sinal feito pelo avatar.
+                </p>
+
+                <img src="/static_libras/images/tutorial/confirmacao.png" />
+            </div> <!-- Passo 6 -->
+            <div id="7" class="modal-body" style="display: none; text-align: justify">
+                <p>
+                    Caso o avatar n&atilde;o fa&ccedil;a o sinal corretamente, voc&ecirc; pode
+                    clicar em corrigir e selecionar um dos par&acirc;metros para ser corrigido.
+                </p>
+
+                <img src="/static_libras/images/tutorial/correcao.png" />
+            </div> <!-- Passo 7 -->
+            <div id="8" class="modal-body" style="display: none; text-align: justify">
+                <p>
+                    Feita a sele&ccedil;&atilde;o da forma da m&atilde;o, por exemplo,
+                    as op&ccedil;&otilde;es surgem na tela de modo que voc&ecirc; possa
+                    selecionar a nova forma de m&atilde;o
+                </p>
+
+                <img src="/static_libras/images/tutorial/correcao_opcao.png" />
+            </div> <!-- Passo 8 -->
+            <div id="8" class="modal-body" style="display: none; text-align: justify">
+                <p>
+                    Observe a pessoa que faz o sinal e determine a quantidade m&atilde;os
+                    que caracteriza o sinal.
+                </p>
+
+                <img src="/static_libras/images/tutorial/maos.png" />
+            </div> <!-- Passo 9 -->
             <div class="modal-footer">
                 <a id="prevBtn" href="#" onclick="showStep('prev')" class="btn">Previous</a>
                 <a id="nextBtn" href="#" onclick="showStep('next')" class="btn btn-success">Next</a>
@@ -85,7 +137,6 @@
         if (step == 0) {
             $("#prevBtn").hide();
             $("#nextBtn").show();
-            $("#startContrib").hide();
         }
         else {
             $("#prevBtn").show();
@@ -94,14 +145,27 @@
         if ( step == 1 ){
             $("#prevBtn").show();
             $("#nextBtn").show();
-            $("#startContrib").hide();
+            $("#startContrib").show();
         }else if (step == 2 ) {
             $("#prevBtn").show();
             $("#nextBtn").show();
-            $("#startContrib").hide();
-        }else if ( step == 3 ){
+        }else if (step == 3 ) {
+            $("#prevBtn").show();
+            $("#nextBtn").show();
+        }else if (step == 4 ) {
+            $("#prevBtn").show();
+            $("#nextBtn").show();
+        }else if (step == 5 ) {
+            $("#prevBtn").show();
+            $("#nextBtn").show();
+        }else if (step == 6 ) {
+            $("#prevBtn").show();
+            $("#nextBtn").show();
+        }else if (step == 7 ) {
+            $("#prevBtn").show();
+            $("#nextBtn").show();
+        }else if ( step == 8 ){
             $("#nextBtn").hide();
-            $("#startContrib").show();
         }
         $("#" + step).show();
     }

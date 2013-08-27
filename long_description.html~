@@ -25,4 +25,77 @@
         </p>
     </div>
 </div>
+<script>
+function preloadImages( images ){
+  $(images).each(function(){
+    (new Image()).src = this;
+  });
+}
+
+preloadImages(['/static_libras/images/formas_de_mao/conf_1.png','/static_libras/images/formas_de_mao/conf_2.png',
+            '/static_libras/images/formas_de_mao/conf_3.png','/static_libras/images/formas_de_mao/conf_4.png',
+            '/static_libras/images/formas_de_mao/conf_5.png','/static_libras/images/formas_de_mao/conf_6.png',
+            '/static_libras/images/formas_de_mao/conf_7.png','/static_libras/images/formas_de_mao/conf_8.png',
+            '/static_libras/images/formas_de_mao/conf_9.png','/static_libras/images/formas_de_mao/conf_10.png',
+            '/static_libras/images/formas_de_mao/conf_11.png','/static_libras/images/formas_de_mao/conf_12.png',
+            '/static_libras/images/formas_de_mao/conf_13.png','/static_libras/images/formas_de_mao/conf_14.png',
+            '/static_libras/images/formas_de_mao/conf_15.png','/static_libras/images/formas_de_mao/conf_16.png',
+            '/static_libras/images/formas_de_mao/conf_17.png','/static_libras/images/formas_de_mao/conf_18.png',
+            '/static_libras/images/formas_de_mao/conf_19.png','/static_libras/images/formas_de_mao/conf_20.png',
+            '/static_libras/images/formas_de_mao/conf_21.png','/static_libras/images/formas_de_mao/conf_22.png',
+            '/static_libras/images/formas_de_mao/conf_23.png','/static_libras/images/formas_de_mao/conf_24.png',
+            '/static_libras/images/formas_de_mao/conf_25.png','/static_libras/images/formas_de_mao/conf_26.png',
+            '/static_libras/images/formas_de_mao/conf_27.png','/static_libras/images/formas_de_mao/conf_28.png',
+            '/static_libras/images/formas_de_mao/conf_29.png','/static_libras/images/formas_de_mao/conf_30.png',
+            '/static_libras/images/formas_de_mao/conf_31.png','/static_libras/images/formas_de_mao/conf_32.png',
+            '/static_libras/images/formas_de_mao/conf_33.png','/static_libras/images/formas_de_mao/conf_34.png',
+            '/static_libras/images/formas_de_mao/conf_35.png','/static_libras/images/formas_de_mao/conf_36.png',
+            '/static_libras/images/formas_de_mao/conf_37.png','/static_libras/images/formas_de_mao/conf_38.png',
+            '/static_libras/images/formas_de_mao/conf_39.png','/static_libras/images/formas_de_mao/conf_40.png',
+            '/static_libras/images/formas_de_mao/conf_41.png','/static_libras/images/formas_de_mao/conf_42.png',
+            '/static_libras/images/formas_de_mao/conf_43.png','/static_libras/images/formas_de_mao/conf_44.png',
+            '/static_libras/images/formas_de_mao/conf_45.png','/static_libras/images/formas_de_mao/conf_46.png',
+            '/static_libras/images/formas_de_mao/conf_47.png','/static_libras/images/formas_de_mao/conf_48.png',
+            '/static_libras/images/formas_de_mao/conf_49.png','/static_libras/images/formas_de_mao/conf_50.png',
+            '/static_libras/images/formas_de_mao/conf_51.png','/static_libras/images/formas_de_mao/conf_52.png',
+            '/static_libras/images/formas_de_mao/conf_53.png','/static_libras/images/formas_de_mao/conf_54.png',
+            '/static_libras/images/formas_de_mao/conf_55.png','/static_libras/images/formas_de_mao/conf_56.png',
+            '/static_libras/images/formas_de_mao/conf_57.png','/static_libras/images/formas_de_mao/conf_58.png',
+            '/static_libras/images/formas_de_mao/conf_59.png','/static_libras/images/formas_de_mao/conf_60.png',
+            '/static_libras/images/orientacao_da_mao/left_hand/Ori_1.png','/static_libras/images/orientacao_da_mao/left_hand/Ori_2.png',
+            '/static_libras/images/orientacao_da_mao/left_hand/Ori_3.png','/static_libras/images/orientacao_da_mao/left_hand/Ori_4.png',
+            '/static_libras/images/orientacao_da_mao/left_hand/Ori_5.png','/static_libras/images/orientacao_da_mao/left_hand/Ori_6.png',
+            '/static_libras/images/orientacao_da_mao/left_hand/Ori_7.png','/static_libras/images/orientacao_da_mao/left_hand/Ori_8.png',
+            '/static_libras/images/orientacao_da_mao/left_hand/Ori_9.png','/static_libras/images/orientacao_da_mao/left_hand/Ori_10.png',
+            '/static_libras/images/orientacao_da_mao/left_hand/Ori_11.png','/static_libras/images/orientacao_da_mao/left_hand/Ori_12.png',
+            '/static_libras/images/orientacao_da_mao/right_hand/Ori_1.png','/static_libras/images/orientacao_da_mao/right_hand/Ori_2.png',
+            '/static_libras/images/orientacao_da_mao/right_hand/Ori_3.png','/static_libras/images/orientacao_da_mao/right_hand/Ori_4.png',
+            '/static_libras/images/orientacao_da_mao/right_hand/Ori_5.png','/static_libras/images/orientacao_da_mao/right_hand/Ori_6.png',
+            '/static_libras/images/orientacao_da_mao/right_hand/Ori_7.png','/static_libras/images/orientacao_da_mao/right_hand/Ori_8.png',
+            '/static_libras/images/orientacao_da_mao/right_hand/Ori_9.png','/static_libras/images/orientacao_da_mao/right_hand/Ori_10.png',
+            '/static_libras/images/orientacao_da_mao/right_hand/Ori_11.png','/static_libras/images/orientacao_da_mao/right_hand/Ori_12.png',
+            '/static_libras/images/expressao_facial/Exp_1.png','/static_libras/images/expressao_facial/Exp_2.png',
+            '/static_libras/images/expressao_facial/Exp_3.png','/static_libras/images/expressao_facial/Exp_4.png',
+            '/static_libras/images/expressao_facial/Exp_5.png','/static_libras/images/expressao_facial/Exp_6.png',
+            '/static_libras/images/expressao_facial/Exp_7.png','/static_libras/images/expressao_facial/Exp_8.png',
+            '/static_libras/images/expressao_facial/Exp_9.png','/static_libras/images/expressao_facial/Exp_10.png',
+            '/static_libras/images/expressao_facial/Exp_11.png','/static_libras/images/expressao_facial/Exp_12.png',
+            '/static_libras/images/expressao_facial/Exp_13.png','/static_libras/images/expressao_facial/Exp_14.png',
+            '/static_libras/images/expressao_facial/Exp_15.png','/static_libras/images/expressao_facial/Exp_16.png',
+            '/static_libras/images/expressao_facial/Exp_17.png', '/static_libras/images/ponto_de_articulacao/Pa_6.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_9.png', '/static_libras/images/ponto_de_articulacao/Pa_9_esq.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_12.png', '/static_libras/images/ponto_de_articulacao/Pa_15.png',
+            '/static_libras/images/ponto_de_articulacao/Pa_18.png', '/static_libras/images/ponto_de_articulacao/Pa_21.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_24.png', '/static_libras/images/ponto_de_articulacao/Pa_27.png',
+            '/static_libras/images/ponto_de_articulacao/Pa_32.png', '/static_libras/images/ponto_de_articulacao/Pa_35.png',
+            '/static_libras/images/ponto_de_articulacao/Pa_38.png', '/static_libras/images/ponto_de_articulacao/Pa_44.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_47.png', '/static_libras/images/ponto_de_articulacao/Pa_50.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_53.png', '/static_libras/images/ponto_de_articulacao/Pa_56.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_57.png', '/static_libras/images/ponto_de_articulacao/Pa_60.png', 
+            '/static_libras/images/ponto_de_articulacao/Pa_63.png', '/static_libras/images/ponto_de_articulacao/Pa_66.png', 
+            '/static_libras/images/ponto_de_articulacao/distancia_0.png', '/static_libras/images/ponto_de_articulacao/distancia_1.png', 
+            '/static_libras/images/ponto_de_articulacao/distancia_2.png', '/static_libras/images/ponto_de_articulacao/avatar_distancia.png', 
+            '/static_libras/images/ponto_de_articulacao/avatar_ponstos.png' ]);
+
+</script>
 
