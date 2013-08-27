@@ -46,20 +46,16 @@ def userReport():
         user_average = round( user_task_runs_amount / float(comunity_average), 2 )
         
         if ( user_average < 0.5 ) and ( user_task_runs_amount != 0 ):
-            print "ENTREI user_average < 0.5: " + str(user_average)
             user_average = 1
         elif user_average >= 0.5 and user_average < 1:
-            print "ENTREI user_average >= 0.5: " + str(user_average)
             user_average = 1 + user_average
         elif user_average >= 1 and user_average < 1.5:
-            print "ENTREI user_average >= 1: " + str(user_average)
             user_average = 2 + (user_average - 1)
         elif user_average >= 1.5:
-            print "ENTREI user_average >= 1.5: " + str(user_average)
             user_average = 3
-        print "USER AVERAGE DEPOIS: " + str(user_average)      
 
         overall_progress = round( ( all_task_runs_amount / float(tasks_amount) ) * 100, 2 )
+        comunity_average = round( comunity_average, 2 )
 
         if ( user_task_runs_amount > 0 ):
             last_time = user_task_runs[-1].finish_time.split("T")[0]

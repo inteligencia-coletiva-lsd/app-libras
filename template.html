@@ -58,6 +58,7 @@
         <label style="font-size: 18px">Ajude os surdos!</label>
         <p style="text-align: justify">Enquanto voc&ecirc; traduz uma palavra de Portugu&ecirc;s para LIBRAS voc&ecirc; contribui para a cria&ccedil;&atilde;o do dicion&aacute;rio e assim promove a inclus&atilde;o social dos surdos.</p>
         <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 300px; margin: 10px 0 0 20px">Continue colaborando</button>
+        <button class="btn btn-info btn-large share_button" type="button" value="share" style="width: 300px; margin: 10px 0 0 20px; display: none">Chamem seus amigos</button>
       </section> <!-- End of section help_deaf -->
       <section id="average_legend" style="padding: 10px">
         <label style="font-size: 18px">M&eacute;dia de contribui&ccedil;&atilde;o</label>
@@ -1279,6 +1280,8 @@ pybossa.presentTask(function(task, deferred) {
 
     }
     else {
+      $('.colabore_button').hide();
+      $('.share_button').show();
       showUserReport();
     } 
 });
