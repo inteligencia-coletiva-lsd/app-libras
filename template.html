@@ -28,7 +28,7 @@
         <tbody>
           <tr>
             <td><img class="hand_conf_tooltip" href="#" title="Configuracao" data-placement="left" data-toggle="tooltip" src="/static_libras/images/hand_config.png" style="float: left"/><label class="signs_conf_counter">0</label></td>
-            <td><div id="star_avg" style="margin: 5px 0 0 0; float: left"></div><label id="user_vs_comunity_avg" style="margin: 5px 0 0 5px;">(X/Y)</label></td>
+            <td><div id="star_avg" style="margin: 5px 0 0 0; float: left"></div><label id="user_vs_comunity_avg" style="margin: 5px 0 0 5px;"></label></td>
             <td><label class="last_time" style="margin: 10px 0 0 0"></label></td>
           </tr>
         </tbody>
@@ -56,7 +56,7 @@
       </section> <!-- End of section overall_progress -->
       <section id="help_deaf" style="padding: 10px">
         <label style="font-size: 18px">Ajude os surdos!</label>
-        <p style="text-align: justify">Enquanto voc&ecirc; traduz uma palavra de Portugu&ecirc;s para LIBRAS voc&ecirc; contribui para a cria&ccedil;&atilde;o do dicion&aacute;rio e assim promove a inclus&atilde;o social dos surdos.</p>
+        <p style="text-align: justify">Enquanto voc&ecirc; traduz uma palavra de Portugu&ecirc;s para Libras voc&ecirc; contribui para a cria&ccedil;&atilde;o do dicion&aacute;rio e assim promove a inclus&atilde;o social dos surdos.</p>
         <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 300px; margin: 10px 0 0 20px">Continue colaborando</button>
         <button class="btn btn-info btn-large share_button" type="button" value="share" style="width: 300px; margin: 10px 0 0 20px; display: none">Chamem seus amigos</button>
       </section> <!-- End of section help_deaf -->
@@ -188,10 +188,10 @@
 
     <!-- begin of quantidade_de_maos -->
     <section id="quantidade_maos" style="display: none; float: left">
-      <button class="btn btn-large btn-info btn-answer" style="width: 130px; float: left; margin: 10px 0 0 48px" value='uma'>
+      <button class="btn btn-large btn-info btn-hands-amount" style="width: 130px; float: left; margin: 10px 0 0 48px" value='uma'>
           Uma m&atilde;o
       </button>
-      <button class="btn btn-large btn-info btn-answer" style="width: 130px; margin: 10px 0 0 10px;" value='duas'>
+      <button class="btn btn-large btn-info btn-hands-amount" style="width: 130px; margin: 10px 0 0 10px;" value='duas'>
 	  Duas m&atilde;os
       </button>
     </section>
@@ -491,9 +491,20 @@ pybossa.presentTask(function(task, deferred) {
   var current_exp_group;
   var current_handshape_group;
   var current_fix_hand;
+  var fix_counter = 0;
   var state = "QTD_MAOS";
   var isRightHand = true;
   var parametros = {right : {}, left : {}};
+
+  var steps_times = { right : {}, left : {} };
+
+  var old_date = new Date();
+  var microtask_start = old_date.getTime();
+
+  var current_date = new Date();
+  var microtask_end = current_date.getTime();
+
+  console.log( "INICIO DA TAREFA: " + microtask_start );
 
   var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
@@ -753,11 +764,12 @@ pybossa.presentTask(function(task, deferred) {
         $('#ponto_de_articulacao').show();
       }
       else if (state == "RENDER") {
-	pergunta = "O avatar faz o sinal corretamente?";
+	pergunta = "Aguarde um momento por favor";
 	renderizarVideo();
         $("#wrap_avatar_video").show();
       }
       else if (state == "CONFIRM_AVATAR") {
+	pergunta = "O avatar faz o sinal corretamente?";
 	$("#wrap_avatar_video").show();
       }
       else if (state == "CORRECAO") {
@@ -826,12 +838,9 @@ pybossa.presentTask(function(task, deferred) {
       } // Fim do if
 
       $("#fix_expressao").find("li").first().html( '<a href="#modalExp" data-toggle="modal"><img width="100px" height="100px" src="/static_libras/images/expressao_facial/' + parametros["EXP_FACIAL"] + '.png" /></a>' );
-
-          
-      
+  
     } // Fim da funcao setCorrecaoLi
     
-
     function showCorrecaoDiv() {
         setCorrecaoLi();
 	$("#correcao").show();
@@ -839,9 +848,17 @@ pybossa.presentTask(function(task, deferred) {
 
     function saveAnswer(answer) {
         
-
 	if ( state == "CONFIRM_AVATAR" ) {
-          return;
+            if ( fix_counter == 0 ) {  
+                steps_times[state] = getStepTime();
+                updateMicrotaskTimer();
+            }
+            parametros["steps_times"] = steps_times;
+            console.log("TEMPO DE CADA MICROSTACK");
+            console.log( parametros["steps_times"] );
+            console.log( parametros["steps_times"].right );
+            console.log( parametros["steps_times"].left );
+            return;
 	}
 
         if ( state == "CORRECAO" ) {
@@ -880,21 +897,47 @@ pybossa.presentTask(function(task, deferred) {
         } // Fim do if CORRECAO
 
 	if (state == "RENDER") {
-		parametros.avatar_video = answer;
-		return;
+            parametros.avatar_video = answer;
+            return;
 	}
 
-	if (state == "EXP_FACIAL" || state == "QTD_MAOS") {
-		parametros[state] = answer;
-		return;
+	if ( state == "EXP_FACIAL" || state == "QTD_MAOS" ) {
+            parametros[state] = answer;
+            
+            if ( fix_counter == 0 ) {
+                steps_times[state] = getStepTime();
+                updateMicrotaskTimer();
+            }
+            return;
 	}
 
 	if (isRightHand) {
-		parametros.right[state] = answer;
+            parametros.right[state] = answer;
+            if ( fix_counter == 0 ) {
+                steps_times.right[state] = getStepTime();
+                updateMicrotaskTimer();
+            }
 	} else {
-		parametros.left[state] = answer;
+            parametros.left[state] = answer;
+            if ( fix_counter == 0 ) {
+                steps_times.left[state] = getStepTime();
+                updateMicrotaskTimer();
+            }
 	}	
     }
+    
+    function getStepTime(){
+        current_date = new Date();
+        microtask_end = current_date.getTime();
+        return (microtask_end - microtask_start);
+    } // Fim da funcao saveStepTime
+
+    function updateMicrotaskTimer(){
+        old_date = new Date();
+        microtask_start = old_date.getTime(); 
+        current_date = new Date();
+        microtask_end = current_date.getTime();
+    } // Fim da funcao updateMicrotaskTimer
 
     function updateState(answer) {
 	
@@ -938,8 +981,10 @@ pybossa.presentTask(function(task, deferred) {
           nextState = "CONFIRM_AVATAR";
 	} else if (state == "CONFIRM_AVATAR") {
           if (answer == "Sim") {
-            nextState = "TASK_END";
+            parametros["fix_counter"] = fix_counter;
+            fix_counter == 0;
             params_configured = 0;
+            nextState = "TASK_END";
             $('.task_progress_bar').hide();
           } else {
             nextState = "CORRECAO";
@@ -952,7 +997,6 @@ pybossa.presentTask(function(task, deferred) {
 	state = nextState;
 	//console.log(state);
      }
-
 
     function updatePA(rightHand) {
 	var mao = rightHand ? parametros.right : parametros.left;
@@ -1009,12 +1053,15 @@ pybossa.presentTask(function(task, deferred) {
 	updateRenderProgressBar(100);
 	clearInterval(tid);
 	$('#render_progress').fadeOut(1000);
+        $("#confirmacao_avatar").show();
+        updateMicrotaskTimer();
     }
 
     function showRenderProgress() {
 	updateRenderProgressBar(0);
 	tid = setInterval(updateRenderProgress, 1000);
 	$("#render_progress").show();
+        $("#confirmacao_avatar").hide();
     }
 
     function renderizarVideo() {
@@ -1064,8 +1111,6 @@ pybossa.presentTask(function(task, deferred) {
       for( var sign in user_signs ){
         $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/check_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
       } // Fim do for
-
-
 
     } // Fim da funcao setCurrentUserSigns
 
@@ -1133,11 +1178,25 @@ pybossa.presentTask(function(task, deferred) {
               $("#error").show();
             }
         });
+
+        // Eventos de clique no botao de quantidade de maos
+        $('.btn-hands-amount').off('click').on('click', function(){
+            var answer = $(this).attr('value');
+            if( typeof answer != 'undefined' ){
+
+              saveAnswer(answer);
+              updateState(answer);	
+              mostrarPergunta(state);
+            } else{
+              $("#error").show();
+            }
+        });
 	
         // Eventos de cliques em tipos de mao
         $(".handshape").off("click").on( "click", function() {
 	  answer = $(this).data('handshape');
   	  saveAnswer(answer);
+          
           if ( state != "CORRECAO" ) 
 	    updateState(answer);
           else
@@ -1172,7 +1231,6 @@ pybossa.presentTask(function(task, deferred) {
             $('.modal.in').modal("hide");
 	   mostrarPergunta();
          });
-
 
          // Eventos de cliques em expressao facial
          var exp_answer;
@@ -1218,6 +1276,9 @@ pybossa.presentTask(function(task, deferred) {
          $('.ready').off('click').on('click', function(){
            updateState( $(this).attr('value') );
            $('#avatar_video').hide();
+           fix_counter = fix_counter + 1;
+           steps_times[ "CORRECAO" + fix_counter ] = getStepTime();
+           updateMicrotaskTimer();
            mostrarPergunta();
          });
 

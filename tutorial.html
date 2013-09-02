@@ -14,7 +14,7 @@
                     Libras &eacute; uma l&iacute;ngua espa&ccedil;o visual realizada atrav&eacute;s
                     de sinais onde cada sinal &eacute; constituido de par&acirc;metros tais como:
                     Forma da m&atilde;o, Orienta&ccedil;&atilde;o da palma da m&atilde;o, 
-                    Ponto de articula&ccedil;o, tipo de Movimento e Express&atilde;o facial.
+                    Ponto de articula&ccedil;&atilde;o, tipo de Movimento e Express&atilde;o facial.
                 </p>
                 <p>
                     Para configurar um sinal a aplica&ccedil;&atilde;o Dicion&aacute;rio
@@ -36,13 +36,6 @@
                     <li><span class="badge badge-important">6</span> Mostra as suas contribui&ccedil;&otilde;es</li>
                     <li><span class="badge badge-important">7</span> Op&ccedil;&atilde;o de n&atilde;o contribuir com o sinal atual</li>
                 </ul>
-                <!-- imagem -->
-                <!-- 
-                <p>
-                    Finalmente, na terceira etapa, o voluntário visualiza o avatar fazendo um sinal configurado
-                    por outro outro voluntário e confirma ou corrige os parâmetros selecionados para o sinal
-                    que o avatar está fazendo.                     
-                </p> -->
             </div> <!-- Passo 1 -->
             <div id="2" class="modal-body" style="display: none; text-align: justify">
                 <img src="/static_libras/images/tutorial/ori_tuto.png" />
@@ -58,7 +51,7 @@
             <div id="3" class="modal-body" style="display: none; text-align: justify">
                 <p>
                     Para este par&acirc;metro, ponto de articula&ccedil;&atilde;o, voc&ecirc; deve determinar 
-                    o local, em rela&ccedil;&atilde;o ao corpo, onde se faz o sinal.
+                    o local em rela&ccedil;&atilde;o ao corpo onde se faz o sinal.
                 </p>
 
                 <img src="/static_libras/images/tutorial/ponto_tuto.png" />
@@ -82,8 +75,8 @@
             </div> <!-- Passo 5 -->
             <div id="6" class="modal-body" style="display: none; text-align: justify">
                 <p>
-                    O conjunto de par&atilde;metros selecionados s&atilde;o passados para um avatar, um agente virtual 
-                    sinalizador que faz o sinal e o volunt&aacute;rio confirma ou corrige o sinal feito pelo avatar.
+                    O conjunto de par&atilde;metros selecionados s&atilde;o passados para um avatar que 
+                    faz o sinal e o volunt&aacute;rio confirma ou corrige.
                 </p>
 
                 <img src="/static_libras/images/tutorial/confirmacao.png" />
@@ -105,7 +98,7 @@
 
                 <img src="/static_libras/images/tutorial/correcao_opcao.png" />
             </div> <!-- Passo 8 -->
-            <div id="8" class="modal-body" style="display: none; text-align: justify">
+            <div id="9" class="modal-body" style="display: none; text-align: justify">
                 <p>
                     Observe a pessoa que faz o sinal e determine a quantidade m&atilde;os
                     que caracteriza o sinal.
@@ -164,7 +157,10 @@
         }else if (step == 7 ) {
             $("#prevBtn").show();
             $("#nextBtn").show();
-        }else if ( step == 8 ){
+        }else if (step == 8 ) {
+            $("#prevBtn").show();
+            $("#nextBtn").show();
+        }else if ( step == 9 ){
             $("#nextBtn").hide();
         }
         $("#" + step).show();
