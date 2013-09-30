@@ -58,14 +58,14 @@
             <div id="3" class="modal-body" style="display: none; text-align: justify">
                 <p>
                     Para este par&acirc;metro, ponto de articula&ccedil;&atilde;o, voc&ecirc; deve determinar 
-                    o local, em rela&ccedil;&atilde;o ao corpo, onde se faz o sinal.
+                    o local em rela&ccedil;&atilde;o ao corpo onde se faz o sinal.
                 </p>
 
                 <img src="/static_libras/images/tutorial/ponto_tuto.png" />
             </div> <!-- Passo 3 -->
             <div id="4" class="modal-body" style="display: none; text-align: justify">
                 <p>
-                    Observe se a mão est&acute; perto ou longe do corpo da pessoa que faz o sinal
+                    Observe se a mão est&aacute; perto ou longe do corpo da pessoa que faz o sinal
                     e selecione uma dos tr&ecirc;s alvos indicados na figura abaixo
                 </p>
 
@@ -82,8 +82,8 @@
             </div> <!-- Passo 5 -->
             <div id="6" class="modal-body" style="display: none; text-align: justify">
                 <p>
-                    O conjunto de par&atilde;metros selecionados s&atilde;o passados para um avatar, um agente virtual 
-                    sinalizador que faz o sinal e o volunt&aacute;rio confirma ou corrige o sinal feito pelo avatar.
+                    O conjunto de par&atilde;metros selecionados s&atilde;o passados para um avatar que 
+                    faz o sinal e o volunt&aacute;rio confirma ou corrige.
                 </p>
 
                 <img src="/static_libras/images/tutorial/confirmacao.png" />
@@ -91,7 +91,7 @@
             <div id="7" class="modal-body" style="display: none; text-align: justify">
                 <p>
                     Caso o avatar n&atilde;o fa&ccedil;a o sinal corretamente, voc&ecirc; pode
-                    clicar em corrigir e selecionar um dos par&ametros para ser corrigido.
+                    clicar em corrigir e selecionar um dos par&acirc;metros para ser corrigido.
                 </p>
 
                 <img src="/static_libras/images/tutorial/correcao.png" />

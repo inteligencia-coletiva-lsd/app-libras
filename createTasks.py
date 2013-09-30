@@ -135,38 +135,8 @@ if __name__ == "__main__":
         # First of all we get the URL photos
         # Then, we have to create a set of tasks for the application
         # For this, we get first the photo URLs from Flickr
-
         videos_ids = get_videos_ids()
         question = app_config['question']
-        #questions = [ "Com quantas m&atilde;os se faz o sinal?", 
-        #              "Escolha &eacute; a orienta&ccedil;&atilde;o inicial da palma da m&atilde;o direita?",
-        #              "Selecione &eacute; o ponto de articula&ccedil;&atilde;o da m&atilde;o direita?",
-        #              "Com que express&atilde;o facial se faz o sinal?",
-        #              "Escolha a forma inicial da m&atilde;o direita." ]
-        
-        #videoId_questions_dict = dict() 
-        #for video_id in videos_ids:
-        #    videoId_questions_dict[ video_id ] = questions[:]
-        
-        # Batch creation
-        #for i in xrange(1):
-            #videosId_keys = videoId_questions_dict.keys()
-            #while True:
-            #    if len( videosId_keys ) == 0:
-            #        break
-                
-            #    videoId_key = random.choice( videosId_keys )
-            #    questions_values = videoId_questions_dict[ videoId_key ]  
-            #    if len( questions_values ) != 0:
-            #        question = random.choice( questions_values )
-            #        create_video_task( app, videoId_key, question )
-            #        videoId_questions_dict[ videoId_key ].remove( question )
-            #    else:
-            #        videosId_keys.remove( videoId_key )
-                
-#            for question in questions:
-#                for video_id in videos_ids:
-#                    create_video_task( app, video_id, question)
         for k,v in videos_ids.iteritems():
           create_video_task( app, k, v, question)
       

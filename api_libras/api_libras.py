@@ -5,6 +5,7 @@ import random
 import urllib2
 import urllib
 import pbclient
+import requests
 
 app = Flask(__name__)
 
@@ -16,6 +17,37 @@ MOV_PONTUAL_SCRIPT = os.path.join(SCRIPTS_BLENDER_DIR, "movPontual.py")
 
 pbclient.set('endpoint', "http://localhost:8080/pybossa")
 
+@app.route( "/validateTask", methods = ['POST'] )
+def validateTask():
+    task_id = json.loads( request.data )
+
+    app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
+    taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_id )
+    taskruns_for_task_id[-1].info["agreement"] = "yes"
+
+    print "TESTE DE UPDATE"
+    print json.dumps( dict( info = taskruns_for_task_id[-1].info ) )
+    print json.dumps( dict( state = "completed" ) )
+
+    requests.put("%s/api/taskrun/%s?api_key=%s" % 
+                 ( "http://localhost:8080/pybossa", taskruns_for_task_id[-1].id, "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
+                 data = json.dumps( dict( info = taskruns_for_task_id[-1].info ) ) )    
+
+    requests.put("%s/api/task/%s?api_key=%s" % 
+                 ( "http://localhost:8080/pybossa", task_id, "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
+                 data = json.dumps( dict( state = "completed" ) ) )
+
+    return jsonify( resultado = None )
+
+@app.route( "/getLastTaskrun", methods = ['POST'] )
+def getLastTaskrun():
+    task_id = json.loads( request.data )    
+    app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
+    taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_id )
+    if len( taskruns_for_task_id ) != 0:
+        return jsonify( avatar_video = taskruns_for_task_id[-1].info["avatar_video"] )
+    return jsonify( avatar_video = None )
+
 @app.route( "/userReport", methods = ['POST'] )
 def userReport():
     info = json.loads(request.data)
@@ -26,11 +58,13 @@ def userReport():
     tasks_amount = getTasksAmount( app_id ) * 5
 
     user_task_runs = dict()
+    user_task_runs_amount = 0
     user_signs = []
     users_amount = 0
     comunity_average = 0
     user_average = 0
     overall_progress = 0
+    last_time = "Nunca"
     if( len(all_task_runs) > 0 ):
         user_task_runs = getUserTaskRuns( app_id, current_user_id, current_user_ip )
         user_task_runs_amount = len(user_task_runs)
@@ -39,7 +73,7 @@ def userReport():
         all_task_runs_amount = len( all_task_runs )
         
         if ( users_amount ) == 1:
-            comunity_average = user_task_runs_amount
+            comunity_average = all_task_runs_amount
         else:
             comunity_average = (all_task_runs_amount - user_task_runs_amount) / ( float(users_amount - 1) )
 
@@ -59,8 +93,6 @@ def userReport():
 
         if ( user_task_runs_amount > 0 ):
             last_time = user_task_runs[-1].finish_time.split("T")[0]
-        else:
-            last_time = "Nunca"
 
     return jsonify( user_signs = user_signs, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
 
