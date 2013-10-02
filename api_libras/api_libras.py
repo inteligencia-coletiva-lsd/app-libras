@@ -19,22 +19,26 @@ pbclient.set('endpoint', "http://localhost:8080/pybossa")
 
 @app.route( "/validateTask", methods = ['POST'] )
 def validateTask():
-    task_id = json.loads( request.data )
+    task_info = json.loads( request.data )
 
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
-    taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_id )
-    taskruns_for_task_id[-1].info["agreement"] = "yes"
+    current_user_id = task_info["current_user_id"]
+    current_user_ip = getUserIp()
+    
+    taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_info["task_id"] )
 
-    print "TESTE DE UPDATE"
-    print json.dumps( dict( info = taskruns_for_task_id[-1].info ) )
-    print json.dumps( dict( state = "completed" ) )
+
+    if ( current_user_id is None ):
+        taskruns_for_task_id[-1].info["agreement"] = dict( status = "yes", user_id = current_user_ip )
+    else:
+        taskruns_for_task_id[-1].info["agreement"] = dict( status = "yes", user_id = task_info["current_user_id"] )        
 
     requests.put("%s/api/taskrun/%s?api_key=%s" % 
                  ( "http://localhost:8080/pybossa", taskruns_for_task_id[-1].id, "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
                  data = json.dumps( dict( info = taskruns_for_task_id[-1].info ) ) )    
 
     requests.put("%s/api/task/%s?api_key=%s" % 
-                 ( "http://localhost:8080/pybossa", task_id, "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
+                 ( "http://localhost:8080/pybossa", task_info["task_id"], "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
                  data = json.dumps( dict( state = "completed" ) ) )
 
     return jsonify( resultado = None )
@@ -50,34 +54,37 @@ def getLastTaskrun():
 
 @app.route( "/userReport", methods = ['POST'] )
 def userReport():
-    info = json.loads(request.data)
+    info = json.loads( request.data )
     current_user_id = info["current_user_id"]
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
     current_user_ip = getUserIp();
     all_task_runs = getAllTaskRuns( app_id ) 
+    # TODO comparar a quantidade de tarefas disponiveis com a quantidade de tarefas completas
     tasks_amount = getTasksAmount( app_id ) * 5
 
     user_task_runs = dict()
     user_task_runs_amount = 0
-    user_signs = []
+    user_signs = dict()
+    user_reviews = dict()
     users_amount = 0
     comunity_average = 0
     user_average = 0
     overall_progress = 0
     last_time = "Nunca"
-    if( len(all_task_runs) > 0 ):
+    if( len( all_task_runs ) > 0 ):
         user_task_runs = getUserTaskRuns( app_id, current_user_id, current_user_ip )
-        user_task_runs_amount = len(user_task_runs)
-        user_signs = getUserSigns( user_task_runs, current_user_id, current_user_ip )
+        user_task_runs_amount = len( user_task_runs )
+        user_signs = getUserSigns( user_task_runs )
+        user_reviews = getUserReviews( all_task_runs, current_user_id, current_user_ip )
         users_amount = getUsersAmount( all_task_runs )
         all_task_runs_amount = len( all_task_runs )
         
         if ( users_amount ) == 1:
             comunity_average = all_task_runs_amount
         else:
-            comunity_average = (all_task_runs_amount - user_task_runs_amount) / ( float(users_amount - 1) )
+            comunity_average = ( all_task_runs_amount - user_task_runs_amount ) / ( float( users_amount - 1 ) )
 
-        user_average = round( user_task_runs_amount / float(comunity_average), 2 )
+        user_average = round( user_task_runs_amount / float( comunity_average ), 2 )
         
         if ( user_average < 0.5 ) and ( user_task_runs_amount != 0 ):
             user_average = 1
@@ -94,7 +101,7 @@ def userReport():
         if ( user_task_runs_amount > 0 ):
             last_time = user_task_runs[-1].finish_time.split("T")[0]
 
-    return jsonify( user_signs = user_signs, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
+    return jsonify( user_signs = user_signs, user_reviews = user_reviews, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
 
 
 def getUserIp():
@@ -111,15 +118,18 @@ def getUserTaskRuns( app_id, user_id, current_user_ip ):
         return pbclient.find_taskruns( app_id, user_ip = current_user_ip )        
     return pbclient.find_taskruns( app_id, user_id = user_id )
 
-def getUserSigns( all_task_runs, user_id, current_user_ip ):
-    user_signs = []
-    for task_run in all_task_runs:
-        if ( user_id is None ):
-            if( task_run.user_ip == current_user_ip ):
-                user_signs.append( task_run.info['signal_name'] )            
-        elif( user_id == task_run.user_id ):
-            user_signs.append( task_run.info['signal_name'] )
+def getUserSigns( user_task_runs ):
+    user_signs = dict()
+    for task_run in user_task_runs:
+        user_signs[ task_run.info['signal_name'] ] = task_run.info['agreement']["status"]            
     return user_signs
+
+def getUserReviews( all_taskruns, user_id, user_ip ):
+    user_reviews = dict()
+    for taskrun in all_taskruns:
+        if ( taskrun.info['agreement']['user_id'] == user_id ) or ( taskrun.info['agreement']['user_id'] == user_ip ):
+            user_reviews[ taskrun.info['signal_name'] ] = taskrun.info['agreement']['status']
+    return user_reviews
 
 def getUsersAmount( all_task_runs ):
     users = set()

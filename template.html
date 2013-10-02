@@ -9,7 +9,7 @@
                 Dicion&aacute;rio de Libras
             </label>
             <label style="margin: 20px 0 0 220px; font-size: 24px">
-                Todos os sinais que você configurou na aplica&ccedil;&atilde;o.
+                Todos os sinais que você contribuiu na aplica&ccedil;&atilde;o.
             </label>
         </header> <!-- End of top header -->
 
@@ -17,7 +17,7 @@
         <section id="left">
 
             <label class="signs_counter" style="float: left; margin: 10px 0 0  10px">
-                Voc&ecirc; ainda n&atilde;o configurou sinais.
+                Voc&ecirc; ainda n&atilde;o contribuiu.
             </label>
             <form class="form-search" style="margin: 10px 0 0 390px">
                 <input type="text" class="input-medium search-query" placeholder="Procurar Sinal" disabled style="height: 20px" />
@@ -38,7 +38,7 @@
                     <tr>
                         <td>
                             <img class="hand_conf_tooltip" href="#" title="Configuracao" data-placement="left" data-toggle="tooltip" src="/static_libras/images/hand_config.png" style="float: left"/>
-                            <label class="signs_conf_counter">0</label>
+                            <label class="signs_conf_counter"></label>
                         </td>
                         <td>
                             <div id="star_avg" style="margin: 5px 0 0 0; float: left"></div>
@@ -66,6 +66,24 @@
                     </tr>
                 </thead>
                 <tbody class="user_signs">
+                </tbody>
+            </table>
+
+            <label style="margin: 10px 0 0  10px">
+                Sinais que voc&ecirc; revisou.
+            </label>
+
+            <hr style="margin: 10px 0 10px 0; padding: 0" />
+            
+            <table class="table table-striped user_signs_table">
+                <thead>
+                    <tr>
+                        <th>Sinal</th>
+                        <th>Status</th>
+                        <th>Grupo</th>
+                    </tr>
+                </thead>
+                <tbody class="user_reviews">
                 </tbody>
             </table>
 
@@ -530,7 +548,6 @@ pybossa.presentTask(function(task, deferred) {
         data: JSON.stringify( task_id = task.id ),
         success: function( result ) {
             video = result.avatar_video;
-            console.log( "VIDEO AQUI EH: ", video )
             
             if ( video != null ) {
                 state = "VALIDAR_AVATAR";
@@ -575,8 +592,6 @@ pybossa.presentTask(function(task, deferred) {
 
   var current_date = new Date();
   var microtask_end = current_date.getTime();
-
-  console.log( "INICIO DA TAREFA: " + microtask_start );
 
   var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
                                      "Exp_2" : "Bochechas infladas", 
@@ -930,7 +945,7 @@ pybossa.presentTask(function(task, deferred) {
                 updateMicrotaskTimer();
             }
             parametros["steps_times"] = steps_times;
-            parametros["agreement"] = "no";
+            parametros["agreement"] = { status : "no", user_id : "my" };
             return;
 	}
 
@@ -1059,19 +1074,22 @@ pybossa.presentTask(function(task, deferred) {
           
 	} else if ( state == "VALIDAR_AVATAR" ) {
             if ( answer == "Sim" ) {
-                // chamada ajax para setar a tarefa como completa
-                jQuery.ajax( {
- 	            type: 'POST',
-	            url:    '/LIBRAS_API/validateTask',
-	            contentType: 'application/json',
-	            data: JSON.stringify( task_id = task.id ),
-	            success: function( result ) {
-	            },
-	            error: function( result ) {
-	                alert("Error!");
-	            },
-	            async: true
-	        });
+
+                pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
+                    // chamada ajax para setar a tarefa como completa
+                    jQuery.ajax( {
+ 	                type: 'POST',
+	                url:    '/LIBRAS_API/validateTask',
+	                contentType: 'application/json',
+	                data: JSON.stringify( { task_id : task.id, current_user_id : data.current_usr_id } ),
+	                success: function( result ) {
+	                },
+	                error: function( result ) {
+	                    alert("Error!");
+	                },
+	                async: true
+	            });
+                });
             } else {
                 nextState = "CORRECAO";
             }
@@ -1180,12 +1198,28 @@ pybossa.presentTask(function(task, deferred) {
 
     } // Fim da funcao renderizarVideo
 
-    function setCurrentUserSigns( user_signs ){
-      console.log( "Voce; configurou " + user_signs.length + " sinais." );
-      $(".signs_counter").html( "Voc&ecirc; configurou " + user_signs.length + " sinais." );
-      $(".signs_conf_counter").html( user_signs.length );
+    function setCurrentUserSigns( user_signs, user_reviews ) {
+
+      var key, user_signs_length = 0;
+      for( key in user_signs ) {
+          user_signs_length++;
+      }
+       
+      for( key in user_reviews ) {
+          user_signs_length++;
+      }
+
+      console.log( "THE USER REVIEWS: " + user_reviews );
+
+      if ( user_signs_length == 0 ){
+          $(".signs_counter").html( "Voc&ecirc; ainda n&atilde;o contribuiu" );
+      } else {
+          $(".signs_counter").html( "Voc&ecirc; contribuiu em " + user_signs_length + " sinais." );
+      }
       
-      if ( user_signs.length == 0 ){
+      $(".signs_conf_counter").html( user_signs_length );
+      
+      if ( user_signs_length == 0 ){
         $(".user_signs_table").hide();
       }
       else{
@@ -1194,8 +1228,21 @@ pybossa.presentTask(function(task, deferred) {
 
       $(".user_signs").html("");
 
-      for( var sign in user_signs ){
-        $(".user_signs").append('<tr><td><label class="signal_name">' + user_signs[sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/check_gray.png"/></td><td>' + words_groups[ user_signs[sign] ] + '</td></tr>');
+      for( var sign in user_signs ) {
+          var sign_agreement_img = "check_gray.png";
+          if ( user_signs[sign] == "yes" )
+              sign_agreement_img = "check_green.png"       
+
+          $(".user_signs").append( '<tr><td><label class="signal_name">' + sign + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ sign ] + '</td></tr>');
+
+      } // Fim do for
+
+      for( var sign in user_reviews ){
+          var sign_agreement_img = "check_gray.png";
+          if ( user_reviews[sign] == "yes" )
+              sign_agreement_img = "check_green.png"       
+
+          $(".user_reviews").append( '<tr><td><label class="signal_name">' + sign + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ sign ] + '</td></tr>');
       } // Fim do for
 
     } // Fim da funcao setCurrentUserSigns
@@ -1204,17 +1251,16 @@ pybossa.presentTask(function(task, deferred) {
       $(".skeleton").hide();
 
       // TODO tratar o erro de nao encontra id
-      pybossa.getCurrentUserId('librasdictionary').done( function(data){
-        console.log( "Current User Id: " + data.current_usr_id );
+      pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
         
-        $.ajax({
+        $.ajax( {
           type: 'POST',
 	  url: '/LIBRAS_API/userReport',
 	  contentType: 'application/json',
 	  data: JSON.stringify( { current_user_id : data.current_usr_id } ),
 	  success: function(result) {
-            setCurrentUserSigns( result.user_signs );
-            $(".last_time").html( result.last_time );
+            setCurrentUserSigns( result.user_signs, result.user_reviews );
+            $( ".last_time" ).html( result.last_time );
             setUserAverage( result.user_average, result.user_task_runs_amount, result.comunity_average );
             $(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
           },
@@ -1253,7 +1299,11 @@ pybossa.presentTask(function(task, deferred) {
 
                 if ( state == "VALIDAR_AVATAR" ) {
                     updateState( answer );
-      	            deferred.resolve();
+
+                    if( answer == "Sim" ){
+      	                deferred.resolve();
+                    }
+
                 } else {
                     saveAnswer( answer );
                     updateState( answer );
