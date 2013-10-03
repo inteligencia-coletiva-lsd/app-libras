@@ -134,78 +134,79 @@
     </div> <!-- End of wrap div -->
     <!-- End of Report -->
 
-<div class="row skeleton question" style="height: 50px;"> <!-- Start Skeleton -->
-    <h1 id="question" style="margin: 10px 0 0 10px; float: left"></h1> <!-- The question will be loaded here -->
-</div><!-- End of Skeleton -->
-<div class="skeleton" style="width: 1024px;"> <!-- Start Skeleton -->
+    <div class="row skeleton question" style="height: 50px;"> <!-- Start Skeleton -->
+        <h1 id="question" style="margin: 10px 0 0 10px; float: left"></h1> <!-- The question will be loaded here -->
+    </div><!-- End of Skeleton -->
 
-  <div id="parametros_sinal" style="float: left;">
+    <div class="skeleton" style="width: 1024px;"> <!-- Start Skeleton -->
+        <div id="parametros_sinal" style="float: left;">
+            
+            <!-- Begin of hand_shapes -->
+            <section id="hand_shapes" style="display: none">
+                <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%; float: right;">
+                    <ul style="margin: 0">
+                        <li data-handshape_group="prev"><a href="#">Prev</a></li>
+                        <li data-handshape_group="group_1"><a href="#">1</a></li>
+                        <li data-handshape_group="group_2"><a href="#">2</a></li>
+                        <li data-handshape_group="next"><a href="#">Next</a></li>
+                    </ul>
+                </div>
+                
+                <section id="maos">
+                    <ul style="margin: 1px 0 0 0">
+                        <li class="handshape" data-handshape="conf_1"><!--  img from js --></li>
+                        <li class="handshape" data-handshape="conf_2"><!--  img from js --></li>
+                        <li class="handshape" data-handshape="conf_3"><!--  img from js --></li>
+                        <li class="handshape" data-handshape="conf_4"><!--  img from js  --></li>
+                        <li class="handshape" data-handshape="conf_5"><!--  img from js  --></li>
+                        <li class="handshape" data-handshape="conf_6"><!--  img from js --></li>
+                        <li class="handshape" data-handshape="conf_7"><!--  img from js --></li> 
+                        <li class="handshape" data-handshape="conf_8"><!--  img from js --></li>
+                        <li class="handshape" data-handshape="conf_9"><!--  img from js --></li>
+                        <li class="handshape" data-handshape="conf_10"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_11"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_12"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_13"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_14"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_15"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_16"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_17"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_18"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_19"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_20"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_21"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_22"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_23"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_24"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_25"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_26"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_27"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_28"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_29"><!-- img from js --></li>
+                        <li class="handshape" data-handshape="conf_30"><!-- img from js --></li>
+                    </ul>
+                </section> <!-- End of maos section -->
+            </section> <!-- End of hand_shapes section -->
+            <!-- End of hand_shapes -->
 
-    <!-- Begin of hand_shapes -->
-    <section id="hand_shapes" style="display: none">
-      <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%; float: right;">
-        <ul style="margin: 0">
-          <li data-handshape_group="prev"><a href="#">Prev</a></li>
-          <li data-handshape_group="group_1"><a href="#">1</a></li>
-          <li data-handshape_group="group_2"><a href="#">2</a></li>
-          <li data-handshape_group="next"><a href="#">Next</a></li>
-        </ul>
-      </div>
-      <section id="maos">
-        <ul style="margin: 1px 0 0 0">
-          <li class="handshape" data-handshape="conf_1"><!--  img from js --></li>
-          <li class="handshape" data-handshape="conf_2"><!--  img from js --></li>
-          <li class="handshape" data-handshape="conf_3"><!--  img from js --></li>
-          <li class="handshape" data-handshape="conf_4"><!--  img from js  --></li>
-          <li class="handshape" data-handshape="conf_5"><!--  img from js  --></li>
-          <li class="handshape" data-handshape="conf_6"><!--  img from js --></li>
-          <li class="handshape" data-handshape="conf_7"><!--  img from js --></li> 
-          <li class="handshape" data-handshape="conf_8"><!--  img from js --></li>
-          <li class="handshape" data-handshape="conf_9"><!--  img from js --></li>
-          <li class="handshape" data-handshape="conf_10"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_11"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_12"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_13"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_14"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_15"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_16"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_17"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_18"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_19"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_20"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_21"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_22"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_23"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_24"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_25"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_26"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_27"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_28"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_29"><!-- img from js --></li>
-          <li class="handshape" data-handshape="conf_30"><!-- img from js --></li>
-        </ul>
-      </section> <!-- End of maos div -->
-    </section> <!-- End of hand_shapes section -->
-    <!-- End of hand_shapes -->
-
-    <!-- Begin of orientacao_palma_da_mao -->
-    <section id="orientacao_palma_da_mao" style="display: none;">
-      <ul style="margin: 2px 0 0 22px">
-        <li class="ori" data-orientacao="Ori_1"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_2"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_3"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_4"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_5"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_6"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_7"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_8"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_9"><!--  img from js --></li>
-        <li class="ori" data-orientacao="Ori_10"><!-- img from js --></li>
-        <li class="ori" data-orientacao="Ori_11"><!-- img from js --></li>
-        <li class="ori" data-orientacao="Ori_12"><!-- img from js --></li>
-      </ul>
-    </section>
-    <!-- End of orientacao_palma_da_mao -->
+            <!-- Begin of orientacao_palma_da_mao -->
+            <section id="orientacao_palma_da_mao" style="display: none;">
+                <ul style="margin: 2px 0 0 22px">
+                    <li class="ori" data-orientacao="Ori_1"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_2"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_3"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_4"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_5"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_6"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_7"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_8"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_9"><!--  img from js --></li>
+                    <li class="ori" data-orientacao="Ori_10"><!-- img from js --></li>
+                    <li class="ori" data-orientacao="Ori_11"><!-- img from js --></li>
+                    <li class="ori" data-orientacao="Ori_12"><!-- img from js --></li>
+                </ul>
+            </section>
+            <!-- End of orientacao_palma_da_mao -->
 
     <!-- Begin of ponto_de_articulacao -->
     <section id="ponto_de_articulacao" style="display: none; margin: 2px 0 0 0; text-align: center">
@@ -344,7 +345,7 @@
           <h2 id="myModalLabel">Qual &eacute; a forma da m&atilde;o?</h2>
         </div>
         <div class="modal-body">
-          <section id="hand_shapes">
+          <section id="modal_hand_shapes">
             <div class="pagination pagination-right handshape_pagination" style="padding: 0; margin: 0 5px 0 0; width: 100%; float: right;">
               <ul style="margin: 0">
                 <li data-handshape_group="prev"><a href="#">Prev</a></li>
@@ -533,32 +534,32 @@
 <script src="/static_libras/js/jquery.raty.min.js"></script>
 
 <script>
-pybossa.taskLoaded( function(task, deferred) {
+pybossa.taskLoaded( function(task, deferred ) {
 
     deferred.resolve(task);
 });
 
-pybossa.presentTask(function(task, deferred) {
+pybossa.presentTask(  function(task, deferred ) {
 
     // Obtem a ultima taskrun para a task
     jQuery.ajax({
         type: 'POST',
-        url:    '/LIBRAS_API/getLastTaskrun',
+        url:  '/LIBRAS_API/getLastTaskrun',
         contentType: 'application/json',
         data: JSON.stringify( task_id = task.id ),
         success: function( result ) {
-            video = result.avatar_video;
+            console.log( "THE RESULT IS " + result.lastTaskRun['avatar_video'] );
+            parametros["right"] = result.lastTaskRun['right'];
+            parametros["left"] = result.lastTaskRun['left'];
+            parametros['QTD_MAOS'] = result.lastTaskRun['QTD_MAOS'];
+            parametros['EXP_FACIAL'] = result.lastTaskRun['EXP_FACIAL'];
             
-            if ( video != null ) {
+            // Se existe taskrun mostra-se o video do avatar
+            if ( result.lastTaskRun['avatar_video'] != null ) {
                 state = "VALIDAR_AVATAR";
                 mostrarPergunta();
-                showRenderedVideo( video );
+                showRenderedVideo( result.lastTaskRun['avatar_video'] );
             }
-            /* saveAnswer( video );
-            updateState( video );
-            mostrarPergunta();
-            stopRenderProgress();
-            showRenderedVideo( video );*/
         },
         error: function( result ) {
             alert("Error!");
@@ -583,7 +584,7 @@ pybossa.presentTask(function(task, deferred) {
   var fix_counter = 0;
   var state = "QTD_MAOS";
   var isRightHand = true;
-  var parametros = {right : {}, left : {}};
+  var parametros = { right : {}, left : {} };
 
   var steps_times = { right : {}, left : {} };
 
@@ -629,11 +630,11 @@ pybossa.presentTask(function(task, deferred) {
 
   var words_groups = { "abarrotado" : "Verbos", "calado" : "Verbos", "cama" : "Substantivos", "cartao" : "Substantivos", "espelho" : "Substantivos", "meu" : "Pronomes", "oculos" : "Substantivos", "silencio" : "Substantivos", "telefone" : "Substantivos", "adulto" : "Substantivos", "crianca" : "Substantivos", "distrito_federal" : "Cidades", "desculpe" : "Verbos", "televisao" : "Substantivos" };
 
-    $('.hand_conf_tooltip').tooltip();
+  $('.hand_conf_tooltip').tooltip();
 
   // Modifica as imagens dos elementos li da section formas_de_mao
-  function setFormasDeMao(hand_page) {
-    var nth_li;
+  function setFormasDeMao( hand_page ) {
+      var nth_li;
 
       // "limpa" a pagina de maos
       $("#maos").find('li').hide();
@@ -802,8 +803,8 @@ pybossa.presentTask(function(task, deferred) {
 	
       var pergunta;
         
-      if (state == "ORIENT_PALMA"){
-	if (isRightHand){
+      if ( state == "ORIENT_PALMA" ) {
+	if ( isRightHand ){
 		pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
                 setOrientacaoMao("right_hand");
 	} else {
@@ -833,7 +834,7 @@ pybossa.presentTask(function(task, deferred) {
 		pergunta = "Escolha a forma da m&atilde;o esquerda.";
 	}
 
-	setFormasDeMao('group_1')
+	setFormasDeMao('group_1');
         $('#hand_shapes').show();
         $('.task_progress_bar').show();
       }
@@ -879,16 +880,16 @@ pybossa.presentTask(function(task, deferred) {
         nth_li = ":nth-child(" + contador + ")";
         if( p.split('_')[0] == "CONF" ) { // Forma da mao
           content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static_libras/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(nth_li).html(content);
+          $('#right_hand').find("li").filter(":nth-child(1)").html(content);
         }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
           content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(nth_li).html(content);
+          $('#right_hand').find("li").filter(":nth-child(2)").html(content);
         }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
           content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(nth_li).html(content);
+          $('#right_hand').find("li").filter(":nth-child(3)").html(content);
         }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao ao corpo
           content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(nth_li).html(content);
+          $('#right_hand').find("li").filter(":nth-child(4)").html(content);
         }
 
         contador = contador + 1; 
@@ -902,19 +903,19 @@ pybossa.presentTask(function(task, deferred) {
           nth_li = ":nth-child(" + contador + ")";
           if( p.split('_')[0] == "CONF" ) { // Forma da mao esquerda
             content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static_libras/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(nth_li).html(content);
+            $('#left_hand').find("li").filter(":nth-child(1)").html(content);
           }else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
             content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(nth_li).html(content);
+            $('#left_hand').find("li").filter(":nth-child(2)").html(content);
           }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
             if ( parametros.left[p] == "Pa_9" )
               content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
             else
               content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(nth_li).html(content);
+            $('#left_hand').find("li").filter(":nth-child(3)").html(content);
           }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao esquerda ao corpo
             content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(nth_li).html(content);
+            $('#left_hand').find("li").filter(":nth-child(4)").html(content);
           }
           contador = contador + 1; 
         } // Fim do for
@@ -930,6 +931,7 @@ pybossa.presentTask(function(task, deferred) {
     
     function showCorrecaoDiv() {
         setCorrecaoLi();
+        setFormasDeMao('group_1');
 	$("#correcao").show();
     }
 
@@ -1025,7 +1027,7 @@ pybossa.presentTask(function(task, deferred) {
 	
 	var nextState = "";
 
-        if (state == "QTD_MAOS") {
+        if ( state == "QTD_MAOS" ) {
           nextState = "CONF_MAO";
 
 	  if (answer == "uma") {
@@ -1034,19 +1036,19 @@ pybossa.presentTask(function(task, deferred) {
             params_amount = 11;
           }
           params_configured = params_configured + 1;
-	} else if (state == "CONF_MAO") {
+	} else if ( state == "CONF_MAO") {
           nextState = "ORIENT_PALMA";
           params_configured = params_configured + 1;
-	} else if (state == "CONF_MAO") {
+	} else if ( state == "CONF_MAO") {
           nextState = "ORIENT_PALMA";
           params_configured = params_configured + 1;
-	} else if (state == "ORIENT_PALMA") {
+	} else if ( state == "ORIENT_PALMA") {
           nextState = "PONTO_ARTIC";
           params_configured = params_configured + 1;
-	} else if (state == "PONTO_ARTIC") {
+	} else if ( state == "PONTO_ARTIC") {
           nextState = "DIST_MAOS";
           params_configured = params_configured + 1;
-	} else if (state == "DIST_MAOS"){
+	} else if ( state == "DIST_MAOS"){
           if ( parametros["QTD_MAOS"] == "uma" ) {
             nextState = "EXP_FACIAL";
           } else if( isRightHand ){
@@ -1056,10 +1058,10 @@ pybossa.presentTask(function(task, deferred) {
             nextState = "EXP_FACIAL";
           }
           params_configured = params_configured + 1;
-	} else if (state == "EXP_FACIAL") {
+	} else if ( state == "EXP_FACIAL") {
           nextState = "RENDER";
           params_configured = params_configured + 1;
-	} else if (state == "RENDER") {
+	} else if ( state == "RENDER") {
           nextState = "CONFIRM_AVATAR";
 	} else if ( state == "CONFIRM_AVATAR" ) {
           if (answer == "Sim") {
@@ -1067,6 +1069,7 @@ pybossa.presentTask(function(task, deferred) {
             fix_counter == 0;
             params_configured = 0;
             nextState = "TASK_END";
+            /*TODO incrementar a barra de progresso */
             $('.task_progress_bar').hide();
           } else {
             nextState = "CORRECAO";
@@ -1235,13 +1238,14 @@ pybossa.presentTask(function(task, deferred) {
 
           $(".user_signs").append( '<tr><td><label class="signal_name">' + sign + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ sign ] + '</td></tr>');
 
+      } // Fim do for
+
       for( var sign in user_reviews ){
           var sign_agreement_img = "check_gray.png";
           if ( user_reviews[sign] == "yes" )
               sign_agreement_img = "check_green.png"       
 
           $(".user_reviews").append( '<tr><td><label class="signal_name">' + sign + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ sign ] + '</td></tr>');
-
       } // Fim do for
 
     } // Fim da funcao setCurrentUserSigns
@@ -1299,14 +1303,16 @@ pybossa.presentTask(function(task, deferred) {
                 if ( state == "VALIDAR_AVATAR" ) {
                     updateState( answer );
 
-                    if( answer == "Sim" ){
+                    if ( answer == "Sim" ){
       	                deferred.resolve();
+                    } else {
+                        mostrarPergunta();
                     }
 
                 } else {
                     saveAnswer( answer );
                     updateState( answer );
-                    mostrarPergunta( state );
+                    mostrarPergunta();
 
 	            if( state == "TASK_END" ) {
 		        pybossa.saveTask(task.id, parametros).done(function() {
@@ -1331,7 +1337,14 @@ pybossa.presentTask(function(task, deferred) {
               $("#error").show();
             }
         });
-	
+
+        $(".fix").off('click').on('click', function() { 
+            if ( $(this).data("parametro") == "conf" ) {
+                setFormasDeMao('group_1');
+            }
+        });
+
+ 	
         // Eventos de cliques em tipos de mao
         $(".handshape").off("click").on( "click", function() {
 	  answer = $(this).data('handshape');

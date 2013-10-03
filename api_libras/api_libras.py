@@ -49,8 +49,9 @@ def getLastTaskrun():
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
     taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_id )
     if len( taskruns_for_task_id ) != 0:
-        return jsonify( avatar_video = taskruns_for_task_id[-1].info["avatar_video"] )
-    return jsonify( avatar_video = None )
+        print "THE LAST TASKRUN INFO ", taskruns_for_task_id[-1].info
+        return jsonify( lastTaskRun = taskruns_for_task_id[-1].info )
+    return jsonify( lastTaskRun = None )
 
 @app.route( "/userReport", methods = ['POST'] )
 def userReport():
