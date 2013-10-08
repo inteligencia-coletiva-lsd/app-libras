@@ -17,27 +17,19 @@ MOV_PONTUAL_SCRIPT = os.path.join(SCRIPTS_BLENDER_DIR, "movPontual.py")
 
 pbclient.set('endpoint', "http://localhost:8080/pybossa")
 
+
+@app.route( "/getCurrIpAddr" )
+def getCurrIpAddr():
+    return jsonify( curr_usr_ip = getUserIp() )
+
 @app.route( "/validateTask", methods = ['POST'] )
 def validateTask():
     task_info = json.loads( request.data )
 
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
-    current_user_id = task_info["current_user_id"]
-    current_user_ip = getUserIp()
-    
-    taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_info["task_id"] )
 
-
-    if ( current_user_id is None ):
-        taskruns_for_task_id[-1].info["agreement"] = dict( status = "yes", user_id = current_user_ip )
-    else:
-        taskruns_for_task_id[-1].info["agreement"] = dict( status = "yes", user_id = task_info["current_user_id"] )        
-
-    requests.put("%s/api/taskrun/%s?api_key=%s" % 
-                 ( "http://localhost:8080/pybossa", taskruns_for_task_id[-1].id, "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
-                 data = json.dumps( dict( info = taskruns_for_task_id[-1].info ) ) )    
-
-    requests.put("%s/api/task/%s?api_key=%s" % 
+    # sets the task as completed
+    requests.put( "%s/api/task/%s?api_key=%s" % 
                  ( "http://localhost:8080/pybossa", task_info["task_id"], "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
                  data = json.dumps( dict( state = "completed" ) ) )
 
@@ -49,9 +41,8 @@ def getLastTaskrun():
     app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
     taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_id )
     if len( taskruns_for_task_id ) != 0:
-        print "THE LAST TASKRUN INFO ", taskruns_for_task_id[-1].info
-        return jsonify( lastTaskRun = taskruns_for_task_id[-1].info )
-    return jsonify( lastTaskRun = None )
+        return jsonify( lastTaskrun = taskruns_for_task_id[-1].info )
+    return jsonify( lastTaskrun = None )
 
 @app.route( "/userReport", methods = ['POST'] )
 def userReport():
@@ -66,7 +57,8 @@ def userReport():
     user_task_runs = dict()
     user_task_runs_amount = 0
     user_signs = dict()
-    user_reviews = dict()
+    signs_validated = list()
+    signs_improved = list()
     users_amount = 0
     comunity_average = 0
     user_average = 0
@@ -76,7 +68,6 @@ def userReport():
         user_task_runs = getUserTaskRuns( app_id, current_user_id, current_user_ip )
         user_task_runs_amount = len( user_task_runs )
         user_signs = getUserSigns( user_task_runs )
-        user_reviews = getUserReviews( all_task_runs, current_user_id, current_user_ip )
         users_amount = getUsersAmount( all_task_runs )
         all_task_runs_amount = len( all_task_runs )
         
@@ -101,8 +92,12 @@ def userReport():
 
         if ( user_task_runs_amount > 0 ):
             last_time = user_task_runs[-1].finish_time.split("T")[0]
+ 
+        signs_validated = getSignsValidated( all_task_runs )
 
-    return jsonify( user_signs = user_signs, user_reviews = user_reviews, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
+        signs_improved = getSignsImproved( all_task_runs )
+
+    return jsonify( user_signs = user_signs, signs_validated = signs_validated, signs_improved = signs_improved, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
 
 
 def getUserIp():
@@ -120,17 +115,38 @@ def getUserTaskRuns( app_id, user_id, current_user_ip ):
     return pbclient.find_taskruns( app_id, user_id = user_id )
 
 def getUserSigns( user_task_runs ):
-    user_signs = dict()
+    user_configs = list()
+    user_validations = list() 
+    user_improvements = list()
     for task_run in user_task_runs:
-        user_signs[ task_run.info['signal_name'] ] = task_run.info['agreement']["status"]            
+        if( task_run.info['configuration'] == "yes" ):
+            user_configs.append( task_run.info['signal_name'] )
+
+        if( task_run.info['validation'] == "yes" ):
+            user_validations.append( task_run.info['signal_name'] )
+
+        if( task_run.info['improvement'] == "yes" ):
+            user_improvements.append( task_run.info['signal_name'] )
+
+    user_signs = dict( configs = user_configs, validations = user_validations, improvements = user_improvements )
+
     return user_signs
 
-def getUserReviews( all_taskruns, user_id, user_ip ):
-    user_reviews = dict()
+def getSignsValidated( all_taskruns ):
+    signs_validated = list()
     for taskrun in all_taskruns:
-        if ( taskrun.info['agreement']['user_id'] == user_id ) or ( taskrun.info['agreement']['user_id'] == user_ip ):
-            user_reviews[ taskrun.info['signal_name'] ] = taskrun.info['agreement']['status']
-    return user_reviews
+        if ( taskrun.info['validation'] == "yes" ):
+            signs_validated.append( taskrun.info['signal_name'] )
+
+    return signs_validated
+
+def getSignsImproved( all_taskruns ):
+    signs_improved = list()
+    for taskrun in all_taskruns:
+        if ( taskrun.info['improvement'] == "yes" ):
+            signs_improved.append( taskrun.info['signal_name'] )
+
+    return signs_improved
 
 def getUsersAmount( all_task_runs ):
     users = set()
@@ -140,7 +156,6 @@ def getUsersAmount( all_task_runs ):
         else:
             users.add( task_run.user_id )
     return len( users )
-
 @app.route("/render", methods=['POST'])
 def render():
      parameters = json.loads(request.data)

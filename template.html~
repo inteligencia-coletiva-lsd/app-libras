@@ -19,11 +19,12 @@
             <label class="signs_counter" style="float: left; margin: 10px 0 0  10px">
                 Voc&ecirc; ainda n&atilde;o contribuiu.
             </label>
-            <form class="form-search" style="margin: 10px 0 0 390px">
+ <!--           <form class="form-search" style="margin: 10px 0 0 390px; display: none">
                 <input type="text" class="input-medium search-query" placeholder="Procurar Sinal" disabled style="height: 20px" />
                 <button type="submit" disabled class="btn">Procurar</button>
             </form>
-            
+-->
+            <br/>
             <hr style="margin: 10px 0 10px 0; padding: 0" />
             
             <table class="table">
@@ -51,41 +52,76 @@
                 </tbody>
             </table> <!-- End of table -->
 
-            <label style="margin: 10px 0 0  10px">
+
+            <div class="tabbable"> <!-- Only required for left/right tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Sinais que voc&ecirc; fez</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Sinais que voc&ecirc; validou</a></li>
+                    <li><a href="#tab3" data-toggle="tab">Sinais que voc&ecirc; melhorou</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <table class="table table-striped user_signs_table">
+                            <thead>
+                                <tr>
+                                    <th>Sinal</th>
+                                    <th>Status</th>
+                                    <th>Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="user_signs">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <table class="table table-striped user_signs_table">
+                            <thead>
+                                <tr>
+                                    <th>Sinal</th>
+                                    <th>Status</th>
+                                    <th>Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="user_validation">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                        <table class="table table-striped user_signs_table">
+                            <thead>
+                                <tr>
+                                    <th>Sinal</th>
+                                    <th>Status</th>
+                                    <th>Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="user_improvement">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+<!--            <label style="margin: 10px 0 0  10px">
                 Sinais que voc&ecirc; fez.
             </label>
 
             <hr style="margin: 10px 0 10px 0; padding: 0" />
-            
-            <table class="table table-striped user_signs_table">
-                <thead>
-                    <tr>
-                        <th>Sinal</th>
-                        <th>Status</th>
-                        <th>Grupo</th>
-                    </tr>
-                </thead>
-                <tbody class="user_signs">
-                </tbody>
-            </table>
+-->           
 
-            <label style="margin: 10px 0 0  10px">
-                Sinais que voc&ecirc; revisou.
+<!--            <label style="margin: 10px 0 0  10px">
+                Sinais que voc&ecirc; validou.
             </label>
 
             <hr style="margin: 10px 0 10px 0; padding: 0" />
-            
-            <table class="table table-striped user_signs_table">
-                <thead>
-                    <tr>
-                        <th>Sinal</th>
-                        <th>Status</th>
-                        <th>Grupo</th>
-                    </tr>
-                </thead>
-                <tbody class="user_reviews">
-                </tbody>
-            </table>
+-->            
+
+<!--            <label style="margin: 10px 0 0  10px">
+                Sinais que voc&ecirc; melhorou.
+            </label>
+
+            <hr style="margin: 10px 0 10px 0; padding: 0" />
+-->            
 
         </section> 
         <!-- End of left section -->
@@ -539,7 +575,10 @@ pybossa.taskLoaded( function(task, deferred ) {
     deferred.resolve(task);
 });
 
-pybossa.presentTask(  function(task, deferred ) {
+pybossa.presentTask(  function( task, deferred ) {
+    
+    // Guarda a informacao da ultima taskrun para a tarefa atual
+    var lastTaskrun;
 
     // Obtem a ultima taskrun para a task
     jQuery.ajax({
@@ -548,24 +587,38 @@ pybossa.presentTask(  function(task, deferred ) {
         contentType: 'application/json',
         data: JSON.stringify( task_id = task.id ),
         success: function( result ) {
-            console.log( "THE RESULT IS " + result.lastTaskRun['avatar_video'] );
-            parametros["right"] = result.lastTaskRun['right'];
-            parametros["left"] = result.lastTaskRun['left'];
-            parametros['QTD_MAOS'] = result.lastTaskRun['QTD_MAOS'];
-            parametros['EXP_FACIAL'] = result.lastTaskRun['EXP_FACIAL'];
-            
-            // Se existe taskrun mostra-se o video do avatar
-            if ( result.lastTaskRun['avatar_video'] != null ) {
-                state = "VALIDAR_AVATAR";
-                mostrarPergunta();
-                showRenderedVideo( result.lastTaskRun['avatar_video'] );
-            }
+            lastTaskrun = result.lastTaskrun;
+
+            if ( lastTaskrun != null ) {
+                parametros["right"] = result.lastTaskrun['right'];
+                parametros["left"] = result.lastTaskrun['left'];
+                parametros['QTD_MAOS'] = result.lastTaskrun['QTD_MAOS'];
+                parametros['EXP_FACIAL'] = result.lastTaskrun['EXP_FACIAL'];
+                /*parametros['validation'] = result.lastTaskrun['validation'];
+                parametros['configuration'] = result.lastTaskrun['configuration'];
+                parametros['improvement'] = result.lastTaskrun['improvement'];*/
+
+                // Se existe taskrun mostra-se o video do avatar
+                if ( result.lastTaskrun['avatar_video'] != null ) {
+                    state = "VALIDAR_AVATAR";
+                    mostrarPergunta();
+                    showRenderedVideo( result.lastTaskrun['avatar_video'] );
+                }
+
+            } // Fim do if
         },
         error: function( result ) {
             alert("Error!");
         },
         async: true
     });
+
+    var curr_usr_id;
+
+    // TODO tratar o erro de nao encontra id
+    pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
+        curr_usr_id = data.current_usr_id;
+    }); // Fim de getCurrentUserId
 
   $(".skip").show();
 
@@ -935,9 +988,12 @@ pybossa.presentTask(  function(task, deferred ) {
 	$("#correcao").show();
     }
 
-    function saveAnswer(answer) {
+    function saveAnswer( answer ) {
 
-        if ( state == "VALIDAR_AVATAR" ) {            
+        if ( state == "VALIDAR_AVATAR" ) {
+                parametros["configuration"] = "no";
+                parametros["validation"] = "yes";
+                parametros["improvement"] = "no";
             return;
         }
         
@@ -946,13 +1002,23 @@ pybossa.presentTask(  function(task, deferred ) {
                 steps_times[state] = getStepTime();
                 updateMicrotaskTimer();
             }
-            parametros["steps_times"] = steps_times;
-            parametros["agreement"] = { status : "no", user_id : "my" };
+            
+            /* The first time the task is answered */  
+            if ( lastTaskrun == null ) {
+                parametros["steps_times"] = steps_times;
+                parametros["configuration"] = "yes";
+                parametros["validation"] = "no";
+                parametros["improvement"] = "no";
+            } else { /* Another time is improvement */
+                parametros["steps_times"] = steps_times;
+                parametros["configuration"] = "no";
+                parametros["validation"] = "no";
+                parametros["improvement"] = "yes";
+            }
             return;
 	}
 
         if ( state == "CORRECAO" ) {
-          //console.log(answer);
           if ( current_fix_hand == "right" ){
             if ( answer in [0, 1, 2] ) {
               parametros.right["DIST_MAOS"] = answer;              
@@ -1077,22 +1143,7 @@ pybossa.presentTask(  function(task, deferred ) {
           
 	} else if ( state == "VALIDAR_AVATAR" ) {
             if ( answer == "Sim" ) {
-
-                pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
-                    // chamada ajax para setar a tarefa como completa
-                    jQuery.ajax( {
- 	                type: 'POST',
-	                url:    '/LIBRAS_API/validateTask',
-	                contentType: 'application/json',
-	                data: JSON.stringify( { task_id : task.id, current_user_id : data.current_usr_id } ),
-	                success: function( result ) {
-	                },
-	                error: function( result ) {
-	                    alert("Error!");
-	                },
-	                async: true
-	            });
-                });
+                nextState = "TASK_END";
             } else {
                 nextState = "CORRECAO";
             }
@@ -1134,8 +1185,7 @@ pybossa.presentTask(  function(task, deferred ) {
     }
 
     function showRenderedVideo(video) {
-	stopAndPlaySignalVideo(false);
-        console.log( "O VIDEO EH: " + video );
+	stopAndPlaySignalVideo(true);
         $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/static_libras/libras-videos/' + video + '> </video>');
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
@@ -1201,18 +1251,20 @@ pybossa.presentTask(  function(task, deferred ) {
 
     } // Fim da funcao renderizarVideo
 
-    function setCurrentUserSigns( user_signs, user_reviews ) {
+    function setCurrentUserSigns( user_signs, signs_validated, signs_improved ) {
 
       var key, user_signs_length = 0;
-      for( key in user_signs ) {
+      for( key in user_signs["configs"] ) {
           user_signs_length++;
       }
        
-      for( key in user_reviews ) {
+      for( key in user_signs["validations"] ) {
           user_signs_length++;
       }
 
-      console.log( "THE USER REVIEWS: " + user_reviews );
+      for( key in user_signs["improvements"] ) {
+          user_signs_length++;
+      }
 
       if ( user_signs_length == 0 ){
           $(".signs_counter").html( "Voc&ecirc; ainda n&atilde;o contribuiu" );
@@ -1231,21 +1283,77 @@ pybossa.presentTask(  function(task, deferred ) {
 
       $(".user_signs").html("");
 
-      for( var sign in user_signs ) {
-          var sign_agreement_img = "check_gray.png";
-          if ( user_signs[sign] == "yes" )
-              sign_agreement_img = "check_green.png"       
+      console.log("THE USER SIGNS ARE: " + user_signs );
+      console.log("THE SIGNS VALIDATED ARE: " + signs_validated );
+      console.log("THE SIGNS IMPROVED ARE: " + signs_improved );
 
-          $(".user_signs").append( '<tr><td><label class="signal_name">' + sign + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ sign ] + '</td></tr>');
+      for ( var sign in user_signs ) {
+          console.log("THE SIGN IS: " + sign );
+      }
+
+      for( var sign in user_signs["configs"] ) {
+          var sign_agreement_img = "check_gray";
+
+          for( i in signs_validated ) {
+              if ( user_signs["configs"][sign] == signs_validated[i] ) {
+                  sign_agreement_img = "check_green";
+              } 
+          }
+
+          for( j in signs_validated ) {
+              if ( user_signs["configs"][sign] == signs_improved[j] ) {
+                  sign_agreement_img = sign_agreement_img + "_improved";
+              }
+          }
+
+          sign_agreement_img = sign_agreement_img + ".png";
+
+          $(".user_signs").append( '<tr><td><label class="signal_name">' + user_signs["configs"][sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["configs"][sign] ] + '</td></tr>');
 
       } // Fim do for
 
-      for( var sign in user_reviews ){
-          var sign_agreement_img = "check_gray.png";
-          if ( user_reviews[sign] == "yes" )
-              sign_agreement_img = "check_green.png"       
+      $(".user_validation").html("");
 
-          $(".user_reviews").append( '<tr><td><label class="signal_name">' + sign + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ sign ] + '</td></tr>');
+      for( var sign_v in user_signs["validations"] ){
+          var sign_agreement_img = "check_gray"
+
+          for( i in signs_validated ) {
+              if ( user_signs["validations"][sign_v] == signs_validated[i] ) {
+                  sign_agreement_img = "check_green";
+              }
+          }
+
+          for( j in signs_validated ) {
+              if ( user_signs["validations"][sign_v] == signs_improved[j] ) {
+                  sign_agreement_img = sign_agreement_img + "_improved";
+              }
+          }
+
+          sign_agreement_img = sign_agreement_img + ".png";       
+
+          $(".user_validation").append( '<tr><td><label class="signal_name">' + user_signs["validations"][sign_v] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["validations"][sign_v] ] + '</td></tr>');
+      } // Fim do for
+
+      $(".user_improvement").html("");
+
+      for( var sign_i in user_signs["improvements"] ){
+          var sign_agreement_img = "check_gray"
+
+          for( i in signs_validated ) {
+              if ( user_signs["improvements"][sign_i] == signs_validated[i] ) {
+                  sign_agreement_img = "check_green";
+              }
+          }
+
+          for( j in signs_validated ) {
+              if ( user_signs["improvements"][sign_i] == signs_improved[j] ) {
+                  sign_agreement_img = sign_agreement_img + "_improved";
+              }
+          }
+
+          sign_agreement_img = sign_agreement_img + ".png";       
+
+          $(".user_improvement").append( '<tr><td><label class="signal_name">' + user_signs["improvements"][sign_i] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["improvements"][sign_i] ] + '</td></tr>');
       } // Fim do for
 
     } // Fim da funcao setCurrentUserSigns
@@ -1253,7 +1361,7 @@ pybossa.presentTask(  function(task, deferred ) {
     function showUserReport(){
       $(".skeleton").hide();
 
-      // TODO tratar o erro de nao encontra id
+      // TODO tratar o erro de nao encontra fid
       pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
         
         $.ajax( {
@@ -1262,7 +1370,7 @@ pybossa.presentTask(  function(task, deferred ) {
 	  contentType: 'application/json',
 	  data: JSON.stringify( { current_user_id : data.current_usr_id } ),
 	  success: function(result) {
-            setCurrentUserSigns( result.user_signs, result.user_reviews );
+            setCurrentUserSigns( result.user_signs, result.signs_validated, result.signs_improved );
             $( ".last_time" ).html( result.last_time );
             setUserAverage( result.user_average, result.user_task_runs_amount, result.comunity_average );
             $(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
@@ -1281,7 +1389,6 @@ pybossa.presentTask(  function(task, deferred ) {
     } // Fim da funcao showSignsReport
 
     function setUserAverage( user_average, user_task_runs_amount, comunity_average ){
-      console.log( "USER AVERAGE: " + user_average.toString() )
       $("#star_avg").raty( { noRatedMsg: "Quase lá!", hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score : user_average } );
       $("#user_vs_comunity_avg").html("(" + user_task_runs_amount.toString() + "/" + comunity_average.toString() + ")")
     } 
@@ -1290,7 +1397,6 @@ pybossa.presentTask(  function(task, deferred ) {
       
         stopAndPlaySignalVideo(true);
         
-        $('#task-id').html(task.id);
 	parametros['signal_name'] = task.info.signal_name;
  	
         mostrarPergunta(state);
@@ -1301,10 +1407,30 @@ pybossa.presentTask(  function(task, deferred ) {
             if( typeof answer != 'undefined' ){
 
                 if ( state == "VALIDAR_AVATAR" ) {
+                    saveAnswer( answer );
                     updateState( answer );
 
-                    if ( answer == "Sim" ){
-      	                deferred.resolve();
+	            if( state == "TASK_END" ) {
+		        pybossa.saveTask(task.id, parametros).done(function() {
+      	                    deferred.resolve(); 
+
+                            pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
+                                // chamada ajax para setar a tarefa como completa
+                                jQuery.ajax( {
+             	                    type: 'POST',
+	                            url:    '/LIBRAS_API/validateTask',
+	                            contentType: 'application/json',
+	                            data: JSON.stringify( { task_id : task.id } ),
+	                            success: function( result ) {
+	                            },
+	                            error: function( result ) {
+	                                alert("Error!");
+	                            },
+	                            async: true
+	                        });
+                            });
+
+                        });
                     } else {
                         mostrarPergunta();
                     }
@@ -1337,13 +1463,6 @@ pybossa.presentTask(  function(task, deferred ) {
               $("#error").show();
             }
         });
-
-        $(".fix").off('click').on('click', function() { 
-            if ( $(this).data("parametro") == "conf" ) {
-                setFormasDeMao('group_1');
-            }
-        });
-
  	
         // Eventos de cliques em tipos de mao
         $(".handshape").off("click").on( "click", function() {
