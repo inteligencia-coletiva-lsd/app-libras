@@ -66,8 +66,8 @@ def userReport():
     last_time = "Nunca"
     if( len( all_task_runs ) > 0 ):
         user_task_runs = getUserTaskRuns( app_id, current_user_id, current_user_ip )
-        user_task_runs_amount = len( user_task_runs )
         user_signs = getUserSigns( user_task_runs )
+        user_task_runs_amount = len( user_task_runs ) - len( user_signs['skips'] )        
         users_amount = getUsersAmount( all_task_runs )
         all_task_runs_amount = len( all_task_runs )
         
@@ -115,27 +115,35 @@ def getUserTaskRuns( app_id, user_id, current_user_ip ):
     return pbclient.find_taskruns( app_id, user_id = user_id )
 
 def getUserSigns( user_task_runs ):
+    user_skips = list()
     user_configs = list()
     user_validations = list() 
     user_improvements = list()
     for task_run in user_task_runs:
-        if( task_run.info['configuration'] == "yes" ):
-            user_configs.append( task_run.info['signal_name'] )
+    
+        if 'final_state' in task_run.info:
+            user_skips.append( task_run.info['signal_name'] )
+        else:
+            if( task_run.info['configuration'] == "yes" ):
+                user_configs.append( task_run.info['signal_name'] )
 
-        if( task_run.info['validation'] == "yes" ):
-            user_validations.append( task_run.info['signal_name'] )
+            if( task_run.info['validation'] == "yes" ):
+                user_validations.append( task_run.info['signal_name'] )
 
-        if( task_run.info['improvement'] == "yes" ):
-            user_improvements.append( task_run.info['signal_name'] )
+            if( task_run.info['improvement'] == "yes" ):
+                user_improvements.append( task_run.info['signal_name'] )
 
-    user_signs = dict( configs = user_configs, validations = user_validations, improvements = user_improvements )
+    user_signs = dict( configs = user_configs, validations = user_validations, improvements = user_improvements, skips = user_skips )
 
     return user_signs
 
 def getSignsValidated( all_taskruns ):
     signs_validated = list()
     for taskrun in all_taskruns:
-        if ( taskrun.info['validation'] == "yes" ):
+    
+        if 'final_state' in taskrun.info:
+            pass
+        elif ( taskrun.info['validation'] == "yes" ):
             signs_validated.append( taskrun.info['signal_name'] )
 
     return signs_validated
@@ -143,7 +151,9 @@ def getSignsValidated( all_taskruns ):
 def getSignsImproved( all_taskruns ):
     signs_improved = list()
     for taskrun in all_taskruns:
-        if ( taskrun.info['improvement'] == "yes" ):
+        if 'final_state' in taskrun.info:
+            pass
+        elif ( taskrun.info['improvement'] == "yes" ):
             signs_improved.append( taskrun.info['signal_name'] )
 
     return signs_improved
@@ -156,6 +166,7 @@ def getUsersAmount( all_task_runs ):
         else:
             users.add( task_run.user_id )
     return len( users )
+    
 @app.route("/render", methods=['POST'])
 def render():
      parameters = json.loads(request.data)
