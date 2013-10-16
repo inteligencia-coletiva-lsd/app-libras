@@ -1,7 +1,7 @@
     <!-- Report -->
     <div id="wrap" style="display: none; font-size: 14px">
         <header id="top">
-            <label style="margin: 20px 0 0 300px; font-size: 36px;">
+            <label style="margin: 20px 0 0 320px; font-size: 36px;">
                 Dicion&aacute;rio de Libras
             </label>
             <label style="margin: 20px 0 0 220px; font-size: 24px">
@@ -29,8 +29,22 @@
                 <tbody>
                     <tr>
                         <td>
-                            <img class="hand_conf_tooltip" href="#" title="Configuracao" data-placement="left" data-toggle="tooltip" src="/static_libras/images/hand_config.png" style="float: left"/>
-                            <label class="signs_conf_counter"></label>
+                            
+                            <img class="hand_conf_tooltip" href="#" title="Configura&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/check_gray.png" style="float: left"/>
+                            
+                            <label class="signs_conf_counter">
+                            </label>                                                        
+                            
+                            <img class="hand_conf_tooltip" href="#" title="Valida&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/check_green.png" style="float: left"/>
+                            
+                            <label class="signs_validate_counter">
+                            </label>                           
+                            
+                            <img class="hand_conf_tooltip" href="#" title="Melhoria" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/plus.png" style="float: left"/>
+                            
+                            <label class="signs_improved_counter">
+                            </label>                             
+                            
                         </td>
                         <td>
                             <div id="star_avg" style="margin: 5px 0 0 0; float: left"></div>
@@ -565,9 +579,6 @@ pybossa.presentTask(  function( task, deferred ) {
                 parametros["left"] = result.lastTaskrun['left'];
                 parametros['QTD_MAOS'] = result.lastTaskrun['QTD_MAOS'];
                 parametros['EXP_FACIAL'] = result.lastTaskrun['EXP_FACIAL'];
-                /*parametros['validation'] = result.lastTaskrun['validation'];
-                parametros['configuration'] = result.lastTaskrun['configuration'];
-                parametros['improvement'] = result.lastTaskrun['improvement'];*/
 
                 // Se existe taskrun mostra-se o video do avatar
                 if ( result.lastTaskrun['avatar_video'] != null ) {
@@ -1223,26 +1234,40 @@ pybossa.presentTask(  function( task, deferred ) {
 
     function setCurrentUserSigns( user_signs, signs_validated, signs_improved ) {
 
-      var key, user_signs_length = 0;
+      var key;
+      var user_signs_length = 0;
+      var signs_conf_length = 0;
+      var signs_validated_length = 0;
+      var signs_improved_length = 0;
+      
       for( key in user_signs["configs"] ) {
           user_signs_length++;
+          signs_conf_length++;
       }
        
       for( key in user_signs["validations"] ) {
           user_signs_length++;
+          signs_validated_length++;
       }
 
       for( key in user_signs["improvements"] ) {
           user_signs_length++;
+          signs_improved_length++;
       }
 
       if ( user_signs_length == 0 ){
           $(".signs_counter").html( "Voc&ecirc; ainda n&atilde;o contribuiu" );
       } else {
-          $(".signs_counter").html( "Voc&ecirc; contribuiu em " + user_signs_length + " sinais." );
+          if ( user_signs_length == 1 ) {
+              $(".signs_counter").html( "Voc&ecirc; contribuiu com " + user_signs_length + " sinal." );          
+          } else {
+              $(".signs_counter").html( "Voc&ecirc; contribuiu com " + user_signs_length + " sinais." );          
+          }
       }
       
-      $(".signs_conf_counter").html( user_signs_length );
+      $(".signs_conf_counter").html( signs_conf_length );
+      $(".signs_validate_counter").html( signs_validated_length );
+      $(".signs_improved_counter").html( signs_improved_length );      
       
       if ( user_signs_length == 0 ){
         $(".user_signs_table").hide();
@@ -1697,7 +1722,9 @@ pybossa.run('librasdictionary');
 
   .signal_name{ margin: 7px 0 0 0; /*width: 105px*/ }
 
-  .signs_conf_counter{ margin: 10px 0 0 10px; float: left }
+  .signs_conf_counter{ margin: 10px 10px 0 10px; float: left }
+  .signs_validate_counter{ margin: 10px 10px 0 10px; float: left }
+  .signs_improved_counter{ margin: 10px 10px 0 10px; float: left }
   .signs_fix_counter{ margin: 10px 0 0 10px; float: left }
 
 </style>
