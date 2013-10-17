@@ -52,7 +52,6 @@ def userReport():
     current_user_ip = getUserIp();
     all_task_runs = getAllTaskRuns( app_id ) 
     # TODO comparar a quantidade de tarefas disponiveis com a quantidade de tarefas completas
-    tasks_amount = getTasksAmount( app_id ) * 5
 
     user_task_runs = dict()
     user_task_runs_amount = 0
@@ -62,7 +61,7 @@ def userReport():
     users_amount = 0
     comunity_average = 0
     user_average = 0
-    overall_progress = 0
+    overall_progress = getOverallProgress( app_id )
     last_time = "Nunca"
     if( len( all_task_runs ) > 0 ):
         user_task_runs = getUserTaskRuns( app_id, current_user_id, current_user_ip )
@@ -87,7 +86,6 @@ def userReport():
         elif user_average >= 1.5:
             user_average = 3
 
-        overall_progress = round( ( all_task_runs_amount / float(tasks_amount) ) * 100, 2 )
         comunity_average = round( comunity_average, 2 )
 
         if ( user_task_runs_amount > 0 ):
@@ -99,6 +97,11 @@ def userReport():
 
     return jsonify( user_signs = user_signs, signs_validated = signs_validated, signs_improved = signs_improved, last_time = last_time, overall_progress = overall_progress, user_average = user_average, user_task_runs_amount = user_task_runs_amount, comunity_average = comunity_average )
 
+
+def getOverallProgress( app_id ):
+    tasks_completed_amount = len( pbclient.find_tasks( app_id, state = "completed" ) )
+    tasks_amount = len( pbclient.find_tasks( app_id ) )
+    return round( ( tasks_completed_amount / float(tasks_amount) ) * 100, 2 )
 
 def getUserIp():
     return request.remote_addr
