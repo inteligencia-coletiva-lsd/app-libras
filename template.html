@@ -30,7 +30,7 @@
                     <tr>
                         <td>
                             
-                            <img class="hand_conf_tooltip" href="#" title="Configura&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/check_gray.png" style="float: left"/>
+                            <img class="hand_conf_tooltip" href="#" title="Configura&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/check_blue.png" style="float: left"/>
                             
                             <label class="signs_conf_counter">
                             </label>                                                        
@@ -127,7 +127,7 @@
                     Enquanto voc&ecirc; traduz uma palavra de Portugu&ecirc;s para Libras voc&ecirc; contribui para a cria&ccedil;&atilde;o do dicion&aacute;rio e assim promove a inclus&atilde;o social dos surdos.
                 </p>
                 <button class="btn btn-success btn-large colabore_button" type="button" value="Colabore" style="width: 300px; margin: 10px 0 0 20px">Continue colaborando</button>
-                <button class="btn btn-info btn-large share_button" type="button" value="share" style="width: 300px; margin: 10px 0 0 20px; display: none">Chamem seus amigos</button>
+                <button class="btn btn-info btn-large share_button" type="button" value="share" style="width: 300px; margin: 10px 0 0 20px; display: none">Compartilhe</button>
             </section> <!-- End of section help_deaf -->
 
             <section id="average_legend" style="padding: 10px">
@@ -1287,7 +1287,7 @@ pybossa.presentTask(  function( task, deferred ) {
       }
 
       for( var sign in user_signs["configs"] ) {
-          var sign_agreement_img = "check_gray";
+          var sign_agreement_img = "check_blue";
 
           for( i in signs_validated ) {
               if ( user_signs["configs"][sign] == signs_validated[i] ) {
@@ -1310,7 +1310,7 @@ pybossa.presentTask(  function( task, deferred ) {
       $(".user_validation").html("");
 
       for( var sign_v in user_signs["validations"] ){
-          var sign_agreement_img = "check_gray"
+          var sign_agreement_img = "check_blue"
 
           for( i in signs_validated ) {
               if ( user_signs["validations"][sign_v] == signs_validated[i] ) {
@@ -1332,7 +1332,7 @@ pybossa.presentTask(  function( task, deferred ) {
       $(".user_improvement").html("");
 
       for( var sign_i in user_signs["improvements"] ){
-          var sign_agreement_img = "check_gray"
+          var sign_agreement_img = "check_blue"
 
           for( i in signs_validated ) {
               if ( user_signs["improvements"][sign_i] == signs_validated[i] ) {
