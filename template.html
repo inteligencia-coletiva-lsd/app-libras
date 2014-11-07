@@ -565,6 +565,12 @@ pybossa.presentTask(  function( task, deferred ) {
     // Guarda a informacao da ultima taskrun para a tarefa atual
     var lastTaskrun;
 
+    if (typeof task.id == "undefined") {
+	deferred.resolve();
+	return;
+    }
+
+
     // Obtem a ultima taskrun para a task
     jQuery.ajax({
         type: 'POST',
