@@ -1,4 +1,4 @@
-from flask import (Flask, jsonify, request)
+from flask import Blueprint, Flask, jsonify, request
 import json
 import os
 import random
@@ -7,22 +7,22 @@ import urllib
 import pbclient
 import requests
 
-app = Flask(__name__)
-
-VIDEOS_DIR = "/home/thyagofas/web_dev/pybossa/app-libras/static_libras/libras-videos/"
+VIDEOS_DIR = "/local/adabriand/pybossa_apps/app-libras/libras-static/libras-videos/"
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS_BLENDER_DIR = os.path.join(APP_DIR, "scripts-blender")
 BLEND_FILE = os.path.join(SCRIPTS_BLENDER_DIR, "mulher05_iK_14_05.blend")
 MOV_PONTUAL_SCRIPT = os.path.join(SCRIPTS_BLENDER_DIR, "movPontual.py")
+PYBOSSA_ENDPOINT = "http://localhost/pybossa"
+PYBOSSA_API_KEY = "53b8465d-91b0-4286-b2d8-834fbd89e194" 
 
-pbclient.set('endpoint', "http://localhost:8080/pybossa")
+pbclient.set('endpoint', PYBOSSA_ENDPOINT)
+app = Flask(__name__)
 
-
-@app.route( "/getCurrIpAddr" )
+@app.route( "/api/getCurrIpAddr" )
 def getCurrIpAddr():
     return jsonify( curr_usr_ip = getUserIp() )
 
-@app.route( "/validateTask", methods = ['POST'] )
+@app.route("/api/validateTask", methods = ['POST'] )
 def validateTask():
     task_info = json.loads( request.data )
 
@@ -30,21 +30,12 @@ def validateTask():
 
     # sets the task as completed
     requests.put( "%s/api/task/%s?api_key=%s" % 
-                 ( "http://localhost:8080/pybossa", task_info["task_id"], "53b8465d-91b0-4286-b2d8-834fbd89e194" ), 
+                 (PYBOSSA_ENDPOINT, task_info["task_id"], PYBOSSA_API_KEY), 
                  data = json.dumps( dict( state = "completed" ) ) )
 
     return jsonify( resultado = None )
 
-@app.route( "/getLastTaskrun", methods = ['POST'] )
-def getLastTaskrun():
-    task_id = json.loads( request.data )    
-    app_id = pbclient.find_app( short_name = "librasdictionary" )[0].id
-    taskruns_for_task_id = pbclient.find_taskruns( app_id, task_id = task_id )
-    if len( taskruns_for_task_id ) != 0:
-        return jsonify( lastTaskrun = taskruns_for_task_id[-1].info )
-    return jsonify( lastTaskrun = None )
-
-@app.route( "/userReport", methods = ['POST'] )
+@app.route("/api/userReport", methods = ['POST'] )
 def userReport():
     info = json.loads( request.data )
     current_user_id = info["current_user_id"]
@@ -170,7 +161,7 @@ def getUsersAmount( all_task_runs ):
             users.add( task_run.user_id )
     return len( users )
     
-@app.route("/render", methods=['POST'])
+@app.route("/api/render", methods=['POST'])
 def render():
      parameters = json.loads(request.data)
      random_id = str(random.getrandbits(64))     
@@ -184,6 +175,9 @@ def render():
 
      path_dir = VIDEOS_DIR + 'pontualDir' + random_id
      path_esq = VIDEOS_DIR + 'pontualEsq' + random_id
+     
+     print(path_dir)
+     print(parameters)
 
      # mao direita
      try:
@@ -194,12 +188,12 @@ def render():
 	     f.write(parameters['QTD_MAOS'] + '\n')
 	     f.write(signal_name + '\n')
 	     f.write(user_id + '\n')
-     except IOError: 
-	print("Error de IO!")
+     except IOError:
+         print("Error de IO!")
      except KeyError:
-	print("Error de KEY!")
+         print("Error de KEY!")
      finally:
-	f.close()
+         f.close()
  
      # mao esquerda
      try:
@@ -212,18 +206,16 @@ def render():
 	     	f.write(left_hand['PONTO_ARTIC'] + '\n')
 	     f.write(parameters['EXP_FACIAL'] + '\n')
      except IOError: 
-	print("Error de IO!")
+         print("Error de IO!")
      except KeyError:
-	print("Error de KEY!")
+         print("Error de KEY!")
      finally:
-	f.close()
-
+         f.close()
+         
      cmd = "cd " + SCRIPTS_BLENDER_DIR + "; blender -b " + BLEND_FILE + " -o " + VIDEOS_DIR + " -P " + MOV_PONTUAL_SCRIPT + " " + path_dir + " " + path_esq
+     print(cmd)
      exitcode = os.system(cmd)
      #avatar_file = signal_name + ".webm"
      avatar_file = signal_name + ".webm"
      return jsonify(rendered_video=avatar_file, exitcode=exitcode)
-
-if __name__ == "__main__":
-    app.run(debug=True)
 

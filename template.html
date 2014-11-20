@@ -30,17 +30,17 @@
                     <tr>
                         <td>
                             
-                            <img class="hand_conf_tooltip" href="#" title="Configura&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/check_blue.png" style="float: left"/>
+                            <img class="hand_conf_tooltip" href="#" title="Configura&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/libras-static/images/check_blue.png" style="float: left"/>
                             
                             <label class="signs_conf_counter">
                             </label>                                                        
                             
-                            <img class="hand_conf_tooltip" href="#" title="Valida&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/check_green.png" style="float: left"/>
+                            <img class="hand_conf_tooltip" href="#" title="Valida&ccedil;&atilde;o" data-placement="bottom" data-toggle="tooltip" src="/libras-static/images/check_green.png" style="float: left"/>
                             
                             <label class="signs_validate_counter">
                             </label>                           
                             
-                            <img class="hand_conf_tooltip" href="#" title="Melhoria" data-placement="bottom" data-toggle="tooltip" src="/static_libras/images/plus.png" style="float: left"/>
+                            <img class="hand_conf_tooltip" href="#" title="Melhoria" data-placement="bottom" data-toggle="tooltip" src="/libras-static/images/plus.png" style="float: left"/>
                             
                             <label class="signs_improved_counter">
                             </label>                             
@@ -275,8 +275,8 @@
                     <area title="grande"  shape="rect" coords="240, 205, 290, 255" href="#"  data-local="2" />
                 </map>
         
-                <img id="avatar_completo_img"  src="/static_libras/images/ponto_de_articulacao/avatar_pontos.png" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
-                <img id="avatar_distancia_img" src="/static_libras/images/ponto_de_articulacao/avatar_distancia.png" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
+                <img id="avatar_completo_img"  src="/libras-static/images/ponto_de_articulacao/avatar_pontos.png" style="margin: 2px 0 0 2px" usemap="#avatar_completo" />
+                <img id="avatar_distancia_img" src="/libras-static/images/ponto_de_articulacao/avatar_distancia.png" style="margin: 2px 0 0 2px; display: none" usemap="#avatar_distancia" />
             </section>
             <!-- End of ponto_de_articulacao section -->
 
@@ -551,237 +551,133 @@
         </button>
     </div>
 
-<script type="text/javascript" src="http://malsup.github.com/jquery.blockUI.js"></script>
-<script src="/static_libras/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="//malsup.github.com/jquery.blockUI.js"></script>
+<script src="/libras-static/js/jquery.raty.min.js"></script>
 
-<script>
-pybossa.taskLoaded( function(task, deferred ) {
+<script type="text/javascript" charset="utf-8">
+var app_shortname = "librasdictionary";
+var endpoint = "/pybossa";
+var current_task;
+var curr_usr_id;
+var tid;
+var progress_width;
 
-    deferred.resolve(task);
-});
+var params_amount;
+var current_exp_group;
+var current_handshape_group;
+var current_fix_hand;
 
-pybossa.presentTask(  function( task, deferred ) {
-    
-    // Guarda a informacao da ultima taskrun para a tarefa atual
-    var lastTaskrun;
+var params_configured;
+var fix_counter;
+var state;
+var isRightHand;
+var parametros;
+var steps_times;
 
-    if (typeof task.id == "undefined") {
-	deferred.resolve();
-	return;
+var old_date;
+var microtask_start;
+var current_date;
+var microtask_end;
+
+var lastTaskrun;
+
+var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
+                                   "Exp_2" : "Bochechas infladas", 
+                                   "Exp_3" : "Bochechas contraidas",
+                                   "Exp_4" : "Labios contraidos",
+                                   "Exp_5" : "Olhos para a direita",
+                                   "Exp_6" : "Olhos para a esquerda" },
+                     "group_2" : { "Exp_7" : "Lingua para baixo",
+                                   "Exp_8" : "Lingua reta",
+				     "Exp_1" : "Bico",
+                                   "Exp_10" : "Olhos arregalados",
+                                   "Exp_11" : "Sobrancelhas levantadas",
+                                   "Exp_12" : "Sobrancelhas franzidas"  },
+                     "group_3" : { "Exp_13" : "Bochecha direita inflada",
+                                   "Exp_14" : "Susto",
+                                   "Exp_15" : "Triste",
+                                   "Exp_16" : "Raiva",
+                                   "Exp_17" : "Desconfiado" } 
+                   };
+
+var hands_shapes = new Object();
+hands_shapes['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
+                               "mao_48", "mao_33", "mao_34", "mao_47",
+                               "mao_36", "mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_37", "mao_49",
+                               "mao_54", "mao_8", "mao_52",
+                               "mao_60", "mao_25", "mao_53", "mao_55", "mao_56", "mao_57", "mao_59",
+                               "mao_26", "mao_27", "mao_29", "mao_30" );
+
+hands_shapes['group_2'] = new Array("mao_28", "mao_22", "mao_58",
+                               "mao_50", "mao_3", "mao_4", "mao_5", "mao_6", "mao_39", "mao_40", "mao_51",
+                               "mao_42", "mao_41",
+                               "mao_44", "mao_43", "mao_45", "mao_46",
+                               "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
+                               "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");   
+
+var words_groups = { "abarrotado" : "Verbos", "calado" : "Verbos", "cama" : "Substantivos", "cartao" : "Substantivos", "espelho" : "Substantivos", "meu" : "Pronomes", "oculos" : "Substantivos", "silencio" : "Substantivos", "telefone" : "Substantivos", "adulto" : "Substantivos", "crianca" : "Substantivos", "distrito_federal" : "Cidades", "desculpe" : "Verbos", "televisao" : "Substantivos" };
+
+function loadData(data) {
+	current_task = data.task;
+	
+	params_configured = 0;
+	fix_counter = 0;
+	state = "QTD_MAOS";
+	isRightHand = true;
+	parametros = { right : {}, left : {} };
+	steps_times = { right : {}, left : {} };
+
+	old_date = new Date();
+	microtask_start = old_date.getTime();
+	current_date = new Date();
+	microtask_end = current_date.getTime();
+	
+	lastTaskrun = null;
+	
+    if (typeof current_task.id == "undefined") {
+		return;
     }
-
 
     // Obtem a ultima taskrun para a task
     jQuery.ajax({
-        type: 'POST',
-        url:  '/LIBRAS_API/getLastTaskrun',
-        contentType: 'application/json',
-        data: JSON.stringify( task_id = task.id ),
+        url:  '/pybossa/api/taskrun?task_id=' + current_task.id + '&limit=30',
         success: function( result ) {
-            lastTaskrun = result.lastTaskrun;
-
-            if ( lastTaskrun != null ) {
-                parametros["right"] = result.lastTaskrun['right'];
-                parametros["left"] = result.lastTaskrun['left'];
-                parametros['QTD_MAOS'] = result.lastTaskrun['QTD_MAOS'];
-                parametros['EXP_FACIAL'] = result.lastTaskrun['EXP_FACIAL'];
+        	if (result.length != 0) {
+        		lastTaskrun = result[result.length-1].info;
+        		
+                parametros["right"] = lastTaskrun['right'];
+                parametros["left"] = lastTaskrun['left'];
+                parametros['QTD_MAOS'] = lastTaskrun['QTD_MAOS'];
+                parametros['EXP_FACIAL'] = lastTaskrun['EXP_FACIAL'];
 
                 // Se existe taskrun mostra-se o video do avatar
-                if ( result.lastTaskrun['avatar_video'] != null ) {
+                if (lastTaskrun['avatar_video'] != null) {
                     state = "VALIDAR_AVATAR";
                     mostrarPergunta();
-                    showRenderedVideo( result.lastTaskrun['avatar_video'] );
+                    showRenderedVideo(lastTaskrun['avatar_video']);
                 }
-
-            } // Fim do if
+        	}
         },
         error: function( result ) {
             alert("Error!");
-        },
-        async: true
+        }
     });
 
-    var curr_usr_id;
-
     // TODO tratar o erro de nao encontra id
-    pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
-        curr_usr_id = data.current_usr_id;
+    pybossa.getCurrentUserId(function(userId) {
+        curr_usr_id = userId;
     }); // Fim de getCurrentUserId
 
-  $(".skip").show();
+  	$(".skip").show();
 
-  $("#star_avg").raty( {numberMax: 3, number : 3 } );
+  	$("#star_avg").raty( {numberMax: 3, number : 3 } );
 
-  $("#star_regular").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 1} );
+  	$("#star_regular").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 1} );
   
-  $("#star_bom").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 2} );
-  $("#star_excelente").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 3} );
+  	$("#star_bom").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 2} );
+  	$("#star_excelente").raty( { hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score: 3} );
 
-  var params_amount;
-  var params_configured = 0;
-  var current_exp_group;
-  var current_handshape_group;
-  var current_fix_hand;
-  var fix_counter = 0;
-  var state = "QTD_MAOS";
-  var isRightHand = true;
-  var parametros = { right : {}, left : {} };
-
-  var steps_times = { right : {}, left : {} };
-
-  var old_date = new Date();
-  var microtask_start = old_date.getTime();
-
-  var current_date = new Date();
-  var microtask_end = current_date.getTime();
-
-  var exp_facial = { "group_1" : { "Exp_9" : "Neutra", 
-                                     "Exp_2" : "Bochechas infladas", 
-                                     "Exp_3" : "Bochechas contraidas",
-                                     "Exp_4" : "Labios contraidos",
-                                     "Exp_5" : "Olhos para a direita",
-                                     "Exp_6" : "Olhos para a esquerda" },
-                       "group_2" : { "Exp_7" : "Lingua para baixo",
-                                     "Exp_8" : "Lingua reta",
-				     "Exp_1" : "Bico",
-                                     "Exp_10" : "Olhos arregalados",
-                                     "Exp_11" : "Sobrancelhas levantadas",
-                                     "Exp_12" : "Sobrancelhas franzidas"  },
-                       "group_3" : { "Exp_13" : "Bochecha direita inflada",
-                                     "Exp_14" : "Susto",
-                                     "Exp_15" : "Triste",
-                                     "Exp_16" : "Raiva",
-                                     "Exp_17" : "Desconfiado" } 
-                     };
-
-  var hands_shapes = new Object();
-  hands_shapes['group_1'] = new Array("mao_14", "mao_12", "mao_13", "mao_16",
-                                 "mao_48", "mao_33", "mao_34", "mao_47",
-                                 "mao_36", "mao_21", "mao_23", "mao_24", "mao_31", "mao_35", "mao_37", "mao_49",
-                                 "mao_54", "mao_8", "mao_52",
-                                 "mao_60", "mao_25", "mao_53", "mao_55", "mao_56", "mao_57", "mao_59",
-                                 "mao_26", "mao_27", "mao_29", "mao_30" );
-
-  hands_shapes['group_2'] = new Array("mao_28", "mao_22", "mao_58",
-                                 "mao_50", "mao_3", "mao_4", "mao_5", "mao_6", "mao_39", "mao_40", "mao_51",
-                                 "mao_42", "mao_41",
-                                 "mao_44", "mao_43", "mao_45", "mao_46",
-                                 "mao_38", "mao_9", "mao_15", "mao_17", "mao_18", "mao_19", "mao_20", "mao_32",
-                                 "mao_2", "mao_1", "mao_7", "mao_10", "mao_11");   
-
-  var words_groups = { "abarrotado" : "Verbos", "calado" : "Verbos", "cama" : "Substantivos", "cartao" : "Substantivos", "espelho" : "Substantivos", "meu" : "Pronomes", "oculos" : "Substantivos", "silencio" : "Substantivos", "telefone" : "Substantivos", "adulto" : "Substantivos", "crianca" : "Substantivos", "distrito_federal" : "Cidades", "desculpe" : "Verbos", "televisao" : "Substantivos" };
-
-  $('.hand_conf_tooltip').tooltip();
-
-  // Modifica as imagens dos elementos li da section formas_de_mao
-  function setFormasDeMao( hand_page ) {
-      var nth_li;
-
-      // "limpa" a pagina de maos
-      $("#maos").find('li').hide();
-
-      $("#modal_maos").find('li').hide();
-      
-      // Dertermina a pagina de maos a ser mostrada 
-      if( hand_page == "prev" ) {
-          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) - 1 );
-          hand_page = current_handshape_group;
-      }else if ( hand_page == "next" ) {
-          current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) + 1 );
-          hand_page = current_handshape_group;
-      } else {
-          current_handshape_group = hand_page;
-      }
-
-      // Modifica a aparencia do pagination
-      set_handshape_pagination();
-      
-      // Cria as tags img e poe nos elementos li
-      for( var i = 0; i < hands_shapes[hand_page].length; i++) {
-          nth_li = ":nth-child(" + (i+1) + ")";
-	  conf_mao = 'conf_' + parseInt( hands_shapes[hand_page][i].split("_")[1] );
-          
-          $("#maos").find("li").filter(nth_li).data('handshape', conf_mao);
-          $("#maos").find("li").filter(nth_li).html('<img src="/static_libras/images/formas_de_mao/' + conf_mao + '.png" />');
-
-          $("#modal_maos").find("li").filter(nth_li).data('handshape', conf_mao);
-          $("#modal_maos").find("li").filter(nth_li).html('<img src="/static_libras/images/formas_de_mao/' + conf_mao + '.png" />');
-      } // Fim do for
-
-      $("#maos").find('li').fadeIn();
-      $("#modal_maos").find('li').fadeIn();
-
-    } // Fim da funcao setFormasDeMao
-
-    // Modifica as imagens dos elementos li da section orientacao_palma_da_mao
-    function setOrientacaoMao( hand ) {
-      var nth_li;
-      //console.log( hand );
-      var img_ori;
-      for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
-        nth_li = ":nth-child(" +  ori_num  + ")";
-        img_ori = '<img src="/static_libras/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
-        //console.log( img_ori );
-
-        $("#orientacao_palma_da_mao").find("li").filter(nth_li).html( img_ori );
-        $("#modal_orientacao_mao").find("li").filter(nth_li).html( img_ori );
-      } // Fim do for
-
-    } // Fim da funcao setOrientacaoMao
-
-    // Modifica as imagens dos elementos li da section expressao_facial
-    function setExpressaoFacial( group ) {
-      var nth_li;
-      var exp_num;
-      
-      // Determina a pagina de expressoes faciais
-      if( group == "prev" ){
-          current_exp_group = "group_" + ( parseInt( current_exp_group.split("_")[1] ) - 1 );
-          group = current_exp_group;
-      }else if( group == "next" ){
-          current_exp_group = "group_" + ( parseInt( current_exp_group.split("_")[1] ) + 1 );
-          group = current_exp_group;
-      }else{
-          current_exp_group = group;
-      }
-      
-      // Modifica a aparencia do pagination de expressoes faciais  
-      set_pagination();
-      
-      // Modifica as images da expressao facial bem como os valores dos atributos title e data-exp_facial
-      var contador = 1;
-      for( var exp in exp_facial[group] ) {
-        exp_num = parseInt( exp.split("_")[1]  );
-        nth_li = ":nth-child(" + contador + ")";
-
-        $("#expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static_libras/images/expressao_facial/' + exp + '.png" />');
-        $("#expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
-        $("#expressoes").find("li").filter(nth_li).data("exp_facial", exp);
-
-        $("#modal_expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/static_libras/images/expressao_facial/' + exp + '.png" />');
-        $("#modal_expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
-        $("#modal_expressoes").find("li").filter(nth_li).data("exp_facial", exp);
-      
-        contador = contador + 1;
-      } // Fim do for
-    } // Fim da funcao setExpressaoFacial  
-    
-    // Modifica a aparencia do pagination da expressao facial
-    function set_pagination() {
-    
-      if( current_exp_group == "group_1" ){
-          $('.expressao_pagination').find("li").first().addClass("disabled");
-      }else{
-          $('.expressao_pagination').find("li").first().removeClass("disabled");
-      }
-    
-      if( current_exp_group == "group_3" ){
-          $('.expressao_pagination').find("li").last().addClass("disabled");
-      }else{
-          $('.expressao_pagination').find("li").last().removeClass("disabled");
-      }
-
-    } // Fim da funcao set_pagination
+ 	$('.hand_conf_tooltip').tooltip();
     
     // An expressao_pagination button is clicked 
     $('.expressao_pagination').off('click').on( 'click', 'li', function(event){
@@ -812,226 +708,527 @@ pybossa.presentTask(  function( task, deferred ) {
       }
     });
     
-    // Modifica a aparencia do pagination 
-    function set_handshape_pagination() {
-    
-      if( current_handshape_group == "group_1" ){
-          $('.handshape_pagination').find("li").first().addClass("disabled");
-      }else{
-          $('.handshape_pagination').find("li").first().removeClass("disabled");
-      }
-    
-      if( current_handshape_group == "group_2" ){
-          $('.handshape_pagination').find("li").last().addClass("disabled");
-      }else{
-          $('.handshape_pagination').find("li").last().removeClass("disabled");
-      }
-    }
-
-    // Modifica a pergunta a ser mostrada e mostra a div adequada
-    function mostrarPergunta() {
-      $('#quantidade_maos').hide();
-      $('#orientacao_palma_da_mao').hide();
-      $('#expressao_facial').hide();
-      $('#ponto_de_articulacao').hide();
-      $('#avatar_distancia_img').hide();
-      $('#hand_shapes').hide();
-      $('#wrap_avatar_video').hide();
-      $('#avatar_video').hide();
-      $("#correcao").hide();
-      $("#left_hand").hide();
-	
-      var pergunta;
+    if (!$.isEmptyObject(current_task)) {
+      
+        stopAndPlaySignalVideo(true);
+	    parametros['signal_name'] = current_task.info.signal_name;
+        mostrarPergunta(state);
         
-      if ( state == "ORIENT_PALMA" ) {
-          if ( isRightHand ){
+        // Enventos de click no botao de confirmacao ou correcao
+        $('.btn-answer').off('click').on('click', function(){
+            var answer = $(this).attr('value');
+            if( typeof answer != 'undefined' ){
+
+                if ( state == "VALIDAR_AVATAR" ) {
+                    saveAnswer( answer );
+                    updateState( answer );
+
+		            if( state == "TASK_END" ) {
+				        pybossa.saveTask(current_task.id, parametros).done(function() {
+						    // chamada ajax para setar a tarefa como completa
+							jQuery.ajax( {
+							    type: 'POST',
+							    url:    '/libras/api/validateTask',
+							    contentType: 'application/json',
+							    data: JSON.stringify( { task_id : current_task.id } ),
+							    success: function( result ) {
+							    },
+							    error: function( result ) {
+							        alert("Error!");
+							    },
+							    async: true
+							});
+							getNewTask();
+		                });
+                    } else {
+                        mostrarPergunta();
+                    }
+
+                } else {
+                    saveAnswer( answer );
+                    updateState( answer );
+                    mostrarPergunta();
+
+		            if( state == "TASK_END" ) {
+						pybossa.saveTask(current_task.id, parametros).done(function() {
+						    getNewTask();
+						});
+	                }
+                } 
+            } else{
+              $("#error").show();
+            }
+        });
+
+        // Eventos de clique no botao de quantidade de maos
+        $('.btn-hands-amount').off('click').on('click', function(){
+            var answer = $(this).attr('value');
+            if( typeof answer != 'undefined' ){
+
+              saveAnswer(answer);
+              updateState(answer);	
+              mostrarPergunta(state);
+            } else{
+              $("#error").show();
+            }
+        });
+ 	
+        // Eventos de cliques em tipos de mao
+        $(".handshape").off("click").on( "click", function() {
+			answer = $(this).data('handshape');
+			saveAnswer(answer);
+			       
+			if ( state != "CORRECAO" ) 
+				updateState(answer);
+			else
+				$('.modal.in').modal("hide");
+			mostrarPergunta();	
+        });
+
+		// Eventos de cliques em pontos de articulacao
+		$("#avatar_completo").find("area").off('click').on('click', function(event){
+			event.preventDefault();         
+			answer = $(this).data('local');    
+			saveAnswer(answer);
+			if ( state != "CORRECAO" )
+				updateState(answer);
+			else
+				$('.modal.in').modal("hide");
+			mostrarPergunta();
+			
+			$("#avatar_completo_img").hide();
+			$("#avatar_distancia_img").fadeIn();
+		});
+		
+        $("#avatar_distancia").find("area").off('click').on('click', function(event){
+			event.preventDefault();
+			$("#avatar_distancia_img").hide();
+			answer = $(this).data('local');
+			
+			saveAnswer(answer);
+			if ( state != "CORRECAO" )
+			  updateState(answer);
+			else
+			  $('.modal.in').modal("hide");
+			mostrarPergunta();
+        });
+
+	    // Eventos de cliques em expressao facial
+	    var exp_answer;
+	    $('.exp').off('click').on( 'click', function(){
+			exp_answer = $(this).data('exp_facial');
+			saveAnswer(exp_answer);
+			if ( state != "CORRECAO" )
+			  updateState(exp_answer);
+			else
+			  $('.modal.in').modal("hide");
+			mostrarPergunta();
+	    });
+
+	    // Eventos de cliques em orientacao da mao
+	    $(".ori").off("click").on("click", function() {
+			answer = $(this).data('orientacao');
+			saveAnswer(answer);
+			if ( state != "CORRECAO" )           
+			  updateState(answer);
+			else
+			  $('.modal.in').modal("hide");           
+			mostrarPergunta();
+	    });
+
+		// Evento de clique em pular tarefa
+		$('.btn-skip').off( 'click' ).on( 'click', function() {
+		    params_configured = 0;
+		    $('.task_progress_bar').hide();
+		    var answer = $(this).attr('value');
+		    if( typeof answer != 'undefined' ){
+		        if (answer == "Pular") {
+		            parametros.final_state = "skipped";
+		         	pybossa.saveTask(current_task.id, parametros).done(function() {
+		         		getNewTask();
+		            });
+		        }
+		    } else {
+		        $("#error").show();
+		    }
+		});
+
+		// Evento de clique no botao pronto
+		$('.ready').off('click').on('click', function(){
+		  updateState( $(this).attr('value') );
+		  $('#avatar_video').hide();
+		  fix_counter = fix_counter + 1;
+		  steps_times[ "CORRECAO" + fix_counter ] = getStepTime();
+		  updateMicrotaskTimer();
+		  mostrarPergunta();
+		});
+
+		// Eventos de cliques nas opcoes de correcao
+		$(".fix").off("click").on("click", function(){
+		  if ( $(this).data("parametro") == "ori" )
+		    if ( $(this).data("fix_hand") == "right" )
+		      setOrientacaoMao( "right_hand" );
+		    else
+		      setOrientacaoMao( "left_hand" );
+		      
+		  current_fix_hand = $(this).data("fix_hand");
+		});
+		
+		// Eventos de cliques na opcao de remover mao esquerda
+		$('.remove_button').off('click').on('click', function(event) {
+		  event.preventDefault();
+		  $('.remove_button').hide();
+		  $('.add_button').show();
+		  $('#left_hand').hide();
+		  parametros["QTD_MAOS"] = "uma";
+		  parametros.left = {};
+		});
+
+		// Eventos de cliques no botao de adicionar mao esquerda
+		$('.add_button').off('click').on('click', function(event) {
+		  event.preventDefault();
+		  $('.remove_button').show();
+		  $('.add_button').hide();
+		  $('#left_hand').show();
+		  parametros["QTD_MAOS"] = "duas";
+		  parametros.left["CONF_MAO"] = parametros.right["CONF_MAO"];
+		  parametros.left["ORIENT_PALMA"] = parametros.right["ORIENT_PALMA"];
+		  parametros.left["PONTO_ARTIC"] = parametros.right["PONTO_ARTIC"];
+		  parametros.left["DIST_MAOS"] = parametros.right["DIST_MAOS"];
+		
+		  showCorrecaoDiv();
+		});
+
+		// Eventos de cliques no botao Colabore
+		$(".colabore_button").off('click').on('click', function(){
+		  $("#wrap").hide();
+		  $(".skeleton").show();
+		});
+		
+		// Eventos de cliques no botao relatorio
+		$(".my_signs_button").off('click').on('click', function(){
+		  showUserReport();
+		});
+    } else {
+		$('.colabore_button').hide();
+		$('.share_button').show();
+		showUserReport();
+    } 
+}
+
+// Modifica as imagens dos elementos li da section formas_de_mao
+function setFormasDeMao( hand_page ) {
+	 var nth_li;
+	
+	 // "limpa" a pagina de maos
+	 $("#maos").find('li').hide();
+	
+	 $("#modal_maos").find('li').hide();
+	 
+	 // Dertermina a pagina de maos a ser mostrada 
+	 if( hand_page == "prev" ) {
+	     current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) - 1 );
+	     hand_page = current_handshape_group;
+	 }else if ( hand_page == "next" ) {
+	     current_handshape_group = "group_" + ( parseInt( current_handshape_group.split("_")[1] ) + 1 );
+	     hand_page = current_handshape_group;
+	 } else {
+	     current_handshape_group = hand_page;
+	 }
+	
+	 // Modifica a aparencia do pagination
+	 set_handshape_pagination();
+	 
+	 // Cria as tags img e poe nos elementos li
+	 for( var i = 0; i < hands_shapes[hand_page].length; i++) {
+	     nth_li = ":nth-child(" + (i+1) + ")";
+	conf_mao = 'conf_' + parseInt( hands_shapes[hand_page][i].split("_")[1] );
+	     
+	     $("#maos").find("li").filter(nth_li).data('handshape', conf_mao);
+	     $("#maos").find("li").filter(nth_li).html('<img src="/libras-static/images/formas_de_mao/' + conf_mao + '.png" />');
+	
+	     $("#modal_maos").find("li").filter(nth_li).data('handshape', conf_mao);
+	     $("#modal_maos").find("li").filter(nth_li).html('<img src="/libras-static/images/formas_de_mao/' + conf_mao + '.png" />');
+	 } // Fim do for
+	
+	 $("#maos").find('li').fadeIn();
+	 $("#modal_maos").find('li').fadeIn();
+} // Fim da funcao setFormasDeMao
+
+// Modifica as imagens dos elementos li da section orientacao_palma_da_mao
+function setOrientacaoMao( hand ) {
+	var nth_li;
+	//console.log( hand );
+	var img_ori;
+	for ( var ori_num = 1; ori_num <= 12; ori_num++ ) {
+	  nth_li = ":nth-child(" +  ori_num  + ")";
+	  img_ori = '<img src="/libras-static/images/orientacao_da_mao/' + hand + '/Ori_' + ori_num + '.png" />';
+	  //console.log( img_ori );
+	
+	  $("#orientacao_palma_da_mao").find("li").filter(nth_li).html( img_ori );
+	  $("#modal_orientacao_mao").find("li").filter(nth_li).html( img_ori );
+	} // Fim do for
+} // Fim da funcao setOrientacaoMao
+
+// Modifica as imagens dos elementos li da section expressao_facial
+function setExpressaoFacial( group ) {
+	var nth_li;
+	var exp_num;
+	
+	// Determina a pagina de expressoes faciais
+	if( group == "prev" ){
+	    current_exp_group = "group_" + ( parseInt( current_exp_group.split("_")[1] ) - 1 );
+	    group = current_exp_group;
+	}else if( group == "next" ){
+	    current_exp_group = "group_" + ( parseInt( current_exp_group.split("_")[1] ) + 1 );
+	    group = current_exp_group;
+	}else{
+	    current_exp_group = group;
+	}
+	
+	// Modifica a aparencia do pagination de expressoes faciais  
+	set_pagination();
+	
+	// Modifica as images da expressao facial bem como os valores dos atributos title e data-exp_facial
+	var contador = 1;
+	for( var exp in exp_facial[group] ) {
+	  exp_num = parseInt( exp.split("_")[1]  );
+	  nth_li = ":nth-child(" + contador + ")";
+	
+	  $("#expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/libras-static/images/expressao_facial/' + exp + '.png" />');
+	  $("#expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
+	  $("#expressoes").find("li").filter(nth_li).data("exp_facial", exp);
+	
+	  $("#modal_expressoes").find("li").filter(nth_li).html('<img width="133px" height="133px" src="/libras-static/images/expressao_facial/' + exp + '.png" />');
+	  $("#modal_expressoes").find("li").filter(nth_li).attr("title", exp_facial[group][exp]);
+	  $("#modal_expressoes").find("li").filter(nth_li).data("exp_facial", exp);
+	
+	  contador = contador + 1;
+	} // Fim do for
+} // Fim da funcao setExpressaoFacial
+  
+// Modifica a aparencia do pagination da expressao facial
+function set_pagination() {
+	if( current_exp_group == "group_1" ){
+	    $('.expressao_pagination').find("li").first().addClass("disabled");
+	}else{
+	    $('.expressao_pagination').find("li").first().removeClass("disabled");
+	}
+	
+	if( current_exp_group == "group_3" ){
+	    $('.expressao_pagination').find("li").last().addClass("disabled");
+	}else{
+	    $('.expressao_pagination').find("li").last().removeClass("disabled");
+	}
+} // Fim da funcao set_pagination
+
+// Modifica a aparencia do pagination 
+function set_handshape_pagination() {
+	if( current_handshape_group == "group_1" ){
+	    $('.handshape_pagination').find("li").first().addClass("disabled");
+	}else{
+	    $('.handshape_pagination').find("li").first().removeClass("disabled");
+	}
+	
+	if( current_handshape_group == "group_2" ){
+	    $('.handshape_pagination').find("li").last().addClass("disabled");
+	}else{
+	    $('.handshape_pagination').find("li").last().removeClass("disabled");
+	}
+}
+
+// Modifica a pergunta a ser mostrada e mostra a div adequada
+function mostrarPergunta() {
+	  $('#quantidade_maos').hide();
+	  $('#orientacao_palma_da_mao').hide();
+	  $('#expressao_facial').hide();
+	  $('#ponto_de_articulacao').hide();
+	  $('#avatar_distancia_img').hide();
+	  $('#hand_shapes').hide();
+	  $('#wrap_avatar_video').hide();
+	  $('#avatar_video').hide();
+	  $("#correcao").hide();
+	  $("#left_hand").hide();
+	
+	  var pergunta;
+	    
+	  if ( state == "ORIENT_PALMA" ) {
+	      if ( isRightHand ){
 		      pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o direita.";
-              setOrientacaoMao("right_hand");
+	          setOrientacaoMao("right_hand");
 	      } else {
 		      pergunta = "Escolha a orienta&ccedil;&atilde;o da m&atilde;o esquerda.";
-              setOrientacaoMao("left_hand");
+	          setOrientacaoMao("left_hand");
 	      }
-          $('#orientacao_palma_da_mao').show();
-      }
-      else if ( state == "EXP_FACIAL") {
+	      $('#orientacao_palma_da_mao').show();
+	  } else if ( state == "EXP_FACIAL") {
 	      pergunta = "Com que express&atilde;o se faz o sinal?";
-          setExpressaoFacial("group_1");  
-          $('#expressao_facial').show();
-      }
-      else if (state == "PONTO_ARTIC") {
-	if (isRightHand) {
-		pergunta = "A m&atilde;o direita fica suspensa em que ponto?";
-	} else {
-		pergunta = "A m&atilde;o esquerda fica suspensa em que ponto?";
-	}
-        $('#ponto_de_articulacao').show();
-        $("#avatar_completo_img").show(); // mostrar no caso de mao esquerda pois foi hiden na mao direita
-      }
-      else if (state == "CONF_MAO") {
-	if (isRightHand) {
-		 pergunta = "Escolha a forma da m&atilde;o direita.";
-	} else {
-		pergunta = "Escolha a forma da m&atilde;o esquerda.";
-	}
+	      setExpressaoFacial("group_1");  
+	      $('#expressao_facial').show();
+	  } else if (state == "PONTO_ARTIC") {
+			if (isRightHand) {
+				pergunta = "A m&atilde;o direita fica suspensa em que ponto?";
+			} else {
+				pergunta = "A m&atilde;o esquerda fica suspensa em que ponto?";
+			}
+			    $('#ponto_de_articulacao').show();
+			    $("#avatar_completo_img").show(); // mostrar no caso de mao esquerda pois foi hiden na mao direita
+	  } else if (state == "CONF_MAO") {
+			if (isRightHand) {
+				 pergunta = "Escolha a forma da m&atilde;o direita.";
+			} else {
+				pergunta = "Escolha a forma da m&atilde;o esquerda.";
+			}
+			
+			setFormasDeMao('group_1');
+			    $('#hand_shapes').show();
+			    $('.task_progress_bar').show();
+	  } else if (state == "QTD_MAOS") {
+			pergunta = "Com quantas m&atilde;os se faz o sinal?"
+		    $('#quantidade_maos').show();
+  	  } else if (state == "DIST_MAOS") {
+			if (isRightHand) {
+				 pergunta = "A que dist&acirc;ncia do corpo a m&atilde;o direita faz o sinal?";
+			} else {
+				pergunta = "A que dist&acirc;ncia do corpo a m&atilde;o esquerda faz o sinal?";
+			}
+			$('#ponto_de_articulacao').show();
+	  } else if (state == "RENDER") {
+			pergunta = "Aguarde um momento por favor";
+			renderizarVideo();
+			$("#wrap_avatar_video").show();
+	  } else if ( ( state == "CONFIRM_AVATAR" ) || ( state == "VALIDAR_AVATAR" ) ) {
+			pergunta = "O avatar faz o sinal corretamente?";
+			$("#wrap_avatar_video").show();
+	  } else if (state == "CORRECAO") {
+			pergunta = "O que deve ser corrigido?"
+			showCorrecaoDiv();
+	  }
+	
+	  $("#question").html( pergunta );
+	  $(".task_progress_bar").css({"width" : ( ( params_configured / params_amount ) * 100 ) + "%" });
+} // Fim da funcao mostrarPergunta
 
-	setFormasDeMao('group_1');
-        $('#hand_shapes').show();
-        $('.task_progress_bar').show();
-      }
-      else if (state == "QTD_MAOS") {
-	pergunta = "Com quantas m&atilde;os se faz o sinal?"
-        $('#quantidade_maos').show();
-      }
-      else if (state == "DIST_MAOS") {
-	if (isRightHand) {
-		 pergunta = "A que dist&acirc;ncia do corpo a m&atilde;o direita faz o sinal?";
-	} else {
-		pergunta = "A que dist&acirc;ncia do corpo a m&atilde;o esquerda faz o sinal?";
-	}
+function setCorrecaoLi() {
+	var contador = 1;
+	var content;
+	var nth_li;   
+	
+	// Imagens de correcao da mao direita
+	for( var p in parametros.right ) {
+	  nth_li = ":nth-child(" + contador + ")";
+	  if( p.split('_')[0] == "CONF" ) { // Forma da mao
+	    content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/libras-static/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
+	    $('#right_hand').find("li").filter(":nth-child(1)").html(content);
+	  }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
+	    content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
+	    $('#right_hand').find("li").filter(":nth-child(2)").html(content);
+	  }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
+	    content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
+	    $('#right_hand').find("li").filter(":nth-child(3)").html(content);
+	  }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao ao corpo
+	    content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
+	    $('#right_hand').find("li").filter(":nth-child(4)").html(content);
+	  }
+	
+	  contador = contador + 1; 
+	} // Fim do for
+	
+	// Imagens de correcao da mao esquerda
+	if( parametros["QTD_MAOS"] == "duas" )
+	{
+	  contador = 1;
+	  for( var p in parametros.left ) { 
+	    nth_li = ":nth-child(" + contador + ")";
+	    if ( p.split('_')[0] == "CONF" ) { // Forma da mao esquerda
+	      content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/libras-static/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
+	      $('#left_hand').find("li").filter(":nth-child(1)").html(content);
+	    } else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
+	      content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
+	      $('#left_hand').find("li").filter(":nth-child(2)").html(content);
+	    } else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
+	      if ( parametros.left[p] == "Pa_9" )
+	        content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
+	      else
+	        content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
+	      $('#left_hand').find("li").filter(":nth-child(3)").html(content);
+	    } else if( p.split('_')[0] == "DIST" ){ // Distancia da mao esquerda ao corpo
+	      content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/libras-static/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
+	      $('#left_hand').find("li").filter(":nth-child(4)").html(content);
+	    }
+	    contador = contador + 1; 
+	  } // Fim do for
+	
+	  $('.remove_button').show();
+	  $('.add_button').hide();
+	  $('#left_hand').show();
+	} // Fim do if
+	
+	$("#fix_expressao").find("li").first().html( '<a href="#modalExp" data-toggle="modal"><img width="100px" height="100px" src="/libras-static/images/expressao_facial/' + parametros["EXP_FACIAL"] + '.png" /></a>' );
+} // Fim da funcao setCorrecaoLi
 
-        $('#ponto_de_articulacao').show();
-      }
-      else if (state == "RENDER") {
-	pergunta = "Aguarde um momento por favor";
-	renderizarVideo();
-        $("#wrap_avatar_video").show();
-      }
-      else if ( ( state == "CONFIRM_AVATAR" ) || ( state == "VALIDAR_AVATAR" ) ) {
-	pergunta = "O avatar faz o sinal corretamente?";
-	$("#wrap_avatar_video").show();
-      }
-      else if (state == "CORRECAO") {
-	pergunta = "O que deve ser corrigido?"
-	showCorrecaoDiv();
-      }
-
-      $("#question").html( pergunta );
-      $(".task_progress_bar").css({"width" : ( ( params_configured / params_amount ) * 100 ) + "%" });
-    } // Fim da funcao mostrarPergunta
-
-    
-    function setCorrecaoLi() {
-      var contador = 1;
-      var content;
-      var nth_li;   
-
-      // Imagens de correcao da mao direita
-      for( var p in parametros.right ) {
-        nth_li = ":nth-child(" + contador + ")";
-        if( p.split('_')[0] == "CONF" ) { // Forma da mao
-          content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static_libras/images/formas_de_mao/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(":nth-child(1)").html(content);
-        }else if( p.split('_')[0] == "ORIENT" ){ // Orientacao da palma da mao
-          content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/orientacao_da_mao/'+ 'right_hand/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(":nth-child(2)").html(content);
-        }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
-          content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(":nth-child(3)").html(content);
-        }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao ao corpo
-          content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/distancia_' + parametros.right[p] + '.png" /></a>';
-          $('#right_hand').find("li").filter(":nth-child(4)").html(content);
-        }
-
-        contador = contador + 1; 
-      } // Fim do for
-      
-      // Imagens de correcao da mao esquerda
-      if( parametros["QTD_MAOS"] == "duas" )
-      {
-        contador = 1;
-        for( var p in parametros.left ) { 
-          nth_li = ":nth-child(" + contador + ")";
-          if( p.split('_')[0] == "CONF" ) { // Forma da mao esquerda
-            content = '<a href="#modalFormas" data-toggle="modal"> <img width="98px" height="98px" src="/static_libras/images/formas_de_mao/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(":nth-child(1)").html(content);
-          }else if( p.split('_')[0] == "ORIENT" ){ // Orientaca da palma da mao esquerda
-            content = '<a href="#modalOri" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/orientacao_da_mao/' + 'left_hand/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(":nth-child(2)").html(content);
-          }else if( p.split('_')[0] == "PONTO" ){ // Ponto de articulacao da mao esquerda
-            if ( parametros.left[p] == "Pa_9" )
-              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.left[p] + '_esq.png" /></a>';
-            else
-              content = '<a href="#modalPontos" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(":nth-child(3)").html(content);
-          }else if( p.split('_')[0] == "DIST" ){ // Distancia da mao esquerda ao corpo
-            content = '<a href="#modalDistancia" data-toggle="modal"><img width="98px" height="98px" src="/static_libras/images/ponto_de_articulacao/distancia_' + parametros.left[p] + '.png" /></a>';
-            $('#left_hand').find("li").filter(":nth-child(4)").html(content);
-          }
-          contador = contador + 1; 
-        } // Fim do for
-
-        $('.remove_button').show();
-        $('.add_button').hide();
-        $('#left_hand').show();
-      } // Fim do if
-
-      $("#fix_expressao").find("li").first().html( '<a href="#modalExp" data-toggle="modal"><img width="100px" height="100px" src="/static_libras/images/expressao_facial/' + parametros["EXP_FACIAL"] + '.png" /></a>' );
-  
-    } // Fim da funcao setCorrecaoLi
-    
-    function showCorrecaoDiv() {
-        setCorrecaoLi();
-        setFormasDeMao('group_1');
+function showCorrecaoDiv() {
+    setCorrecaoLi();
+    setFormasDeMao('group_1');
 	$("#correcao").show();
+}
+
+function saveAnswer( answer ) {
+    if ( state == "VALIDAR_AVATAR" ) {
+            parametros["configuration"] = "no";
+            parametros["validation"] = "yes";
+            parametros["improvement"] = "no";
+        return;
     }
-
-    function saveAnswer( answer ) {
-
-        if ( state == "VALIDAR_AVATAR" ) {
-                parametros["configuration"] = "no";
-                parametros["validation"] = "yes";
-                parametros["improvement"] = "no";
-            return;
-        }
-        
+    
 	if ( state == "CONFIRM_AVATAR" ) {
-            if ( fix_counter == 0 ) {  
-                steps_times[state] = getStepTime();
-                updateMicrotaskTimer();
-            }
-            
-            /* The first time the task is answered */  
-            if ( lastTaskrun == null ) {
-                parametros["steps_times"] = steps_times;
-                parametros["configuration"] = "yes";
-                parametros["validation"] = "no";
-                parametros["improvement"] = "no";
-            } else { /* Another time is improvement */
-                parametros["steps_times"] = steps_times;
-                parametros["configuration"] = "no";
-                parametros["validation"] = "no";
-                parametros["improvement"] = "yes";
-            }
-            return;
+	           if ( fix_counter == 0 ) {  
+	               steps_times[state] = getStepTime();
+	               updateMicrotaskTimer();
+	           }
+	           
+	           /* The first time the task is answered */  
+	           if ( lastTaskrun == null ) {
+	               parametros["steps_times"] = steps_times;
+	               parametros["configuration"] = "yes";
+	               parametros["validation"] = "no";
+	               parametros["improvement"] = "no";
+	           } else { /* Another time is improvement */
+	               parametros["steps_times"] = steps_times;
+	               parametros["configuration"] = "no";
+	               parametros["validation"] = "no";
+	               parametros["improvement"] = "yes";
+	           }
+	           return;
 	}
 
-        if ( state == "CORRECAO" ) {
-          if ( current_fix_hand == "right" ){
-            if ( answer in [0, 1, 2] ) {
-              parametros.right["DIST_MAOS"] = answer;              
-            }else if ( answer.split("_")[0] == "conf" ) {
-              parametros.right["CONF_MAO"] = answer;
-            }else if ( answer.split("_")[0] == "Ori" ) {
-              parametros.right["ORIENT_PALMA"] = answer;              
-            }else if ( answer.split("_")[0] == "Pa" ) {
-              parametros.right["PONTO_ARTIC"] = answer;              
-            }           
-          }else if ( current_fix_hand == "left" ){
-            if ( answer in [0, 1, 2] ) {
-              parametros.left["DIST_MAOS"] = answer;              
-            }else if ( answer.split("_")[0] == "conf" ) {
-              parametros.left["CONF_MAO"] = answer;
-            }else if ( answer.split("_")[0] == "Ori" ) {
-              parametros.left["ORIENT_PALMA"] = answer;              
-            }else if ( answer.split("_")[0] == "Pa" ) {
-              parametros.left["PONTO_ARTIC"] = answer;              
-          } 
-          }else {
-            parametros["EXP_FACIAL"] = answer;                         
-          } // Fim do else
-          
-          return;
-        } // Fim do if CORRECAO
+    if ( state == "CORRECAO" ) {
+      if ( current_fix_hand == "right" ){
+        if ( answer in [0, 1, 2] ) {
+          parametros.right["DIST_MAOS"] = answer;              
+        }else if ( answer.split("_")[0] == "conf" ) {
+          parametros.right["CONF_MAO"] = answer;
+        }else if ( answer.split("_")[0] == "Ori" ) {
+          parametros.right["ORIENT_PALMA"] = answer;              
+        }else if ( answer.split("_")[0] == "Pa" ) {
+          parametros.right["PONTO_ARTIC"] = answer;              
+        }           
+      }else if ( current_fix_hand == "left" ){
+        if ( answer in [0, 1, 2] ) {
+          parametros.left["DIST_MAOS"] = answer;              
+        }else if ( answer.split("_")[0] == "conf" ) {
+          parametros.left["CONF_MAO"] = answer;
+        }else if ( answer.split("_")[0] == "Ori" ) {
+          parametros.left["ORIENT_PALMA"] = answer;              
+        }else if ( answer.split("_")[0] == "Pa" ) {
+          parametros.left["PONTO_ARTIC"] = answer;              
+      } 
+      }else {
+        parametros["EXP_FACIAL"] = answer;                         
+      } // Fim do else
+      
+      return;
+    } // Fim do if CORRECAO
 
 	if (state == "RENDER") {
             parametros.avatar_video = answer;
@@ -1061,34 +1258,34 @@ pybossa.presentTask(  function( task, deferred ) {
                 updateMicrotaskTimer();
             }
 	}	
-    }
-    
-    function getStepTime(){
-        current_date = new Date();
-        microtask_end = current_date.getTime();
-        return (microtask_end - microtask_start);
-    } // Fim da funcao saveStepTime
+}
 
-    function updateMicrotaskTimer(){
-        old_date = new Date();
-        microtask_start = old_date.getTime(); 
-        current_date = new Date();
-        microtask_end = current_date.getTime();
-    } // Fim da funcao updateMicrotaskTimer
+function getStepTime(){
+    current_date = new Date();
+    microtask_end = current_date.getTime();
+    return (microtask_end - microtask_start);
+} // Fim da funcao saveStepTime
 
-    function updateState( answer ) {
-	
+function updateMicrotaskTimer(){
+    old_date = new Date();
+    microtask_start = old_date.getTime(); 
+    current_date = new Date();
+    microtask_end = current_date.getTime();
+} // Fim da funcao updateMicrotaskTimer
+
+function updateState( answer ) {
 	var nextState = "";
 
-        if ( state == "QTD_MAOS" ) {
-          nextState = "CONF_MAO";
+    if ( state == "QTD_MAOS" ) {
+      nextState = "CONF_MAO";
 
 	  if (answer == "uma") {
             params_amount = 7;
 	  } else {
-            params_amount = 11;
-          }
-          params_configured = params_configured + 1;
+        params_amount = 11;
+      }
+      params_configured = params_configured + 1;
+      
 	} else if ( state == "CONF_MAO") {
           nextState = "ORIENT_PALMA";
           params_configured = params_configured + 1;
@@ -1107,7 +1304,7 @@ pybossa.presentTask(  function( task, deferred ) {
           } else if( isRightHand ){
             nextState = "CONF_MAO";
             isRightHand = false;
-	  } else {
+	  	  } else {
             nextState = "EXP_FACIAL";
           }
           params_configured = params_configured + 1;
@@ -1127,22 +1324,20 @@ pybossa.presentTask(  function( task, deferred ) {
           } else {
             nextState = "CORRECAO";
           }
-          
 	} else if ( state == "VALIDAR_AVATAR" ) {
             if ( answer == "Sim" ) {
                 nextState = "TASK_END";
             } else {
                 nextState = "CORRECAO";
             }
-        } else if (state == "CORRECAO") {
+    } else if (state == "CORRECAO") {
           nextState = "RENDER";
 	}
-
 	state = nextState;
 	//console.log(state);
-     }
+ }
 
-    function updatePA(rightHand) {
+function updatePA(rightHand) {
 	var mao = rightHand ? parametros.right : parametros.left;
 	paId = mao["PONTO_ARTIC"];
 
@@ -1152,73 +1347,70 @@ pybossa.presentTask(  function( task, deferred ) {
 
         paId = "Pa_" + (parseInt(paId.split('_')[1]) + parseInt(mao["DIST_MAOS"]));
 	mao["PONTO_ARTIC"] = paId;
-    }	
+}	
 
-    function preparaParametros() {
-        parametros.final_state = "completed";
+function preparaParametros() {
+    parametros.final_state = "completed";
 
 	if (parametros["QTD_MAOS"] == "duas") {
 		updatePA(false);
 	}
 	updatePA(true);
-    }
+}
 
-    function stopAndPlaySignalVideo (toPlay) {
+function stopAndPlaySignalVideo (toPlay) {
 	autoplay_Id = toPlay ? 1 : 0;
-        $('#signal_video').html(function(){
-            var video_id = task.info.video_id;
-            return '<iframe type="text/html" width="540" height="450" src="http://www.youtube.com/embed/' + 
-            video_id + '?autoplay=' + autoplay_Id + '&version=3&loop=1&playlist=' + video_id + '" />'});
-    }
+    $('#signal_video').html(function(){
+        var video_id = current_task.info.video_id;
+        return '<iframe type="text/html" width="540" height="450" src="https://www.youtube.com/embed/' + 
+        video_id + '?autoplay=' + autoplay_Id + '&version=3&loop=1&playlist=' + video_id + '" />'});
+}
 
-    function showRenderedVideo(video) {
+function showRenderedVideo(video) {
 	stopAndPlaySignalVideo(true);
-        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/static_libras/libras-videos/' + video + '> </video>');
+        $('#avatar_video').html('<video width="395" height="400" controls="true" autoplay="autoplay" loop="true"> <source src=/libras-static/libras-videos/' + video + '> </video>');
 	$('#avatar_video').show();
 	$('#confirmacao_avatar').show();
-    }
+}
 
-    var tid;
-    var progress_width;
-    function updateRenderProgressBar(width) {
+function updateRenderProgressBar(width) {
 	progress_width = width
         $('#render_progress').html(function(){
 	      return '<div class="bar" style="width: ' + width + '%"></div>'});
-    }
+}
 
-    function updateRenderProgress() {
+function updateRenderProgress() {
 	if (progress_width < 100) {
 		progress_width += 7;
 		updateRenderProgressBar(progress_width);
 	}
-    }
+}
 
-    function stopRenderProgress() {
+function stopRenderProgress() {
 	updateRenderProgressBar(100);
 	clearInterval(tid);
 	$('#render_progress').fadeOut(1000);
-        $("#confirmacao_avatar").show();
-        updateMicrotaskTimer();
-    }
+    $("#confirmacao_avatar").show();
+    updateMicrotaskTimer();
+}
 
-    function showRenderProgress() {
+function showRenderProgress() {
 	updateRenderProgressBar(0);
 	tid = setInterval(updateRenderProgress, 1000);
 	$("#render_progress").show();
-        $("#confirmacao_avatar").hide();
-    }
+    $("#confirmacao_avatar").hide();
+}
 
-    function renderizarVideo() {
-        //console.log(parametros);
+function renderizarVideo() {
+    //console.log(parametros);
 	//console.log(parametros.right);
 	//console.log(parametros.left);
-
 	showRenderProgress();
-        stopAndPlaySignalVideo(false);
+    stopAndPlaySignalVideo(false);
 
 	jQuery.ajax({
  	  type: 'POST',
-	  url:    '/LIBRAS_API/render',
+	  url:    '/libras/api/render',
 	  contentType: 'application/json',
 	  data: JSON.stringify(parametros),
 	  success: function(result) {
@@ -1235,383 +1427,166 @@ pybossa.presentTask(  function( task, deferred ) {
 	  },
 	  async: true
 	});
+} // Fim da funcao renderizarVideo
 
-    } // Fim da funcao renderizarVideo
-
-    function setCurrentUserSigns( user_signs, signs_validated, signs_improved ) {
-
-      var key;
-      var user_signs_length = 0;
-      var signs_conf_length = 0;
-      var signs_validated_length = 0;
-      var signs_improved_length = 0;
-      
-      for( key in user_signs["configs"] ) {
-          user_signs_length++;
-          signs_conf_length++;
-      }
-       
-      for( key in user_signs["validations"] ) {
-          user_signs_length++;
-          signs_validated_length++;
-      }
-
-      for( key in user_signs["improvements"] ) {
-          user_signs_length++;
-          signs_improved_length++;
-      }
-
-      if ( user_signs_length == 0 ){
-          $(".signs_counter").html( "Voc&ecirc; ainda n&atilde;o contribuiu" );
-      } else {
-          if ( user_signs_length == 1 ) {
-              $(".signs_counter").html( "Voc&ecirc; contribuiu com " + user_signs_length + " sinal." );          
-          } else {
-              $(".signs_counter").html( "Voc&ecirc; contribuiu com " + user_signs_length + " sinais." );          
-          }
-      }
-      
-      $(".signs_conf_counter").html( signs_conf_length );
-      $(".signs_validate_counter").html( signs_validated_length );
-      $(".signs_improved_counter").html( signs_improved_length );      
-      
-      if ( user_signs_length == 0 ){
-        $(".user_signs_table").hide();
-      }
-      else{
-        $(".user_signs_table").show();
-      }
-
-      $(".user_signs").html("");
-
-      console.log("THE USER SIGNS ARE: " + user_signs );
-      console.log("THE SIGNS VALIDATED ARE: " + signs_validated );
-      console.log("THE SIGNS IMPROVED ARE: " + signs_improved );
-
-      for ( var sign in user_signs ) {
-          console.log("THE SIGN IS: " + sign );
-      }
-
-      for( var sign in user_signs["configs"] ) {
-          var sign_agreement_img = "check_blue";
-
-          for( i in signs_validated ) {
-              if ( user_signs["configs"][sign] == signs_validated[i] ) {
-                  sign_agreement_img = "check_green";
-              } 
-          }
-
-          for( j in signs_validated ) {
-              if ( user_signs["configs"][sign] == signs_improved[j] ) {
-                  sign_agreement_img = sign_agreement_img + "_improved";
-              }
-          }
-
-          sign_agreement_img = sign_agreement_img + ".png";
-
-          $(".user_signs").append( '<tr><td><label class="signal_name">' + user_signs["configs"][sign] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["configs"][sign] ] + '</td></tr>');
-
-      } // Fim do for
-
-      $(".user_validation").html("");
-
-      for( var sign_v in user_signs["validations"] ){
-          var sign_agreement_img = "check_blue"
-
-          for( i in signs_validated ) {
-              if ( user_signs["validations"][sign_v] == signs_validated[i] ) {
-                  sign_agreement_img = "check_green";
-              }
-          }
-
-          for( j in signs_validated ) {
-              if ( user_signs["validations"][sign_v] == signs_improved[j] ) {
-                  sign_agreement_img = sign_agreement_img + "_improved";
-              }
-          }
-
-          sign_agreement_img = sign_agreement_img + ".png";       
-
-          $(".user_validation").append( '<tr><td><label class="signal_name">' + user_signs["validations"][sign_v] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["validations"][sign_v] ] + '</td></tr>');
-      } // Fim do for
-
-      $(".user_improvement").html("");
-
-      for( var sign_i in user_signs["improvements"] ){
-          var sign_agreement_img = "check_blue"
-
-          for( i in signs_validated ) {
-              if ( user_signs["improvements"][sign_i] == signs_validated[i] ) {
-                  sign_agreement_img = "check_green";
-              }
-          }
-
-          for( j in signs_validated ) {
-              if ( user_signs["improvements"][sign_i] == signs_improved[j] ) {
-                  sign_agreement_img = sign_agreement_img + "_improved";
-              }
-          }
-
-          sign_agreement_img = sign_agreement_img + ".png";       
-
-          $(".user_improvement").append( '<tr><td><label class="signal_name">' + user_signs["improvements"][sign_i] + '</label></td><td><img class="img_sign_conf" src="/static_libras/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["improvements"][sign_i] ] + '</td></tr>');
-      } // Fim do for
-
-    } // Fim da funcao setCurrentUserSigns
-
-    function showUserReport(){
-      $(".skeleton").hide();
-
-      // TODO tratar o erro de nao encontra fid
-      pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
-        
-        $.ajax( {
-          type: 'POST',
-	  url: '/LIBRAS_API/userReport',
-	  contentType: 'application/json',
-	  data: JSON.stringify( { current_user_id : data.current_usr_id } ),
-	  success: function(result) {
-            setCurrentUserSigns( result.user_signs, result.signs_validated, result.signs_improved );
-            $( ".last_time" ).html( result.last_time );
-            setUserAverage( result.user_average, result.user_task_runs_amount, result.comunity_average );
-            $(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
-          },
-          error: function(result) {
-	    alert("Error!");
-	  },
-	  async: true
-        }); // Fim da chamada ajax
-
-      }); // Fim de getCurrentUserId
-
-
-      $("#wrap").show();
-
-    } // Fim da funcao showSignsReport
-
-    function setUserAverage( user_average, user_task_runs_amount, comunity_average ){
-      $("#star_avg").raty( { noRatedMsg: "Quase lá!", hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score : user_average } );
-      $("#user_vs_comunity_avg").html("(" + user_task_runs_amount.toString() + "/" + comunity_average.toString() + ")")
-    } 
-
-    if ( !$.isEmptyObject(task) ) {
-      
-        stopAndPlaySignalVideo(true);
-        
-	parametros['signal_name'] = task.info.signal_name;
- 	
-        mostrarPergunta(state);
-        
-        // Enventos de click no botao de confirmacao ou correcao
-        $('.btn-answer').off('click').on('click', function(){
-            var answer = $(this).attr('value');
-            if( typeof answer != 'undefined' ){
-
-                if ( state == "VALIDAR_AVATAR" ) {
-                    saveAnswer( answer );
-                    updateState( answer );
-
-	            if( state == "TASK_END" ) {
-		        pybossa.saveTask(task.id, parametros).done(function() {
-      	                    deferred.resolve(); 
-
-                            pybossa.getCurrentUserId( 'librasdictionary' ).done( function( data ) {
-                                // chamada ajax para setar a tarefa como completa
-                                jQuery.ajax( {
-             	                    type: 'POST',
-	                            url:    '/LIBRAS_API/validateTask',
-	                            contentType: 'application/json',
-	                            data: JSON.stringify( { task_id : task.id } ),
-	                            success: function( result ) {
-	                            },
-	                            error: function( result ) {
-	                                alert("Error!");
-	                            },
-	                            async: true
-	                        });
-                            });
-
-                        });
-                    } else {
-                        mostrarPergunta();
-                    }
-
-                } else {
-                    saveAnswer( answer );
-                    updateState( answer );
-                    mostrarPergunta();
-
-	            if( state == "TASK_END" ) {
-		        pybossa.saveTask(task.id, parametros).done(function() {
-      	                    deferred.resolve(); 
-                        });
-                    }
-                } 
-            } else{
-              $("#error").show();
-            }
-        });
-
-        // Eventos de clique no botao de quantidade de maos
-        $('.btn-hands-amount').off('click').on('click', function(){
-            var answer = $(this).attr('value');
-            if( typeof answer != 'undefined' ){
-
-              saveAnswer(answer);
-              updateState(answer);	
-              mostrarPergunta(state);
-            } else{
-              $("#error").show();
-            }
-        });
- 	
-        // Eventos de cliques em tipos de mao
-        $(".handshape").off("click").on( "click", function() {
-	  answer = $(this).data('handshape');
-  	  saveAnswer(answer);
-          
-          if ( state != "CORRECAO" ) 
-	    updateState(answer);
-          else
-            $('.modal.in').modal("hide");
-	  mostrarPergunta();	
-        });
-
-	 // Eventos de cliques em pontos de articulacao
-         $("#avatar_completo").find("area").off('click').on('click', function(event){
-           event.preventDefault();         
-           answer = $(this).data('local');    
-           saveAnswer(answer);
-           if ( state != "CORRECAO" )
-             updateState(answer);
-           else
-             $('.modal.in').modal("hide");
-	   mostrarPergunta();
-
-           $("#avatar_completo_img").hide();
-           $("#avatar_distancia_img").fadeIn();
-         });
-
-         $("#avatar_distancia").find("area").off('click').on('click', function(event){
-           event.preventDefault();
-           $("#avatar_distancia_img").hide();
-	   answer = $(this).data('local');
-	   
- 	   saveAnswer(answer);
-           if ( state != "CORRECAO" )
-	     updateState(answer);
-          else
-            $('.modal.in').modal("hide");
-	   mostrarPergunta();
-         });
-
-         // Eventos de cliques em expressao facial
-         var exp_answer;
-         $('.exp').off('click').on( 'click', function(){
-           exp_answer = $(this).data('exp_facial');
-           saveAnswer(exp_answer);
-           if ( state != "CORRECAO" )
-             updateState(exp_answer);
-          else
-            $('.modal.in').modal("hide");
-           mostrarPergunta();
-         });
-
-	 // Eventos de cliques em orientacao da mao
-         $(".ori").off("click").on("click", function() {
-           answer = $(this).data('orientacao');
-           saveAnswer(answer);
-           if ( state != "CORRECAO" )           
-             updateState(answer);
-          else
-            $('.modal.in').modal("hide");           
-           mostrarPergunta();
-         });
-
-        // Evento de clique em pular tarefa
-        $('.btn-skip').off( 'click' ).on( 'click', function() {
-            params_configured = 0;
-            $('.task_progress_bar').hide();
-            var answer = $(this).attr('value');
-            if( typeof answer != 'undefined' ){
-                if (answer == "Pular") {
-                    parametros.final_state = "skipped";
-	                pybossa.saveTask(task.id, parametros).done(function() {
-      	                deferred.resolve(); 
-                    });
-                }
-            } else {
-                $("#error").show();
-            }
-        });
-
-         // Evento de clique no botao pronto
-         $('.ready').off('click').on('click', function(){
-           updateState( $(this).attr('value') );
-           $('#avatar_video').hide();
-           fix_counter = fix_counter + 1;
-           steps_times[ "CORRECAO" + fix_counter ] = getStepTime();
-           updateMicrotaskTimer();
-           mostrarPergunta();
-         });
-
-         // Eventos de cliques nas opcoes de correcao
-         $(".fix").off("click").on("click", function(){
-           if ( $(this).data("parametro") == "ori" )
-             if ( $(this).data("fix_hand") == "right" )
-               setOrientacaoMao( "right_hand" );
-             else
-               setOrientacaoMao( "left_hand" );
-               
-           current_fix_hand = $(this).data("fix_hand");
-         });
-
-         // Eventos de cliques na opcao de remover mao esquerda
-         $('.remove_button').off('click').on('click', function(event) {
-           event.preventDefault();
-           $('.remove_button').hide();
-           $('.add_button').show();
-           $('#left_hand').hide();
-           parametros["QTD_MAOS"] = "uma";
-           parametros.left = {};
-         });
-
-         // Eventos de cliques no botao de adicionar mao esquerda
-         $('.add_button').off('click').on('click', function(event) {
-           event.preventDefault();
-           $('.remove_button').show();
-           $('.add_button').hide();
-           $('#left_hand').show();
-           parametros["QTD_MAOS"] = "duas";
-           parametros.left["CONF_MAO"] = parametros.right["CONF_MAO"];
-           parametros.left["ORIENT_PALMA"] = parametros.right["ORIENT_PALMA"];
-           parametros.left["PONTO_ARTIC"] = parametros.right["PONTO_ARTIC"];
-           parametros.left["DIST_MAOS"] = parametros.right["DIST_MAOS"];
-
-           showCorrecaoDiv();
-         });
-
-         // Eventos de cliques no botao Colabore
-         $(".colabore_button").off('click').on('click', function(){
-           $("#wrap").hide();
-           $(".skeleton").show();
-         });
-
-         // Eventos de cliques no botao relatorio
-         $(".my_signs_button").off('click').on('click', function(){
-           showUserReport();
-         });
-
+function setCurrentUserSigns( user_signs, signs_validated, signs_improved ) {
+    var key;
+    var user_signs_length = 0;
+    var signs_conf_length = 0;
+    var signs_validated_length = 0;
+    var signs_improved_length = 0;
+    
+    for( key in user_signs["configs"] ) {
+        user_signs_length++;
+        signs_conf_length++;
     }
-    else {
-      $('.colabore_button').hide();
-      $('.share_button').show();
-      showUserReport();
-    } 
-});
+     
+    for( key in user_signs["validations"] ) {
+        user_signs_length++;
+        signs_validated_length++;
+    }
 
-pybossa.setEndpoint('/pybossa');
-pybossa.run('librasdictionary');
+    for( key in user_signs["improvements"] ) {
+        user_signs_length++;
+        signs_improved_length++;
+    }
+
+    if ( user_signs_length == 0 ){
+        $(".signs_counter").html( "Voc&ecirc; ainda n&atilde;o contribuiu" );
+    } else {
+        if ( user_signs_length == 1 ) {
+            $(".signs_counter").html( "Voc&ecirc; contribuiu com " + user_signs_length + " sinal." );          
+        } else {
+            $(".signs_counter").html( "Voc&ecirc; contribuiu com " + user_signs_length + " sinais." );          
+        }
+    }
+    
+    $(".signs_conf_counter").html( signs_conf_length );
+    $(".signs_validate_counter").html( signs_validated_length );
+    $(".signs_improved_counter").html( signs_improved_length );      
+    
+    if ( user_signs_length == 0 ){
+      $(".user_signs_table").hide();
+    }
+    else{
+      $(".user_signs_table").show();
+    }
+
+    $(".user_signs").html("");
+
+    //console.log("THE USER SIGNS ARE: " + user_signs );
+    //console.log("THE SIGNS VALIDATED ARE: " + signs_validated );
+    //console.log("THE SIGNS IMPROVED ARE: " + signs_improved );
+
+    for ( var sign in user_signs ) {
+        console.log("THE SIGN IS: " + sign );
+    }
+
+    for( var sign in user_signs["configs"] ) {
+        var sign_agreement_img = "check_blue";
+
+        for( i in signs_validated ) {
+            if ( user_signs["configs"][sign] == signs_validated[i] ) {
+                sign_agreement_img = "check_green";
+            } 
+        }
+
+        for( j in signs_validated ) {
+            if ( user_signs["configs"][sign] == signs_improved[j] ) {
+                sign_agreement_img = sign_agreement_img + "_improved";
+            }
+        }
+
+        sign_agreement_img = sign_agreement_img + ".png";
+
+        $(".user_signs").append( '<tr><td><label class="signal_name">' + user_signs["configs"][sign] + '</label></td><td><img class="img_sign_conf" src="/libras-static/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["configs"][sign] ] + '</td></tr>');
+
+    } // Fim do for
+
+    $(".user_validation").html("");
+
+    for( var sign_v in user_signs["validations"] ){
+        var sign_agreement_img = "check_blue"
+
+        for( i in signs_validated ) {
+            if ( user_signs["validations"][sign_v] == signs_validated[i] ) {
+                sign_agreement_img = "check_green";
+            }
+        }
+
+        for( j in signs_validated ) {
+            if ( user_signs["validations"][sign_v] == signs_improved[j] ) {
+                sign_agreement_img = sign_agreement_img + "_improved";
+            }
+        }
+
+        sign_agreement_img = sign_agreement_img + ".png";       
+
+        $(".user_validation").append( '<tr><td><label class="signal_name">' + user_signs["validations"][sign_v] + '</label></td><td><img class="img_sign_conf" src="/libras-static/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["validations"][sign_v] ] + '</td></tr>');
+    } // Fim do for
+
+    $(".user_improvement").html("");
+
+    for( var sign_i in user_signs["improvements"] ){
+        var sign_agreement_img = "check_blue"
+
+        for( i in signs_validated ) {
+            if ( user_signs["improvements"][sign_i] == signs_validated[i] ) {
+                sign_agreement_img = "check_green";
+            }
+        }
+
+        for( j in signs_validated ) {
+            if ( user_signs["improvements"][sign_i] == signs_improved[j] ) {
+                sign_agreement_img = sign_agreement_img + "_improved";
+            }
+        }
+
+        sign_agreement_img = sign_agreement_img + ".png";       
+
+        $(".user_improvement").append( '<tr><td><label class="signal_name">' + user_signs["improvements"][sign_i] + '</label></td><td><img class="img_sign_conf" src="/libras-static/images/' + sign_agreement_img + ' "/></td><td>' + words_groups[ user_signs["improvements"][sign_i] ] + '</td></tr>');
+    } // Fim do for
+} // Fim da funcao setCurrentUserSigns
+
+
+function showUserReport(){
+	$(".skeleton").hide();
+	
+	// TODO tratar o erro de nao encontra fid
+	pybossa.getCurrentUserId(function(userId) {
+		$.ajax( {
+		     type: 'POST',
+			 url: '/libras/api/userReport',
+			 contentType: 'application/json',
+			 data: JSON.stringify( { current_user_id : userId } ),
+			 success: function(result) {
+				setCurrentUserSigns( result.user_signs, result.signs_validated, result.signs_improved );
+				$( ".last_time" ).html( result.last_time );
+				setUserAverage( result.user_average, result.user_task_runs_amount, result.comunity_average );
+				$(".overall_progress_bar").css({"width" : result.overall_progress + "%" });          
+		     },
+		     error: function(result) {
+		  		alert("Error!");
+			 },
+			 async: true
+		}); // Fim da chamada ajax
+	 }); // Fim de getCurrentUserId
+	 $("#wrap").show();
+} // Fim da funcao showSignsReport
+
+function setUserAverage( user_average, user_task_runs_amount, comunity_average ){
+	$("#star_avg").raty( { noRatedMsg: "Quase lá!", hints: ["Regular", "Boa", "Excelente" ], readOnly: true, numberMax: 3, number : 3, score : user_average } );
+	$("#user_vs_comunity_avg").html("(" + user_task_runs_amount.toString() + "/" + comunity_average.toString() + ")")
+}
+
+function getNewTask() {
+	pybossa.newTask(app_shortname).done(function(data) {
+		loadData(data);
+	});
+}
+
+pybossa.setEndpoint(endpoint);
+getNewTask();
 
 </script>
 
@@ -1732,5 +1707,4 @@ pybossa.run('librasdictionary');
   .signs_validate_counter{ margin: 10px 10px 0 10px; float: left }
   .signs_improved_counter{ margin: 10px 10px 0 10px; float: left }
   .signs_fix_counter{ margin: 10px 0 0 10px; float: left }
-
 </style>
